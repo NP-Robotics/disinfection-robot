@@ -1,0 +1,26 @@
+[
+    [
+        "20102021",
+        [
+            {
+                "location":"toilet"
+            },
+                
+            {
+                "location":"classroom"
+            }
+        ]
+    ],
+    [
+        "21102021",
+        [
+            {
+                "location":"gym"
+            },
+
+            {
+                "location":"classroom"
+            }
+        ]
+    ]
+]
