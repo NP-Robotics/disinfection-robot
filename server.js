@@ -13,7 +13,7 @@ app.use("/login", (request, result) => {
 });
 
 app.use("/data/read", (request, result) => {
-  fs.readFile('./src/components/chatbot/config.json', (err, data) => {
+  fs.readFile('./src/components/disinfection/log.json', (err, data) => {
     if (err) {
         console.log("File read failed:", err)
         return
@@ -25,7 +25,7 @@ app.use("/data/read", (request, result) => {
 
 app.use("/data/write", (request, result) => {
   console.log(request.body)
-  fs.writeFile('./src/components/chatbot/config.json', JSON.stringify(request.body, null, 2), err => {
+  fs.writeFile('./src/components/disinfection/log.json', JSON.stringify(request.body, null, 2), err => {
     if (err) {
       console.log('Error writing file', err)
     } else {
