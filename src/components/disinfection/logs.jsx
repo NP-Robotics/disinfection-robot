@@ -69,6 +69,14 @@ const Logs = (props) => {
     setLocation_log(await initialize_location_log());
   };
 
+  const handleDelete = async (e) => {
+    let data = await readLocation();
+    delete data[e];
+    let token = await writeLocation(data);
+    setLocation_log(await initialize_location_log());
+    //console.log(await readLocation());
+  };
+
   return (
     <React.Fragment>
       <div>
@@ -85,6 +93,12 @@ const Logs = (props) => {
               {log[1].map((location) => (
                 <span className="badge badge-danger">{location.location}</span>
               ))}
+              <button
+                onClick={() => handleDelete(log[0])}
+                className="btn btn-primary btn-sm m-2"
+              >
+                Delete
+              </button>
             </div>
           ))}
       </div>
