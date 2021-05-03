@@ -69,7 +69,7 @@ const Login = ({ setToken }) => {
 
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Please input your username" }]}
+            rules={[{ required: true, message: "Please input your password" }]}
           >
             <Input
               className="password"
@@ -94,7 +94,7 @@ const Login = ({ setToken }) => {
 
           <div>
             <Form.Item>
-              <Button className="button" type="primary" htmlType="submit">
+              <Button className="button" type="primary" htmlType="submit" onClick={handleSubmit}>
                 Sign in
               </Button>
             </Form.Item>
