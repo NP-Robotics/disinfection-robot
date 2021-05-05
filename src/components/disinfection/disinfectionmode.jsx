@@ -6,6 +6,7 @@ import Logs from "./logs";
 
 class Disinfectionmode extends Component {
   state = {
+    dynamixel_pub: "",
     motor_pub: "",
     motor_sub: "",
     waypoint_sub: "",
@@ -18,6 +19,11 @@ class Disinfectionmode extends Component {
   constructor(props) {
     super(props);
 
+    this.state.dynamixel_pub = new ROSLIB.Topic({
+      ros: props.ros,
+      name: "/set_position",
+      messageType: "dynamixel_sdk_examples/SetPosition",
+    });
     this.state.motor_pub = new ROSLIB.Topic({
       ros: props.ros,
       name: "/MotorActivate",
@@ -72,6 +78,11 @@ class Disinfectionmode extends Component {
         console.log(JSON.stringify(data))*/
     this.startExtend();
     this.startPath();
+    var dynamixel_position = new ROSLIB.Message({
+      id: 1,
+      position: 16368,
+    });
+    this.state.dynamixel_pub.publish(dynamixel_position);
   };
 
   handleStop = () => {
@@ -79,6 +90,11 @@ class Disinfectionmode extends Component {
     //console.log(Object.keys(this.state.location_log).length)
     this.startRetract();
     this.stopPath();
+    var dynamixel_position = new ROSLIB.Message({
+      id: 1,
+      position: 0,
+    });
+    this.state.dynamixel_pub.publish(dynamixel_position);
   };
 
   render() {
