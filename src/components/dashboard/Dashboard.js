@@ -18,6 +18,11 @@ const Dashboard = ({setToken}) => {
           Disinfection Mode
         </button>
       </Link>
+	<Link to="/camera">
+        <button className="btn btn-warning btn-sm m-2">
+          Camera Mode
+        </button>
+    </Link>
       <button className="btn btn-danger btn-sm m-2" onClick = {handleLogout}>
         Log out
       </button>
