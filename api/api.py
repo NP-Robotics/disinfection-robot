@@ -2,7 +2,7 @@ import flask
 
 app = Flask(__name__)
 
-@ap.route('/', method=['GET'])
+@ap.route('/camera', method=['GET'])
 def api():
     return{
         'userId': 1,
