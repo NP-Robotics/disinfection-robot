@@ -3,6 +3,16 @@ import ROSLIB from "roslib";
 import { Link } from "react-router-dom";
 
 import Logs from "./logs";
+import Path from "./path.jsx";
+
+async function readPaths() {
+  return fetch("http://localhost:8080/path/read", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((data) => data.json());
+}
 
 class Disinfectionmode extends Component {
   state = {
@@ -124,6 +134,7 @@ class Disinfectionmode extends Component {
         </button>
 
         <Logs ros={this.props.ros} />
+        <Path ros={this.props.ros} />
       </React.Fragment>
     );
   }
@@ -150,7 +161,7 @@ class Disinfectionmode extends Component {
       ],
     });
     this.state.path_srv.callService(request, function (result) {
-      console.log(result.success);
+      //console.log(result.success);
     });
   }
 

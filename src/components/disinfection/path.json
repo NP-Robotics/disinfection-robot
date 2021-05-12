@@ -1,0 +1,74 @@
+{
+  "Path 1": [
+    {
+      "location": "toilet",
+      "task": "24"
+    },
+    {
+      "location": "was",
+      "task": "54"
+    },
+    {
+      "location": "canteen",
+      "task": 0
+    },
+    {
+      "location": "canteen",
+      "task": 0
+    },
+    {
+      "location": "gym",
+      "task": "312"
+    }
+  ],
+  "Path 2": [
+    {
+      "location": "canteen",
+      "task": "0"
+    },
+    {
+      "location": "classroom",
+      "task": "23"
+    },
+    {
+      "location": "gym",
+      "task": "100"
+    },
+    {
+      "location": "gym",
+      "task": "100"
+    },
+    {
+      "location": "toilet",
+      "task": "50"
+    }
+  ],
+  "okaaaaaaaaaaaay": [
+    {
+      "location": "classroom",
+      "task": "12312"
+    },
+    {
+      "location": "gym",
+      "task": "4"
+    },
+    {
+      "location": "gym",
+      "task": "0"
+    }
+  ],
+  "why": [
+    {
+      "location": "classroom",
+      "task": "12312"
+    },
+    {
+      "location": "gym",
+      "task": "4"
+    },
+    {
+      "location": "gym",
+      "task": "0"
+    }
+  ]
+}

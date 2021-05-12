@@ -88,10 +88,15 @@ const Logs = (props) => {
           .slice(0)
           .reverse()
           .map((log) => (
-            <div>
+            <div key={log[0]}>
               <h1 className="badge badge-success">Date: {log[0]}</h1>
               {log[1].map((location) => (
-                <span className="badge badge-danger">{location.location}</span>
+                <span
+                  key={log[1].indexOf(location)}
+                  className="badge badge-danger"
+                >
+                  {location.location}
+                </span>
               ))}
               <button
                 onClick={() => handleDelete(log[0])}

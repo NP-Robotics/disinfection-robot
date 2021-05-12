@@ -1,20 +1,4 @@
 {
-  "20/04/2021": [
-    {
-      "location": "toilet"
-    },
-    {
-      "location": "classroom"
-    }
-  ],
-  "21/04/2021": [
-    {
-      "location": "hall"
-    },
-    {
-      "location": "classroom"
-    }
-  ],
   "26/04/2021": [
     {
       "location": "gym"
@@ -35,6 +19,16 @@
     },
     {
       "location": "classroom"
+    }
+  ],
+  "05/05/2021": [
+    {
+      "location": "gym"
+    }
+  ],
+  "10/05/2021": [
+    {
+      "location": "toilet"
     }
   ]
 }
