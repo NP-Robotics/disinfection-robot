@@ -3,44 +3,44 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 //ros
-import ROSLIB from 'roslib';
+import ROSLIB from "roslib";
 
 //css
 import "./App.css";
 
 //components
-import Dashboard from "./components/dashboard/Dashboard";
-import Login from "./components/login/Login";
-import Rosconnect from './components/ros/rosconnect';
-import Disinfectionmode from './components/disinfection/disinfectionmode';
-
+import Dashboard from "./components/dashboard/dashboard";
+import Login from "./components/login/login";
+import Rosconnect from "./components/ros/rosconnect";
+import Disinfection from "./components/disinfection/disinfection";
+import Camera from "./components/camera/camera";
 //custom hooks
-import useToken from './useToken';
+import useToken from "./useToken";
 
 function App() {
   const { token, setToken } = useToken();
-  const [ ros, setRos ] = useState(new ROSLIB.Ros())
-  const [ status, setStatus ] = useState("Disconnected")
-  const [ error, setError ] = useState(false)
+  const [ros, setRos] = useState(new ROSLIB.Ros());
+  const [status, setStatus] = useState("Disconnected");
+  const [error, setError] = useState(false);
 
-  useEffect( () => {
-    ros.connect('ws://localhost:9090');
+  useEffect(() => {
+    ros.connect("ws://localhost:9090");
 
-    ros.on('connection', ()=> {
-        setStatus("Connected");
-        setError(false);
+    ros.on("connection", () => {
+      setStatus("Connected");
+      setError(false);
     });
 
-    ros.on('close', ()=> {
+    ros.on("close", () => {
       setStatus("Disconnected");
-      ros.connect('ws://localhost:9090');
+      ros.connect("ws://localhost:9090");
     });
 
-    ros.on('error', ()=> {
+    ros.on("error", () => {
       setError(true);
       //ros.connect('ws://localhost:9090');
     });
-  },[] )
+  }, []);
 
   if (token != "admin") {
     return <Login setToken={setToken} />;
@@ -48,13 +48,16 @@ function App() {
 
   return (
     <React.Fragment>
-      <Rosconnect ros={ros} status={status} error={error}/>
+      <Rosconnect ros={ros} status={status} error={error} />
       <Switch>
         <Route exact path="/">
-          <Dashboard setToken={setToken}/>
+          <Dashboard setToken={setToken} />
         </Route>
-        <Route exact path='/disinfection'>
-          <Disinfectionmode ros={ros}/>
+        <Route exact path="/disinfection">
+          <Disinfection ros={ros} />
+        </Route>
+        <Route exact path="/camera">
+          <Camera />
         </Route>
       </Switch>
     </React.Fragment>

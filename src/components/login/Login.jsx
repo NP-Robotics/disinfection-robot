@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import style from "./Login.css";
+import style from "./login.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { EyeFilled } from "@ant-design/icons";
 import NPLogo from "../../assets/NPLogo.jpg";
@@ -19,9 +19,11 @@ const Login = ({ setToken }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [showPassword, setShowPassword] = useState(false);
+  /*
   const [state, setState] = useState({
     submitting: false,
   });
+  */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -94,7 +96,12 @@ const Login = ({ setToken }) => {
 
           <div>
             <Form.Item>
-              <Button className="button" type="primary" htmlType="submit" onClick={handleSubmit}>
+              <Button
+                className="button"
+                type="primary"
+                htmlType="submit"
+                onClick={handleSubmit}
+              >
                 Sign in
               </Button>
             </Form.Item>
