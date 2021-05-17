@@ -1,6 +1,6 @@
 //react
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 //ros
 import ROSLIB from "roslib";
@@ -13,6 +13,8 @@ import Dashboard from "./components/dashboard/dashboard";
 import Login from "./components/login/login";
 import Rosconnect from "./components/ros/rosconnect";
 import Disinfection from "./components/disinfection/disinfection";
+import Logs from "./components/disinfection/logs"
+import Path from "./components/disinfection/path.jsx"
 import Camera from "./components/camera/camera";
 //custom hooks
 import useToken from "./useToken";
@@ -58,6 +60,15 @@ function App() {
         </Route>
         <Route exact path="/camera">
           <Camera />
+        </Route>
+        <Route exact path='/disinfection/admin'>
+        <Link to="/disinfection">
+          <button className="btn btn-primary btn-sm m-2">
+            Back to Disinfection Mode
+          </button>
+        </Link>
+        <br></br>
+        <Path ros={ros} />
         </Route>
       </Switch>
     </React.Fragment>

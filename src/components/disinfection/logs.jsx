@@ -79,8 +79,8 @@ const Logs = (props) => {
 
   return (
     <React.Fragment>
-      <div>
-        <h1 className="badge badge-primary">Waypoint Log when UV disabled</h1>
+      <div className="badge badge-success">
+        Waypoint Log when UV disabled
         <button onClick={handleRefresh} className="btn btn-primary btn-sm m-2">
           Refresh
         </button>

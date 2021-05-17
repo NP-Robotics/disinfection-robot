@@ -10,11 +10,7 @@
     },
     {
       "location": "canteen",
-      "task": 0
-    },
-    {
-      "location": "canteen",
-      "task": 0
+      "task": "0"
     },
     {
       "location": "gym",
@@ -35,40 +31,26 @@
       "task": "100"
     },
     {
-      "location": "gym",
-      "task": "100"
-    },
-    {
       "location": "toilet",
       "task": "50"
     }
   ],
-  "okaaaaaaaaaaaay": [
+  "Path 3": [
     {
       "location": "classroom",
-      "task": "12312"
+      "task": "5"
     },
     {
       "location": "gym",
-      "task": "4"
+      "task": "10"
     },
     {
-      "location": "gym",
-      "task": "0"
-    }
-  ],
-  "why": [
-    {
-      "location": "classroom",
-      "task": "12312"
+      "location": "canteen",
+      "task": "15"
     },
     {
-      "location": "gym",
-      "task": "4"
-    },
-    {
-      "location": "gym",
-      "task": "0"
+      "location": "toilet",
+      "task": "10"
     }
   ]
 }
