@@ -25,6 +25,7 @@
     {
       "location": "gym"
     }
+<<<<<<< Updated upstream
   ],
   "10/05/2021": [
     {
@@ -43,5 +44,7 @@
     {
       "location": "toilet"
     }
+=======
+>>>>>>> Stashed changes
   ]
 }

@@ -1,5 +1,5 @@
-.username,
-.password {
+.loginpage .username,
+.loginpage .password {
   width: 70%;
   font-weight: 400;
   font-size: 14px;
@@ -16,7 +16,7 @@
   font-family: "Ubuntu", sans-serif;
 }
 
-.logo {
+.loginpage .logo {
   width: 400px;
   height: 400px;
   text-align: center;
@@ -26,7 +26,7 @@
   margin-top: -8em;
 }
 
-.box {
+.loginpage .box {
   background-color: #ffffff;
   width: 400px;
   height: 350px;
@@ -39,13 +39,13 @@
   overflow: hidden;
 }
 
-.small-box {
+.loginpage .small-box {
   width: 200px;
   height: 250px;
   text-align: center;
 }
 
-.big-header {
+.loginpage .big-header {
   font-family: "Helvetica", sans-serif;
   font-weight: bold;
   font-size: 20px;
@@ -54,7 +54,7 @@
   padding-top: 20px;
 }
 
-.header {
+.loginpage .header {
   font-family: "Helvetica", sans-serif;
   font-weight: bold;
   font-size: 20px;
@@ -64,22 +64,22 @@
   margin-bottom: 15px;
 }
 
-.icon {
+.loginpage .icon {
   position: absolute;
   margin-top: -60px;
   margin-left: 150px;
 }
-.icon :hover {
+.loginpage .icon :hover {
   color: #aeaeb8;
   cursor: pointer;
 }
 
-.remember {
+.loginpage .remember {
   margin: auto;
   display: inline-block;
 }
 
-.button {
+.loginpage .button {
   border-radius: 4px;
   background: linear-gradient(to right, #527ccc, #40c6fb);
   border: none;

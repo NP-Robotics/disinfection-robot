@@ -1,0 +1,9 @@
+iframe {
+  width: 6000px; /* adjust to your needs */
+  max-width: 100%; /* to make it responsive */
+  height: 800px;
+  max-height: 100%;
+  border: none;
+  overflow: hidden;
+  z-index: 9999;
+}

@@ -11,22 +11,24 @@ const Dashboard = ({ setToken }) => {
   };
 
   return (
-    <React.Fragment>
-      <Link to="/disinfection">
-        <button className="btn btn-primary btn-sm m-2">
-          Disinfection Mode
+    <div className="dashboard">
+      <React.Fragment>
+        <Link to="/disinfection">
+          <button className="btn btn-primary btn-sm m-2">
+            Disinfection Mode
+          </button>
+        </Link>
+        <Link to="/camera">
+          <button className="btn btn-warning btn-sm m-2">Camera Mode</button>
+        </Link>
+        <button className="btn btn-danger btn-sm m-2" onClick={handleLogout}>
+          Log out
         </button>
-      </Link>
-      <Link to="/camera">
-        <button className="btn btn-warning btn-sm m-2">Camera Mode</button>
-      </Link>
-      <button className="btn btn-danger btn-sm m-2" onClick={handleLogout}>
-        Log out
-      </button>
-      <div>
-        <Chatbot />
-      </div>
-    </React.Fragment>
+        <div>
+          <Chatbot />
+        </div>
+      </React.Fragment>
+    </div>
   );
 };
 

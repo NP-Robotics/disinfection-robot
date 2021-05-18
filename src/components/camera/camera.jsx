@@ -22,12 +22,12 @@ const Camera = () => {
       </Link>
       <button className="btn btn-primary btn-sm m-2">Start</button>
       <button className="btn btn-danger btn-sm m-2">Stop</button>
-      <h1>Test camera page jsx</h1>
+      <h1>Stream:</h1>
       <iframe
         src={"http://localhost:5000/camera"}
         allow="accelerometer, autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-      ></iframe>
+      />
     </div>
   );
 };

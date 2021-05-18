@@ -5,24 +5,16 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
 from imutils.video import VideoStream
 import numpy as np
-import argparse
 import imutils
 import time
 import os
 
+face_detector_path = "./detector/face_detector"
+mask_model_path = "./detector/model/mask_detector.model"
+target_confidence = 0.65
+
 #face and mask detector function
 def detector():
-	# construct the argument parser and parse the arguments
-	ap = argparse.ArgumentParser()
-	ap.add_argument("-f", "--face", type=str,
-		default="./detector/face_detector",
-		help="path to face detector model directory")
-	ap.add_argument("-m", "--model", type=str,
-		default="./detector/model/mask_detector.model",
-		help="path to trained face mask detector model")
-	ap.add_argument("-c", "--confidence", type=float, default=0.5, #default=0.5
-		help="minimum probability to filter weak detections")
-	args = vars(ap.parse_args())
 
 	def detect_and_predict_mask(frame, faceNet, maskNet):
 		# grab the dimensions of the frame and then construct a blob
@@ -46,7 +38,7 @@ def detector():
 			confidence = detections[0, 0, i, 2]
 			# filter out weak detections by ensuring the confidence is
 			# greater than the minimum confidence
-			if confidence > args["confidence"]:
+			if confidence > target_confidence:
 				# compute the (x, y)-coordinates of the bounding box for
 				# the object
 				box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
@@ -80,16 +72,13 @@ def detector():
 		return (locs, preds)
 
 	# load our serialized face detector model from disk
-	print("[INFO] loading face detector model...")
-	prototxtPath = os.path.sep.join([args["face"], "deploy.prototxt"])
-	weightsPath = os.path.sep.join([args["face"],
+	prototxtPath = os.path.sep.join([face_detector_path, "deploy.prototxt"])
+	weightsPath = os.path.sep.join([face_detector_path,
 		"res10_300x300_ssd_iter_140000.caffemodel"])
 	faceNet = cv2.dnn.readNet(prototxtPath, weightsPath)
 	# load the face mask detector model from disk
-	print("[INFO] loading face mask detector model...")
-	maskNet = load_model(args["model"])
+	maskNet = load_model(mask_model_path)
 	# initialize the video stream and allow the camera sensor to warm up
-	print("[INFO] starting video stream...")
 
 	#RGB STREAM 
 	vs = VideoStream(src=0).start()
@@ -99,7 +88,6 @@ def detector():
 	#vs2 = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/201").start()
 
 	time.sleep(2.0)
-	print("Stream is open")
 
 	# loop over the frames from the video stream
 	while True:
@@ -119,7 +107,7 @@ def detector():
 			(mask, withoutMask) = pred
 			# determine the class label and color we'll use to draw
 			# the bounding box and text
-			label = "Mask" if mask > withoutMask else "No Mask"
+			label = "Masked" if mask > withoutMask else "Unmasked"
 			color = (0, 255, 0) if label == "Mask" else (0, 0, 255)
 
 			# include the probability in the label
@@ -133,7 +121,15 @@ def detector():
 
 		#cv2.imshow("Detection", frame)
 		ret, jpeg = cv2.imencode('.jpg', frame)
-		return jpeg.tobytes()
-		
+		img = jpeg.tobytes()
+		yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n')
+"""
+		if cv2.waitKey(1) & 0xFF == ord('q'):
+			break
+	cv2.destroyAllWindows()
+	vs.stop
+"""
+	
 if __name__ == '__main__':
 	detector()

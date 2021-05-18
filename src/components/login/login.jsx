@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import style from "./login.css";
+import "./login.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { EyeFilled } from "@ant-design/icons";
 import NPLogo from "../../assets/NPLogo.jpg";
@@ -42,7 +42,7 @@ const Login = ({ setToken }) => {
   };
 
   return (
-    <div>
+    <div className="loginpage">
       <div>
         <img src={NPLogo} className="logo" />
       </div>
