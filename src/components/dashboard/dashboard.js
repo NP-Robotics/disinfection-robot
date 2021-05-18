@@ -2,11 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./dashboard.css";
 import Chatbot from "../chatbot/chatbot";
-<<<<<<< HEAD
 import Recorder from "../chatbot/recorder";
-=======
 import Header from "../header/header";
->>>>>>> 310ec4d26bf82d1f7e1cebf4268ce54672b5cffa
 
 const Dashboard = () => {
   return (
