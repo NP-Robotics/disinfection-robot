@@ -1,109 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { audio,merger,setMerger } from "./recorder"
+import { useSpeechSynthesis } from 'react-speech-kit';
 import "./chatbot.css";
 
-async function readData() {
-  return fetch("http://localhost:8080/data/read", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((data) => data.json());
-}
+var AWS = require('aws-sdk');
+var control = 0;
 
-async function writeData(object) {
-  return fetch("https://ycljsw0kp9.execute-api.us-east-1.amazonaws.com/test", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(object),
-  }).then((data) => data.json());
-}
+function Chatbot() {
+//const[testvar, setvar] = useState('')
+const[APIres, setresponse] = useState("Please say Pizza to start")
 
-const Chatbot = () => {
-  let mediaRecorder;
-  let audioChunks = [];
-  let audioBlob;
-  let audioUrl;
+/*const data = {
+  "input" : "pizza"
+}*/
 
-  const handleMicStart = () => {
-    audioChunks = [];
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then(function (mediaStreamObj) {
-        mediaRecorder = new MediaRecorder(mediaStreamObj);
-        mediaRecorder.start();
 
-        mediaRecorder.addEventListener("dataavailable", (event) => {
-          audioChunks.push(event.data);
-        });
+useEffect(async () => {
+  setInterval(() => {
+    //console.log('Interval triggered');
+    if(merger === 1){
+      setMerger(0)
+      showText();
+    }
+  }, 100);
+})
 
-        mediaRecorder.addEventListener("stop", () => {
-          audioBlob = new Blob(audioChunks);
-          audioUrl = URL.createObjectURL(audioBlob);
-          console.log(audioUrl);
-        });
-      })
-      .catch(function (err) {
-        console.log(err.name, err.message);
-      });
-  };
 
-  const handleMicStop = () => {
-    if (mediaRecorder) mediaRecorder.stop();
-  };
 
-  const handlePlayAudio = () => {
-    let audio = new Audio(audioUrl);
-    audio.play();
-  };
-
-  const handleRead = async (e) => {
-    const token = await readData();
-    console.log(token);
-  };
-
-  const handleWrite = async (e) => {
-    let data = {
-      input: "pizza",
-    };
-    const token = await writeData(data);
-    console.log(token);
-  };
-  return (
-    <React.Fragment>
-      <button
-        onClick={() => handleMicStart()}
-        className="btn btn-primary btn-sm m-2"
-      >
-        Start Mic
-      </button>
-      <button
-        onClick={() => handleMicStop()}
-        className="btn btn-primary btn-sm m-2"
-      >
-        Stop Mic
-      </button>
-      <button
-        onClick={() => handlePlayAudio()}
-        className="btn btn-primary btn-sm m-2"
-      >
-        Play Audio
-      </button>
-      <button
-        onClick={() => handleRead()}
-        className="btn btn-primary btn-sm m-2"
-      >
-        Read
-      </button>
-      <button
-        onClick={() => handleWrite()}
-        className="btn btn-primary btn-sm m-2"
-      >
-        Write
-      </button>
-    </React.Fragment>
-  );
+var params = {
+  botAlias: 'pizzabot', /* required */
+  botName: 'PizzaOrderingBot', /* required */
+  //inputText: `input`, /* required */
+  contentType: 'audio/x-l16; sample-rate=16000; channel-count=1', /*required audio/x-l16; sample-rate=16000; channel-count=1*/
+  //inputStream: input,
+  accept: 'text/plain; charset=utf-8',
+  userId: 'Test'
 };
 
+AWS.config.region = 'us-east-1'; // Region
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+  // Provide your Pool Id here
+      IdentityPoolId: 'us-east-1:a965f9d5-6111-4304-8cd7-df318a38551d',
+  });
+var lexruntime = new AWS.LexRuntime();
+const test1 = (err, data) => {
+  if (err) 
+  {
+      console.log(err, err.stack); // an error occurred
+      console.log("1")
+  }
+  else     
+  {
+      console.log(data); 
+      console.log("2")
+  }
+}
+
+async function PostToAPI(input) {
+  params.inputStream = input
+  return lexruntime.postContent(params, test1()).promise();
+  
+} 
+let audioUrl1
+const { speak } = useSpeechSynthesis();
+async function showText() {
+  let response = await PostToAPI(audio);
+  console.log(response);
+  let { message } = response
+  console.log(message)
+  await speak({ text: message })
+  setresponse(message)
+}
+
+const playblob = () => {
+  let audio2 = new Audio(audioUrl1);
+  audio2.play()
+}
+
+const testaudio = () => {
+  //speak({ text: value })
+  showText()
+  speak({ text: APIres })
+}
+
+  return (
+    <div 
+      style = {{
+        color: "#fbc02d"
+      }}>
+      <h2>{APIres}</h2>
+    </div>
+  );
+}
+
+export {control}
 export default Chatbot;
+
+//<button onClick = {showText}>Test</button>

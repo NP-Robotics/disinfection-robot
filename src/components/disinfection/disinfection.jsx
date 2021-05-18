@@ -167,6 +167,8 @@ class Disinfection extends Component {
   stopPath() {
     var request = new ROSLIB.ServiceRequest({});
     this.state.cancel_srv.callService(request, function (result) {});
+    this.state.status_waypoint = "None";
+    this.setState({ state: this.state });
   }
 
   startExtend() {

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./dashboard.css";
 import Chatbot from "../chatbot/chatbot";
+import Recorder from "../chatbot/recorder";
 
 const Dashboard = ({ setToken }) => {
   const handleLogout = async (e) => {
@@ -25,6 +26,7 @@ const Dashboard = ({ setToken }) => {
           Log out
         </button>
         <div>
+          <Recorder />
           <Chatbot />
         </div>
       </React.Fragment>
