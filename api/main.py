@@ -81,8 +81,8 @@ def detector():
 	# initialize the video stream and allow the camera sensor to warm up
 
 	#RGB STREAM 
-	vs = VideoStream(src=0).start()
-	#vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101")
+	#vs = VideoStream(src=0).start()
+	vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101")
 
 	#TEMPERATURE STREAM
 	#vs2 = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/201").start()
