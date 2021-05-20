@@ -1,0 +1,39 @@
+.wrapper {
+  float: left;
+  margin: auto;
+  padding-top: 10px;
+}
+
+.status-block {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.status-message {
+  margin: auto;
+  width: 110px;
+  display: inline-block;
+  color: white;
+  text-align: center;
+  font-size: 1.05em;
+  padding-top: 0.8px;
+  padding-left: 2px;
+  padding-right: 2px;
+  transition: all 0.4s ease-in-out;
+}
+
+.refresh {
+  margin: auto;
+  display: inline-block;
+  background-size: 100% 100%;
+  font-size: 1.5em;
+  margin-left: 2px;
+}
+
+.refresh:hover {
+  transition: all 0.4s ease-in-out;
+  transform: rotate(360deg) scale(1.1);
+}

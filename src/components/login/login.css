@@ -6,14 +6,19 @@
   letter-spacing: 1px;
   background: rgba(136, 126, 126, 0.04);
   padding: 10px;
-  border: none;
   border-radius: 10px;
-  outline: none;
+  outline: black;
   box-sizing: border-box;
   border: 2px solid rgba(5, 5, 5, 0.363);
   text-align: center;
   margin-bottom: 5px;
   font-family: "Ubuntu", sans-serif;
+  border: 2px solid grey;
+}
+
+.loginpage .username:focus,
+.loginpage .password:focus {
+  border: 2px solid rgba(0, 0, 0, 0.842) !important;
 }
 
 .loginpage .logo {
@@ -54,7 +59,7 @@
   padding-top: 20px;
 }
 
-.loginpage .header {
+.loginpage .heading {
   font-family: "Helvetica", sans-serif;
   font-weight: bold;
   font-size: 20px;
@@ -66,9 +71,12 @@
 
 .loginpage .icon {
   position: absolute;
+  display: inline;
   margin-top: -60px;
   margin-left: 150px;
+  overflow: hidden;
 }
+
 .loginpage .icon :hover {
   color: #aeaeb8;
   cursor: pointer;
@@ -76,6 +84,7 @@
 
 .loginpage .remember {
   margin: auto;
+  padding-top: 20px;
   display: inline-block;
 }
 

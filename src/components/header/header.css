@@ -1,0 +1,9 @@
+.headerBar {
+  width: 100vw;
+  overflow: hidden;
+  background-color: rgb(0, 21, 41);
+}
+
+.user {
+  float: right;
+}

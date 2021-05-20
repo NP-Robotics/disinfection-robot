@@ -81,8 +81,8 @@ def detector():
 	# initialize the video stream and allow the camera sensor to warm up
 
 	#RGB STREAM 
-	#vs = VideoStream(src=0).start()
-	vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101")
+	vs = VideoStream(src=0).start()
+	#vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101")
 
 	#TEMPERATURE STREAM
 	#vs2 = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/201").start()
@@ -114,7 +114,7 @@ def detector():
 			#label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
 
 			# display the label and bounding box rectangle on the output
-			# frame
+			# frame-
 			cv2.putText(frame, label, (startX, startY - 10),
 				cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
 			cv2.rectangle(frame, (startX, startY), (endX, endY), color, 1)

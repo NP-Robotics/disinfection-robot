@@ -1,30 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import "./rosconnect.css";
+import { ReloadOutlined } from "@ant-design/icons";
 
 class Rosconnect extends Component {
-
-    textColour(){
-        if(this.props.status === "Connected"){
-            return "badge badge-success w-100 p-3";
-        }
-        else{
-            return "badge badge-danger w-100 p-3";
-        }
+  statusIndicator() {
+    if (this.props.status === "Connected") {
+      return (
+        <div>
+          <div className="status-message" style={{ color: "green" }}>
+            Connected
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div className="status-message" style={{ color: "red" }}>
+            Disconnected
+          </div>
+        </div>
+      );
     }
+  }
 
-    handleRefresh = () => {
-        this.props.ros.connect('ws://localhost:9090');
-    }
+  handleRefresh = () => {
+    this.props.ros.connect("ws://localhost:9090");
+  };
 
-    render() {
-        return (  
-            <React.Fragment>
-                <span className={this.textColour()}>
-                    {this.props.status}
-                    <button onClick = {()=>this.handleRefresh()} className="btn btn-primary btn-sm m-2" >Refresh</button>
-                </span>
-            </React.Fragment>
-        );
-    }
+  render() {
+    return (
+      <React.Fragment>
+        <div className="wrapper">
+          <span className="status-block">
+            <span
+              style={{
+                float: "left",
+                color: "white",
+                paddingLeft: "20px",
+                fontFamily: "font-family: Arial, Geneva, Helvetica, sans-serif",
+              }}
+            >
+              Connection Status:{" "}
+            </span>
+            {this.statusIndicator()}
+            <ReloadOutlined
+              onClick={() => this.handleRefresh()}
+              className="refresh"
+              style={{ color: "white" }}
+            />
+          </span>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
- 
+
 export default Rosconnect;

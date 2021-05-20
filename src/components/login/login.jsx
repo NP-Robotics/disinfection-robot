@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./login.css";
 import { Form, Input, Button, Checkbox } from "antd";
-import { EyeFilled } from "@ant-design/icons";
+import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 import NPLogo from "../../assets/NPLogo.jpg";
 
 async function loginUser(credentials) {
@@ -49,7 +49,7 @@ const Login = ({ setToken }) => {
 
       <div className="box">
         <div className="big-header">Clinic Robot Web Application</div>
-        <div className="header">Sign in to your account</div>
+        <div className="heading">Sign in to your account</div>
         <Form
           initialValues={{ remember: true }}
           onSubmit={handleSubmit}
@@ -69,22 +69,23 @@ const Login = ({ setToken }) => {
             />
           </Form.Item>
 
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: "Please input your password" }]}
-          >
-            <Input
-              className="password"
-              placeholder="Password"
-              type="text"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              type={showPassword ? "text" : "password"}
-            />
-          </Form.Item>
-
           <div>
+            <Form.Item
+              name="password"
+              rules={[
+                { required: true, message: "Please input your password" },
+              ]}
+            >
+              <Input
+                className="password"
+                placeholder="Password"
+                type="text"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                type={showPassword ? "text" : "password"}
+              />
+            </Form.Item>
             <EyeFilled className="icon" onClick={togglePasswordVisibility} />
           </div>
 
