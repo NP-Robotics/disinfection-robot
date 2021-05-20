@@ -36,7 +36,7 @@ class Rosconnect extends Component {
               style={{
                 float: "left",
                 color: "white",
-                paddingLeft: "20px",
+                paddingLeft: "15px",
                 fontFamily: "font-family: Arial, Geneva, Helvetica, sans-serif",
               }}
             >

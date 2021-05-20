@@ -1,104 +1,200 @@
-.loginpage .username,
-.loginpage .password {
-  width: 70%;
-  font-weight: 400;
-  font-size: 14px;
+.loginpage {
+  overflow: hidden;
+  height: 100vh;
+  align-items: center;
+  margin: auto;
+  padding: auto;
+  background-color: rgb(13, 17, 23);
+  display: absolute;
+}
+
+.username,
+.password {
+  width: 250px;
+  font-weight: 750;
+  font-size: 15px;
+  color: rgb(230, 221, 204);
   letter-spacing: 1px;
-  background: rgba(136, 126, 126, 0.04);
+  background: rgba(243, 242, 242, 0.096);
   padding: 10px;
-  border-radius: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
   outline: black;
   box-sizing: border-box;
-  border: 2px solid rgba(5, 5, 5, 0.363);
   text-align: center;
   margin-bottom: 5px;
   font-family: "Ubuntu", sans-serif;
-  border: 2px solid grey;
+  border: 2px solid rgba(252, 252, 252, 0.596);
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 0px 12px 39px 2px rgba(134, 129, 129, 0.308);
 }
 
-.loginpage .username:focus,
-.loginpage .password:focus {
-  border: 2px solid rgba(0, 0, 0, 0.842) !important;
+.username:focus,
+.password:focus {
+  border: 2px solid rgb(255, 255, 255) !important;
 }
 
-.loginpage .logo {
-  width: 400px;
-  height: 400px;
+.error {
+  width: 250px;
+  font-weight: 750;
+  font-size: 15px;
+  color: rgb(230, 221, 204);
+  letter-spacing: 1px;
+  background: rgba(243, 242, 242, 0.096);
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  outline: black;
+  box-sizing: border-box;
   text-align: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -8em;
+  margin-bottom: 5px;
+  font-family: "Ubuntu", sans-serif;
+  border: 2px solid rgba(252, 252, 252, 0.596);
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 0px 12px 39px 2px rgba(134, 129, 129, 0.308);
+  border: 2px solid red;
 }
 
-.loginpage .box {
-  background-color: #ffffff;
-  width: 400px;
-  height: 350px;
-  margin: 7em auto;
-  margin-top: -8em;
-  border-radius: 1em;
-  box-shadow: 0px 12px 39px 2px rgba(0, 0, 0, 0.14);
+.error.focus {
+  border: 2px solid rgb(255, 0, 0) !important;
+}
+
+.box {
   text-align: center;
   z-index: 9999;
-  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  margin: 7em auto;
 }
 
-.loginpage .small-box {
-  width: 200px;
-  height: 250px;
-  text-align: center;
-}
-
-.loginpage .big-header {
+.big-header {
   font-family: "Helvetica", sans-serif;
   font-weight: bold;
   font-size: 20px;
-  color: #292727;
+  color: #f1e9e9;
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-  padding-top: 20px;
+  margin-top: 20vh;
 }
 
-.loginpage .heading {
+.header {
   font-family: "Helvetica", sans-serif;
   font-weight: bold;
   font-size: 20px;
-  color: #4c4c4c;
+  color: #f1e9e9;
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-  padding-top: 20px;
-  margin-bottom: 15px;
+  padding-top: 10px;
 }
 
-.loginpage .icon {
+.icon {
   position: absolute;
-  display: inline;
-  margin-top: -60px;
-  margin-left: 150px;
+  display: inline-block;
+  margin-top: -35px;
+  margin-left: 100px;
   overflow: hidden;
+  color: white;
 }
 
-.loginpage .icon :hover {
+.icon :hover {
   color: #aeaeb8;
   cursor: pointer;
 }
 
-.loginpage .remember {
-  margin: auto;
-  padding-top: 20px;
-  display: inline-block;
+.button {
+  width: 80px;
+  padding: 5px;
+  border: 1px solid #45b3e7;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #45b3e7;
+  color: #fff;
+  margin-top: 25px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-.loginpage .button {
-  border-radius: 4px;
-  background: linear-gradient(to right, #527ccc, #40c6fb);
-  border: none;
-  color: #ffffff;
-  text-align: center;
+.button:hover {
+  width: 5%;
+  padding: 5px;
+  border: 1px solid rgb(66, 50, 205);
   font-size: 15px;
-  width: 100px;
-  transition: all 0.5s;
-  cursor: pointer;
+  background-color: rgb(66, 50, 205);
+  color: #fff;
+  margin-top: 25px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+/* background effects and animation */
+
+@keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-webkit-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-moz-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-ms-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+.stars,
+.twinkling {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
   margin: auto;
-  margin-top: -10px;
-  font-family: "Ubuntu", sans-serif;
+}
+
+.stars {
+  background: #000
+    url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top
+    center;
+  z-index: 0;
+}
+
+.twinkling {
+  background: transparent
+    url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat
+    top center;
+  z-index: 1;
+
+  -moz-animation: move-twink-back 200s linear infinite;
+  -ms-animation: move-twink-back 200s linear infinite;
+  -o-animation: move-twink-back 200s linear infinite;
+  -webkit-animation: move-twink-back 200s linear infinite;
+  animation: move-twink-back 200s linear infinite;
 }

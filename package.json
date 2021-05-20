@@ -19,6 +19,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-speech-kit": "^3.0.1",
+    "react-spring": "^9.1.2",
     "recorder-js": "^1.0.7",
     "roslib": "^1.1.0",
     "styled-components": "^5.3.0",
