@@ -9,13 +9,17 @@ import ROSLIB from "roslib";
 import "./App.css";
 
 //components
-import Dashboard from "./components/dashboard/dashboard";
-import Login from "./components/login/login";
-import Disinfection from "./components/disinfection/disinfection";
-import Logs from "./components/disinfection/logs";
-import Path from "./components/disinfection/path.jsx";
-import Camera from "./components/camera/camera";
 import Header from "./components/header/header";
+import Sider from "./components/sider/sider";
+
+//pages
+import Login from "./pages/login/login";
+import Dashboard from "./pages/dashboard/dashboard";
+import Disinfection from "./pages/disinfection/disinfection";
+import Logs from "./pages/disinfection/logs";
+import Path from "./pages/disinfection/path.jsx";
+import Camera from "./pages/camera/camera";
+
 //custom hooks
 import useToken from "./useToken";
 

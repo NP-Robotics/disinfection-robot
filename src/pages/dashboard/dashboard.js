@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./dashboard.css";
 import Chatbot from "../chatbot/chatbot";
 import Recorder from "../chatbot/recorder";
-import Header from "../header/header";
 
 const Dashboard = () => {
   return (

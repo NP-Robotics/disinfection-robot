@@ -18,7 +18,7 @@ const Login = ({ setToken }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [showPassword, setShowPassword] = useState(false);
-  const [red, setRed] = useState(false);
+  let red;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,12 +26,8 @@ const Login = ({ setToken }) => {
       const token = await loginUser({ username, password });
       setToken(token);
     } else {
-      redHandle();
+      red = true;
     }
-  };
-
-  const redHandle = () => {
-    setRed(!red);
   };
 
   const onFinishFailed = (errorInfo) => {
