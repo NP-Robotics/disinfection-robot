@@ -96,7 +96,7 @@ const Login = ({ setToken }) => {
                     htmlType="submit"
                     onClick={handleSubmit}
                   >
-                    Sign in
+                    <div>Sign In</div>
                   </Button>
                 </Form.Item>
               </div>

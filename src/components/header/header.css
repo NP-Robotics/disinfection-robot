@@ -1,10 +1,50 @@
-.headerBar {
-  width: 100vw;
-  overflow: hidden;
-  background-color: rgb(0, 21, 41);
+.wrapper {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    90deg,
+    rgb(255, 255, 255) 0%,
+    rgb(36, 36, 41) 100%
+  );
 }
 
-.user {
-  float: right;
+.logo {
+  height: 80%;
+  width: auto;
+  display: flex;
+  margin-right: auto;
+  border: 2px solid red;
+}
+
+.nav-menu {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 70vw;
+  justify-content: end;
+  margin-right: 2rem;
+  border: 2px solid red;
+}
+
+.nav-icons {
   color: white;
+  text-decoration: none;
+  padding-right: 2em;
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+
+.nav-icons:hover {
+  color: rgb(4, 97, 247);
+  border-radius: 3px;
+  transition: all 0.2s ease-out;
+}
+
+.nav-icons-mobile {
+  display: none;
 }

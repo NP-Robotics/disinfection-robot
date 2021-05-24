@@ -32,16 +32,6 @@ class Rosconnect extends Component {
       <React.Fragment>
         <div className="wrapper">
           <span className="status-block">
-            <span
-              style={{
-                float: "left",
-                color: "white",
-                paddingLeft: "15px",
-                fontFamily: "font-family: Arial, Geneva, Helvetica, sans-serif",
-              }}
-            >
-              Connection Status:{" "}
-            </span>
             {this.statusIndicator()}
             <ReloadOutlined
               onClick={() => this.handleRefresh()}

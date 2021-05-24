@@ -1,28 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import NPLogo from "../../assets/NPLogo.png";
 import "./header.css";
+import { HeaderData } from "./headerData";
 import Rosconnect from "../ros/rosconnect";
-import { Layout, Menu, Button } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { FaBars } from "react-icons/fa";
 
 const Header = (props) => {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
+
   const handleLogout = async (e) => {
     e.preventDefault();
     props.setToken({ token: "" });
   };
 
   return (
-    <div className="headerBar">
-      <div>
-        <Rosconnect ros={props.ros} status={props.status} error={props.error} />
+    <nav div className="wrapper">
+      <h1>React</h1>
+      <div className="menu-icon" onClick={handleClick}>
+        <i className={clicked ? "fas fa-times" : "fas fa-bars"}></i>
       </div>
-      <div className="user">
-        <UserOutlined />
-        <button className="btn btn-danger btn-sm m-2" onClick={handleLogout}>
-          Log out
-        </button>
-      </div>
-    </div> //end header
+      <ul className={clicked ? "nav-menu active" : "nav-menu"}>
+        {HeaderData.map((item, index) => {
+          return (
+            <li key={index}>
+              <a className={item.className} href={item.path}>
+                {item.icon}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 };
 

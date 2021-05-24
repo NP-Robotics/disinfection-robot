@@ -10,7 +10,6 @@ import "./App.css";
 
 //components
 import Header from "./components/header/header";
-import Sider from "./components/sider/sider";
 
 //pages
 import Login from "./pages/login/login";

@@ -1,14 +1,12 @@
 .wrapper {
   float: left;
-  margin: auto;
-  padding-top: 10px;
 }
 
 .status-block {
   width: 100%;
   display: flex;
-  margin: auto;
   flex-direction: row;
+  margin: auto;
   justify-content: center;
 }
 
