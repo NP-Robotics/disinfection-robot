@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
 
 async function readLocation() {
-  return fetch("http://localhost:8080/data/read", {
+  return fetch("http://127.0.0.1:8080/data/read", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +11,7 @@ async function readLocation() {
 }
 
 async function writeLocation(object) {
-  return fetch("http://localhost:8080/data/write", {
+  return fetch("http://127.0.0.1:8080/data/write", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -59,10 +59,13 @@ const Logs = (props) => {
       setLocation_log(await initialize_location_log());
       //console.log(await readLocation());
     });
-  }, []);
-
-  useEffect(async () => {
-    setLocation_log(await initialize_location_log());
+    async function fetchData() {
+      setLocation_log(await initialize_location_log());
+    }
+    fetchData();
+    return () => {
+      uv_off_sub.unsubscribe();
+    };
   }, []);
 
   const handleRefresh = async (e) => {
@@ -79,7 +82,15 @@ const Logs = (props) => {
 
   return (
     <React.Fragment>
-      <div className="badge badge-success">
+      <div
+        className="badge badge-success"
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
         Waypoint Log when UV disabled
         <button onClick={handleRefresh} className="btn btn-primary btn-sm m-2">
           Refresh

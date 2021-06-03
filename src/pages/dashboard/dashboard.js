@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./dashboard.css";
-import Chatbot from "../chatbot/chatbot";
-import Recorder from "../chatbot/recorder";
+import Waypointfinder from "../waypointfinder/waypointfinder"
+import { propTypes } from "react-bootstrap/esm/Image";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   return (
     <div className="dashboard">
       <React.Fragment>
@@ -17,8 +17,11 @@ const Dashboard = () => {
           <button className="btn btn-warning btn-sm m-2">Camera Mode</button>
         </Link>
         <div>
+          {/*
           <Recorder />
           <Chatbot />
+          */}
+          <Waypointfinder ros={props.ros}/>
         </div>
       </React.Fragment>
     </div>

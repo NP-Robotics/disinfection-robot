@@ -13,19 +13,21 @@ app.use("/login", (request, result) => {
 });
 
 app.use("/data/read", (request, result) => {
-  fs.readFile('./src/components/disinfection/log.json', (err, data) => {
+  fs.readFile('./src/pages/disinfection/log.json', (err, data) => {
     if (err) {
         console.log("File read failed:", err)
         return
     }
-    result.send(JSON.parse(data));
+    try { result.send(JSON.parse(data)); } catch (e) {
+      console.log("error log/read")
+    }
   })
   console.log("sent")
 });
 
 app.use("/data/write", (request, result) => {
   console.log(request.body)
-  fs.writeFile('./src/components/disinfection/log.json', JSON.stringify(request.body, null, 2), err => {
+  fs.writeFile('./src/pages/disinfection/log.json', JSON.stringify(request.body, null, 2), err => {
     if (err) {
       console.log('Error writing file', err)
     } else {
@@ -36,19 +38,21 @@ app.use("/data/write", (request, result) => {
 });
 
 app.use("/path/read", (request, result) => {
-  fs.readFile('./src/components/disinfection/path.json', (err, data) => {
+  fs.readFile('./src/pages/disinfection/path.json', (err, data) => {
     if (err) {
         console.log("File read failed:", err)
         return
     }
-    result.send(JSON.parse(data));
+    try { result.send(JSON.parse(data)); } catch (e) {
+      console.log("error path/read")
+    }
   })
   console.log("sent")
 });
 
 app.use("/path/write", (request, result) => {
   console.log(request.body)
-  fs.writeFile('./src/components/disinfection/path.json', JSON.stringify(request.body, null, 2), err => {
+  fs.writeFile('./src/pages/disinfection/path.json', JSON.stringify(request.body, null, 2), err => {
     if (err) {
       console.log('Error writing file', err)
     } else {
@@ -56,6 +60,19 @@ app.use("/path/write", (request, result) => {
     }
   })
   result.send({});
+});
+
+app.use("/waypoint/read", (request, result) => {
+  fs.readFile('./src/pages/waypointfinder/waypoints.json', (err, data) => {
+    if (err) {
+        console.log("File read failed:", err)
+        return
+    }
+    try { result.send(JSON.parse(data)); } catch (e) {
+      console.log("error waypoint/read")
+    }
+  })
+  console.log("sent")
 });
 
 app.listen(8080, () => {

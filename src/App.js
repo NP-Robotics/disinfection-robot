@@ -1,3 +1,4 @@
+//hi
 //react
 import React, { useEffect, useState } from "react";
 import { Route, Switch, Link } from "react-router-dom";
@@ -29,7 +30,7 @@ function App() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    ros.connect("ws://localhost:9090");
+    ros.connect("ws://127.0.0.1:9090");
 
     ros.on("connection", () => {
       setStatus("Connected");
@@ -38,7 +39,7 @@ function App() {
 
     ros.on("close", () => {
       setStatus("Disconnected");
-      ros.connect("ws://localhost:9090");
+      ros.connect("ws://127.0.0.1:9090");
     });
 
     ros.on("error", () => {
@@ -56,7 +57,7 @@ function App() {
       <Header ros={ros} error={error} status={status} setToken={setToken} />
       <Switch>
         <Route exact path="/">
-          <Dashboard />
+          <Dashboard ros={ros}/>
         </Route>
         <Route exact path="/disinfection">
           <Disinfection ros={ros} />

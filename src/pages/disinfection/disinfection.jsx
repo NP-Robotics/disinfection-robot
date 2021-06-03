@@ -1,3 +1,4 @@
+//hi
 import React, { Component } from "react";
 import ROSLIB from "roslib";
 import { Link } from "react-router-dom";
@@ -5,7 +6,7 @@ import "./disinfection.css";
 import Logs from "./logs";
 
 async function readPaths() {
-  return fetch("http://localhost:8080/path/read", {
+  return fetch("http://127.0.0.1:8080/path/read", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -75,10 +76,16 @@ class Disinfection extends Component {
       function (message) {
         this.state.status = message.data;
         this.setState({ state: this.state });
+        if (message.data == "extended") this.startPath();
       }.bind(this)
     );
     this.state.path_list = Object.entries(await readPaths());
     this.setState({ state: this.state });
+  }
+
+  componentWillUnmount() {
+    this.state.waypoint_sub.unsubscribe();
+    this.state.motor_sub.unsubscribe();
   }
 
   handleStart = () => {
@@ -89,7 +96,7 @@ class Disinfection extends Component {
         ]
         console.log(JSON.stringify(data))*/
     this.startExtend();
-    this.startPath();
+    //this.startPath();
     var dynamixel_position = new ROSLIB.Message({
       id: 1,
       position: 16368,
@@ -124,30 +131,39 @@ class Disinfection extends Component {
             </button>
           </Link>
         </div>
-        Choose Paths:{" "}
-        <select id="pathnamelist">
-          {this.state.path_list.map((pathname, index) => (
-            <option key={index} value={index}>
-              {pathname[0]}
-            </option>
-          ))}
-        </select>
-        <button
-          onClick={() => this.handleStart()}
-          className="btn btn-primary btn-sm m-2"
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "30%",
+            transform: "translate(-50%, -50%)",
+          }}
         >
-          Start Disinfection Mode
-        </button>
-        <button
-          onClick={() => this.handleStop()}
-          className="btn btn-danger btn-sm m-2"
-        >
-          Stop Disinfection Mode
-        </button>
-        <span className={this.textColour()}>
-          Current Waypoint: {this.state.status_waypoint}
-        </span>
-        <br></br>
+          Choose Paths:{" "}
+          <select id="pathnamelist">
+            {this.state.path_list.map((pathname, index) => (
+              <option key={index} value={index}>
+                {pathname[0]}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() => this.handleStart()}
+            className="btn btn-primary btn-sm m-2"
+          >
+            Start Disinfection Mode
+          </button>
+          <button
+            onClick={() => this.handleStop()}
+            className="btn btn-danger btn-sm m-2"
+          >
+            Stop Disinfection Mode
+          </button>
+          <span className={this.textColour()}>
+            Current Waypoint: {this.state.status_waypoint}
+          </span>
+          <br></br>
+        </div>
         <Logs ros={this.props.ros} />
       </React.Fragment>
     );
@@ -156,8 +172,10 @@ class Disinfection extends Component {
   startPath() {
     const pathindex = document.getElementById("pathnamelist").value;
     let e = this.state.path_list[pathindex][1];
+    console.log(e);
     var request = new ROSLIB.ServiceRequest({
       sequence: e,
+      loop: true,
     });
     this.state.path_srv.callService(request, function (result) {
       //console.log(result.success);
