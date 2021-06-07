@@ -4,14 +4,11 @@ import "./camera.css";
 import axios from "axios";
 
 const Camera = () => {
-  const [initialised, setInitialised] = useState(false);
-  const [stream, getStream] = useState();
-
-  useEffect(() => {
+  /*   useEffect(() => {
     axios.get("http://localhost:5000/camera").then((response) => {
       console.log("Success");
     });
-  });
+  }); */
 
   return (
     <div>
@@ -20,6 +17,7 @@ const Camera = () => {
           Back to Dashboard
         </button>
       </Link>
+      <button>Test Button</button>
       <button className="btn btn-primary btn-sm m-2">Start</button>
       <button className="btn btn-danger btn-sm m-2">Stop</button>
       <h1>Stream:</h1>

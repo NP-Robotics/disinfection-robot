@@ -1,34 +1,24 @@
-.wrapper {
-  float: left;
-}
-
-.status-block {
-  width: 100%;
-  display: flex;
+.status {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   flex-direction: row;
   margin: auto;
-  justify-content: center;
+  padding: auto;
 }
 
-.status-message {
+.text {
   margin: auto;
-  width: 110px;
-  display: inline-block;
-  color: white;
-  text-align: center;
-  font-size: 1.05em;
-  padding-top: 0.8px;
-  padding-left: 2px;
-  padding-right: 2px;
-  transition: all 0.4s ease-in-out;
+  padding: auto;
 }
 
 .refresh {
+  padding: auto;
   margin: auto;
+  margin-left: -48px;
   display: inline-block;
   background-size: 100% 100%;
   font-size: 1.5em;
-  margin-left: 2px;
+  color: white;
 }
 
 .refresh:hover {

@@ -1,32 +1,22 @@
-import React from "react";
-import * as AiIcons from "react-icons/ai";
-import * as BsIcons from "react-icons/bs";
-import * as RiIcons from "react-icons/ri";
-import "./header.css";
-
 export const HeaderData = [
   {
-    title: "Dashboard",
+    name: "Home",
     path: "/",
-    icon: <AiIcons.AiOutlineHome />,
-    className: "nav-icons",
+    className: "nav-links",
   },
   {
-    title: "Streaming",
-    path: "/camera",
-    icon: <AiIcons.AiOutlineVideoCamera />,
-    className: "nav-icons",
-  },
-  {
-    title: "Chatbot",
-    path: "/",
-    icon: <BsIcons.BsChatSquareDots />,
-    className: "nav-icons",
-  },
-  {
-    title: "Disinfection",
+    name: "Disinfection",
     path: "/disinfection",
-    icon: <RiIcons.RiVirusLine />,
-    className: "nav-icons",
+    className: "nav-links",
+  },
+  {
+    name: "Chatbot",
+    path: "/chatbot",
+    className: "nav-links",
+  },
+  {
+    name: "Camera",
+    path: "/camera",
+    className: "nav-links",
   },
 ];
