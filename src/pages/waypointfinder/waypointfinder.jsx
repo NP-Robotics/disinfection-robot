@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
+import Map from "./map.jpg";
 
 async function readWaypoints() {
   return fetch("http://127.0.0.1:8080/waypoint/read", {
@@ -73,6 +74,32 @@ const Waypointfinder = (props) => {
     cancel_srv.callService(request, function (result) {});
   };
 
+  const handleToilet = () => {
+    var goal = new ROSLIB.Message({
+      poses: [
+        {
+          location: "toilette",
+          pose: {
+            position: {
+              x: 4.248,
+              y: -2.346,
+              z: 0.0,
+            },
+            orientation: {
+              x: 0.0,
+              y: 0.0,
+              z: 0.982,
+              w: 0.191,
+            },
+          },
+          task: "0",
+        },
+      ],
+      loop: false,
+    });
+    goal_pub.publish(goal);
+  };
+
   return (
     <React.Fragment>
       <select id="waypointlist">
@@ -94,6 +121,20 @@ const Waypointfinder = (props) => {
         className="btn btn-danger btn-sm m-2"
       >
         Stop Escort
+      </button>
+      <br></br>
+      <img Src={Map} height={700} width={1900} />
+      <button
+        onClick={() => handleToilet()}
+        className="btn btn-success btn-sm m-2"
+        style={{
+          position: "absolute",
+          left: "30%",
+          top: "45%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        Toilet
       </button>
     </React.Fragment>
   );

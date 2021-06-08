@@ -83,11 +83,11 @@ const Logs = (props) => {
   return (
     <React.Fragment>
       <div
-        className="badge badge-success"
+        className="badge border border-dark"
         style={{
           position: "absolute",
           left: "50%",
-          top: "50%",
+          top: "60%",
           transform: "translate(-50%, -50%)",
         }}
       >
@@ -100,15 +100,17 @@ const Logs = (props) => {
           .reverse()
           .map((log) => (
             <div key={log[0]}>
-              <h1 className="badge badge-success">Date: {log[0]}</h1>
-              {log[1].map((location) => (
-                <span
-                  key={log[1].indexOf(location)}
-                  className="badge badge-danger"
-                >
-                  {location.location}
-                </span>
-              ))}
+              <h1 className="badge">Date: {log[0]}</h1>
+              <ul class="list-group list-group-horizontal">
+                {log[1].map((location) => (
+                  <li
+                    key={log[1].indexOf(location)}
+                    className="list-group-item list-group-item-danger"
+                  >
+                    {location.location}
+                  </li>
+                ))}
+              </ul>
               <button
                 onClick={() => handleDelete(log[0])}
                 className="btn btn-primary btn-sm m-2"
