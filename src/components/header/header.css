@@ -8,8 +8,7 @@
   align-items: flex-start;
   justify-content: center;
   font-size: 1.2rem;
-  overflow: hidden;
-  border: solid 2px green;
+  overflow: visible;
 }
 
 .header-logo {
@@ -28,7 +27,8 @@
   margin: auto;
   padding: auto;
   margin-right: -80px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: flex-start;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -48,7 +48,6 @@
   max-width: 40vw;
   justify-content: end;
   margin-right: 2rem;
-  border: solid 2px red;
 }
 
 .nav-links {
@@ -74,19 +73,61 @@
 .ros-status {
   text-align: center;
   padding: auto;
+  margin: auto;
   align-items: center;
   vertical-align: middle;
-  border: 2px solid red;
 }
 
-.logout-button {
+.dropdown {
+  position: relative;
+  display: inline-block;
   margin-top: auto;
   margin-bottom: auto;
-  margin-right: 1em;
-  padding: auto;
-  display: inline-flex;
+  margin-right: 20px;
+  padding: 0;
+  margin-left: -20px;
 }
 
+.dropbtn {
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.content {
+  color: white;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: rgba(25, 25, 32, 0.801);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.content a {
+  float: right;
+  color: black;
+  padding: 8px 14px;
+  text-decoration: none;
+  display: block;
+  z-index: 9999;
+  overflow: visible;
+}
+
+.content a:hover {
+  cursor: pointer;
+  background-color: rgb(25, 25, 32);
+}
+.dropdown:hover .content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: rgba(139, 139, 139, 0.404);
+}
+
+/*
 @media screen and (max-width: 960px) {
   .header-wrapper {
     position: relative;
@@ -166,3 +207,4 @@
     display: none;
   }
 }
+*/ ;

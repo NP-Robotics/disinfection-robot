@@ -4,6 +4,10 @@ import "./header.css";
 import NPLogo from "../../assets/NPLogo.png";
 import Rosconnect from "../ros/rosconnect";
 import Item from "antd/lib/list/Item";
+import { Layout, Menu } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+
+const { SubMenu } = Menu;
 
 class Header extends Component {
   state = { clicked: false };
@@ -46,9 +50,13 @@ class Header extends Component {
             );
           })}
         </ul>
-        <button className="logout-button" onClick={this.handleLogout}>
-          Log Out
-        </button>
+        <div className="dropdown">
+          <UserOutlined className="dropbtn" />
+          <div class="content">
+            <a>Account</a>
+            <a onClick={this.handleLogout}>Log Out</a>
+          </div>
+        </div>
       </nav>
     );
   }
