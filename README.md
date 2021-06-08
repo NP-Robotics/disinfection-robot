@@ -2,9 +2,12 @@
 
 To start local server
 
-### node server.js
+### `node server.js`
 
 To start username and password server
+
+### `cd api`and `export FLASK_APP=app.py`
+if running server on Nvidia Xavier
 
 Camera functionalities:
 
