@@ -3,7 +3,6 @@ import { HeaderData } from "./headerData";
 import "./header.css";
 import NPLogo from "../../assets/NPLogo.png";
 import Rosconnect from "../ros/rosconnect";
-import Item from "antd/lib/list/Item";
 import { Layout, Menu } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -25,7 +24,7 @@ class Header extends Component {
     return (
       <nav className="header-wrapper">
         <img className="header-logo" src={NPLogo} alt="Ngee Ann Logo" />
-        <span className="title">Robot Status: </span>
+        <span className="title">Robot Status:</span>
         <Rosconnect />
         <div className="menu-icon" onClick={this.handleClick}>
           <i

@@ -1,5 +1,4 @@
 import cv2
-import tensorflow as tf
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
@@ -81,13 +80,13 @@ def detector():
 	# initialize the video stream and allow the camera sensor to warm up
 
 	#RGB STREAM 
-	#vs = VideoStream(src=0).start()
-	vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
+	vs = VideoStream(src=0).start()
+	#vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
 
 	#TEMPERATURE STREAM
 	#vs2 = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/201").start()
 
-	time.sleep(2.0)
+	#time.sleep(2.0)
 
 	# loop over the frames from the video stream
 	while True:
@@ -118,9 +117,8 @@ def detector():
 				cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
 			cv2.rectangle(frame, (startX, startY), (endX, endY), color, 1)
 
-		cv2.imshow("Detection", frame)
+		#cv2.imshow("Detection", frame)
 
-		"""
 		ret, jpeg = cv2.imencode('.jpg', frame)
 		img = jpeg.tobytes()
 		yield (b'--frame\r\n'
@@ -132,6 +130,7 @@ def detector():
 	cv2.destroyAllWindows()
 	vs.stop
 
+		"""
 	
 if __name__ == '__main__':
 	detector()

@@ -1,32 +1,25 @@
 .status {
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  flex-direction: row;
-  align-items: flex-start;
-  margin: auto;
-  padding: auto;
 }
 
 .text {
-  display: fixed;
-  margin: auto;
-  margin-top: 28px;
-  margin-left: 80px;
-  padding: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+  font-size: 18px;
 }
 
 .refresh {
-  display: inline-block;
-  padding: 0;
-  margin: auto;
-  margin-left: -90px;
-  display: inline-block;
-  background-size: 100% 100%;
-  font-size: 1.5em;
   color: white;
+  padding-left: 5px;
+  padding: auto;
+  font-size: 23px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .refresh:hover {
   transition: all 0.4s ease-in-out;
-  transform: rotate(360deg) scale(1.1);
+  transform: rotate(360deg) scale(1.15);
+  color: blanchedalmond;
 }

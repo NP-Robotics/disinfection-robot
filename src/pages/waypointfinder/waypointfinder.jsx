@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
 import Map from "./map.jpg";
+import "./waypointfinder.css";
 
 async function readWaypoints() {
   return fetch("http://127.0.0.1:8080/waypoint/read", {
