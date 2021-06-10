@@ -9,14 +9,15 @@ export const HeaderData = [
     path: "/disinfection",
     className: "nav-links",
   },
-  {
-    name: "Chatbot",
-    path: "/chatbot",
-    className: "nav-links",
-  },
+
   {
     name: "Camera",
     path: "/camera",
+    className: "nav-links",
+  },
+  {
+    name: "Chatbot",
+    path: "/chatbot",
     className: "nav-links",
   },
 ];

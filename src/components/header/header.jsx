@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { HeaderData } from "./headerData";
 import "./header.css";
 import NPLogo from "../../assets/NPLogo.png";
@@ -11,7 +12,8 @@ const { SubMenu } = Menu;
 class Header extends Component {
   state = { clicked: false };
 
-  handleClick = () => {
+  handleClick = async (e) => {
+    e.preventDefault();
     this.setState({ clicked: !this.state.clicked });
   };
 
@@ -35,16 +37,17 @@ class Header extends Component {
           {HeaderData.map((item, index) => {
             return (
               <li key={index}>
-                <a
-                  style={{
-                    textDecoration: "none !important",
-                    color: "white",
-                  }}
-                  className={item.className}
-                  href={item.path}
-                >
-                  {item.name}
-                </a>
+                <Link to={item.path}>
+                  <a
+                    style={{
+                      textDecoration: "none !important",
+                      color: "white",
+                    }}
+                    className={item.className}
+                  >
+                    {item.name}
+                  </a>
+                </Link>
               </li>
             );
           })}
