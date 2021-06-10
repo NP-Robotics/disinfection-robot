@@ -6,6 +6,7 @@ import NPLogo from "../../assets/NPLogo.png";
 import Rosconnect from "../ros/rosconnect";
 import { Layout, Menu } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { OmitProps } from "antd/lib/transfer/ListBody";
 
 const { SubMenu } = Menu;
 
@@ -27,7 +28,7 @@ class Header extends Component {
       <nav className="header-wrapper">
         <img className="header-logo" src={NPLogo} alt="Ngee Ann Logo" />
         <span className="title">Robot Status:</span>
-        <Rosconnect />
+        <Rosconnect ros={this.props.ros} status={this.props.status} />
         <div className="menu-icon" onClick={this.handleClick}>
           <i
             className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}
