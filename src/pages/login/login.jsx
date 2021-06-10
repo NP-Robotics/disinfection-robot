@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./login.css";
-import { Form, Input, Button, Checkbox } from "antd";
-import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
+import { Form, Input, Button } from "antd";
+import { EyeFilled } from "@ant-design/icons";
 
 async function loginUser(credentials) {
   return fetch("http://127.0.0.1:8080/login", {

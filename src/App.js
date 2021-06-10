@@ -48,7 +48,7 @@ function App() {
     });
   }, []);
 
-  if (token != "admin") {
+  if (token !== "admin") {
     return <Login setToken={setToken} />;
   }
 
@@ -57,7 +57,7 @@ function App() {
       <Header ros={ros} error={error} status={status} setToken={setToken} />
       <Switch>
         <Route exact path="/">
-          <Dashboard ros={ros}/>
+          <Dashboard ros={ros} />
         </Route>
         <Route exact path="/disinfection">
           <Disinfection ros={ros} />

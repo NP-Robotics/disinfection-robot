@@ -1,5 +1,6 @@
 .status {
   display: grid;
+  grid-template-columns: repeat(2, auto);
 }
 
 .text {
@@ -10,11 +11,12 @@
 }
 
 .refresh {
+  display: inline-block;
   color: white;
   padding-left: 5px;
   padding: auto;
   font-size: 23px;
-  margin-top: auto;
+  margin-top: 28px;
   margin-bottom: auto;
 }
 

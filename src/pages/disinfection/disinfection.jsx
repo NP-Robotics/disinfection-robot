@@ -139,7 +139,7 @@ class Disinfection extends Component {
       function (message) {
         this.state.status = message.data;
         this.setState({ state: this.state });
-        if (message.data == "extended") this.startPath();
+        if (message.data === "extended") this.startPath();
       }.bind(this)
     );
 

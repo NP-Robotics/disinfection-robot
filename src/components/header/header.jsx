@@ -4,10 +4,7 @@ import { HeaderData } from "./headerData";
 import "./header.css";
 import NPLogo from "../../assets/NPLogo.png";
 import Rosconnect from "../ros/rosconnect";
-import { Layout, Menu } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-
-const { SubMenu } = Menu;
 
 class Header extends Component {
   state = { clicked: false };
@@ -37,16 +34,15 @@ class Header extends Component {
           {HeaderData.map((item, index) => {
             return (
               <li key={index}>
-                <Link to={item.path}>
-                  <a
-                    style={{
-                      textDecoration: "none !important",
-                      color: "white",
-                    }}
-                    className={item.className}
-                  >
-                    {item.name}
-                  </a>
+                <Link
+                  to={item.path}
+                  style={{
+                    textDecoration: "none !important",
+                    color: "white",
+                  }}
+                  className={item.className}
+                >
+                  {item.name}
                 </Link>
               </li>
             );
@@ -54,7 +50,7 @@ class Header extends Component {
         </ul>
         <div className="dropdown">
           <UserOutlined className="dropbtn" />
-          <div class="content">
+          <div className="content">
             <a>Account</a>
             <a onClick={this.handleLogout}>Log Out</a>
           </div>

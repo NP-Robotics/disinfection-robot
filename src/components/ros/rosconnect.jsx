@@ -29,13 +29,15 @@ class Rosconnect extends Component {
 
   render() {
     return (
-      <React.Fragment className="status">
-        <div className="text">{this.statusIndicator()}</div>
-        <ReloadOutlined
-          onClick={() => this.handleRefresh()}
-          className="refresh"
-        />
-      </React.Fragment>
+      <div className="status">
+        <React.Fragment>
+          <div className="text">{this.statusIndicator()}</div>
+          <ReloadOutlined
+            onClick={() => this.handleRefresh()}
+            className="refresh"
+          />
+        </React.Fragment>
+      </div>
     );
   }
 }

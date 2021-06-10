@@ -5,7 +5,6 @@ from tensorflow.keras.models import load_model
 from imutils.video import VideoStream
 import numpy as np
 import imutils
-import time
 import os
 
 face_detector_path = "./detector/face_detector"
@@ -119,18 +118,19 @@ def detector():
 
 		#cv2.imshow("Detection", frame)
 
+		#"""
 		ret, jpeg = cv2.imencode('.jpg', frame)
 		img = jpeg.tobytes()
 		yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n') 
-		"""
+		#"""	
 
+	""""
 		if cv2.waitKey(1) & 0xFF == ord('q'):
 			break
 	cv2.destroyAllWindows()
-	vs.stop
-
-		"""
+	vs.stop 
+	"""  
 	
 if __name__ == '__main__':
 	detector()
