@@ -87,38 +87,43 @@ const Logs = (props) => {
         style={{
           position: "absolute",
           left: "50%",
-          top: "60%",
-          transform: "translate(-50%, -50%)",
+          top: "40%",
+          transform: "translate(-50%, -0%)",
         }}
       >
-        Waypoint Log when UV disabled
-        <button onClick={handleRefresh} className="btn btn-primary btn-sm m-2">
-          Refresh
-        </button>
-        {location_log
-          .slice(0)
-          .reverse()
-          .map((log) => (
-            <div key={log[0]}>
-              <h1 className="badge">Date: {log[0]}</h1>
-              <ul class="list-group list-group-horizontal">
-                {log[1].map((location) => (
-                  <li
-                    key={log[1].indexOf(location)}
-                    className="list-group-item list-group-item-danger"
-                  >
-                    {location.location}
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={() => handleDelete(log[0])}
-                className="btn btn-primary btn-sm m-2"
-              >
-                Delete
-              </button>
-            </div>
-          ))}
+        <h6>
+          Disinfection Log when UV disabled
+          <button
+            onClick={handleRefresh}
+            className="btn btn-primary btn-sm m-2"
+          >
+            Refresh
+          </button>
+          {location_log
+            .slice(0)
+            .reverse()
+            .map((log) => (
+              <div key={log[0]}>
+                <h1 className="badge">Date: {log[0]}</h1>
+                <button
+                  onClick={() => handleDelete(log[0])}
+                  className="btn btn-primary btn-sm m-2"
+                >
+                  Delete
+                </button>
+                <ul class="list-group list-group-horizontal">
+                  {log[1].map((location) => (
+                    <li
+                      key={log[1].indexOf(location)}
+                      className="list-group-item list-group-item-danger"
+                    >
+                      {location.location}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+        </h6>
       </div>
     </React.Fragment>
   );

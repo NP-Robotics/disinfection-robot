@@ -16,8 +16,8 @@ export const HeaderData = [
     className: "nav-links",
   },
   {
-    name: "Chatbot",
-    path: "/chatbot",
+    name: "Manual Control",
+    path: "/manual",
     className: "nav-links",
   },
 ];

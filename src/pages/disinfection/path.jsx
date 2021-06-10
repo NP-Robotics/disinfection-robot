@@ -89,74 +89,78 @@ const Path = (props) => {
   return (
     <React.Fragment>
       <div
-        className="badge badge-primary"
+        className="badge border border-dark"
         style={{
           position: "absolute",
           left: "50%",
-          top: "30%",
-          transform: "translate(-50%, -50%)",
+          top: "20%",
+          transform: "translate(-50%, -0%)",
         }}
       >
-        List of Waypoints:{" "}
-        <select id="waypointlist">
-          {waypoint_list.map((waypoint) => (
-            <option key={waypoint.name} value={waypoint.name}>
-              {waypoint.name}
-            </option>
-          ))}
-        </select>{" "}
-        <label>Pause Time(sec): </label>
-        <input id="pausetime" defaultValue="0" />
-        <button
-          onClick={() => handleAddwaypoint()}
-          className="btn btn-success btn-sm m-2"
-        >
-          Add to Path
-        </button>
-        <button
-          onClick={() => handleRevert()}
-          className="btn btn-success btn-sm m-2"
-        >
-          Revert Once
-        </button>
-        <br></br>
-        <div>
-          <h4>Path: </h4>
-          {paths.map((path, index) => (
-            <div key={index}>
-              <span>
-                {path.location} {path.task}s
-              </span>
-            </div>
-          ))}
-          <br></br>
-          <div>
-            <label>Path Name: </label>
-            <input id="pathname" />
-            <button
-              onClick={() => handleCreate()}
-              className="btn btn-success btn-sm m-2"
-            >
-              Create Path
-            </button>
-          </div>
-        </div>
-        <div>
-          List of Paths:{" "}
-          <select id="pathnamelist">
-            {path_list.map((pathname, index) => (
-              <option key={index} value={pathname[0]}>
-                {pathname[0]}
+        <h6>
+          List of Waypoints:{" "}
+          <select id="waypointlist">
+            {waypoint_list.map((waypoint) => (
+              <option key={waypoint.name} value={waypoint.name}>
+                {waypoint.name}
               </option>
             ))}
-          </select>
+          </select>{" "}
+          <label>Pause Time(sec): </label>
+          <input id="pausetime" defaultValue="0" />
           <button
-            onClick={() => handleDelete()}
-            className="btn btn-danger btn-sm m-2"
+            onClick={() => handleAddwaypoint()}
+            className="btn btn-primary btn-sm m-2"
           >
-            Delete Path
+            Add to Path
           </button>
-        </div>
+          <button
+            onClick={() => handleRevert()}
+            className="btn btn-primary btn-sm m-2"
+          >
+            Revert Once
+          </button>
+          <br></br>
+          <div>
+            <h4>Path: </h4>
+            <ul class="list-group list-group-vertical">
+              {paths.map((path, index) => (
+                <div key={index}>
+                  <li className="list-group-item list-group-item-success">
+                    {path.location} {path.task}s
+                  </li>
+                </div>
+              ))}
+            </ul>
+            <br></br>
+            <div>
+              <label>Path Name: </label>
+              <input id="pathname" />
+              <button
+                onClick={() => handleCreate()}
+                className="btn btn-primary btn-sm m-2"
+              >
+                Create Path
+              </button>
+            </div>
+          </div>
+          <div>
+            List of Paths:{" "}
+            <select id="pathnamelist">
+              {path_list.map((pathname, index) => (
+                <option key={index} value={pathname[0]}>
+                  {pathname[0]}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={() => handleDelete()}
+              className="btn btn-danger btn-sm m-2"
+            >
+              Delete Path
+            </button>
+          </div>
+        </h6>
       </div>
     </React.Fragment>
   );
