@@ -16,7 +16,7 @@ import Header from "./components/header/header";
 import Login from "./pages/login/login";
 import Dashboard from "./pages/dashboard/dashboard";
 import Disinfection from "./pages/disinfection/disinfection";
-import Logs from "./pages/disinfection/logs";
+import Manual from "./pages/manual/manual";
 import Path from "./pages/disinfection/path.jsx";
 import Camera from "./pages/camera/camera";
 
@@ -73,6 +73,9 @@ function App() {
           </Link>
           <br></br>
           <Path ros={ros} />
+        </Route>
+        <Route exact path="/manual">
+          <Manual ros={ros} />
         </Route>
       </Switch>
     </React.Fragment>
