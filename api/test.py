@@ -1,15 +1,18 @@
 import cv2
+import time
+from imutils.video import VideoStream
 
 def detector():
+    cap = VideoStream(src=0)
     #cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture("rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101")
+    #cap = cv2.VideoCapture("rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101")
 
     while True:
         ret, frame = cap.read()
-        width = int(frame.shape[1] / 4)
-        height = int(frame.shape[0] / 4)
-        dim = (width, height)
-        cv2.resize(frame, dim, interpolation =cv2.INTER_AREA)
+        #width = int(frame.shape[1] / 4)
+        #height = int(frame.shape[0] / 4)
+        #dim = (width, height)
+        #cv2.resize(frame, dim, interpolation =cv2.INTER_AREA)
 
         cv2.imshow("frame", frame)
 
