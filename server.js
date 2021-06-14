@@ -63,7 +63,11 @@ app.use("/path/write", (request, result) => {
 });
 
 app.use("/waypoint/read", (request, result) => {
+<<<<<<< Updated upstream
   fs.readFile('./src/pages/waypointfinder/waypoints.json', (err, data) => {
+=======
+  fs.readFile('./src/components/waypointfinder/waypoints.json', (err, data) => {
+>>>>>>> Stashed changes
     if (err) {
         console.log("File read failed:", err)
         return

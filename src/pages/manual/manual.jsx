@@ -11,6 +11,42 @@ const Manual = (props) => {
       serviceType: "geometry_msgs/Twist",
     })
   );
+  const [motor_pub] = useState(
+    new ROSLIB.Topic({
+      ros: props.ros,
+      name: "/MotorActivate",
+      messageType: "std_msgs/String",
+    })
+  );
+  const [UVbig_pub] = useState(
+    new ROSLIB.Topic({
+      ros: props.ros,
+      name: "/BigUVActivate",
+      messageType: "std_msgs/Bool",
+    })
+  );
+  const [UVsmall_pub] = useState(
+    new ROSLIB.Topic({
+      ros: props.ros,
+      name: "/SmallUVActivate",
+      messageType: "std_msgs/Bool",
+    })
+  );
+  const [mist_pub] = useState(
+    new ROSLIB.Topic({
+      ros: props.ros,
+      name: "/MistActivate",
+      messageType: "std_msgs/Bool",
+    })
+  );
+  const [fan_pub] = useState(
+    new ROSLIB.Topic({
+      ros: props.ros,
+      name: "/FanActivate",
+      messageType: "std_msgs/Bool",
+    })
+  );
+
   const startTeleop = (linearX, angularZ) => {
     var teleop_msg = new ROSLIB.Message({
       linear: {
@@ -40,6 +76,7 @@ const Manual = (props) => {
     clearInterval(interval);
     console.log("stop");
   };
+
   const handleKeydown = (event) => {
     if (keydown === false) {
       keydown = true;
@@ -54,10 +91,75 @@ const Manual = (props) => {
       }
     }
   };
-
   const handleKeyup = (event) => {
     keydown = false;
     clearInterval(interval);
+  };
+
+  const handleExtend = () => {
+    var extend = new ROSLIB.Message({
+      data: "extendonly",
+    });
+    motor_pub.publish(extend);
+  };
+  const handleRetract = () => {
+    var retract = new ROSLIB.Message({
+      data: "retractonly",
+    });
+    motor_pub.publish(retract);
+  };
+
+  const handleUVbigon = () => {
+    var on = new ROSLIB.Message({
+      data: true,
+    });
+    UVbig_pub.publish(on);
+  };
+  const handleUVbigoff = () => {
+    var off = new ROSLIB.Message({
+      data: false,
+    });
+    UVbig_pub.publish(off);
+  };
+  const handleUVsmallon = () => {
+    var on = new ROSLIB.Message({
+      data: true,
+    });
+    UVsmall_pub.publish(on);
+  };
+  const handleUVsmalloff = () => {
+    var off = new ROSLIB.Message({
+      data: false,
+    });
+    UVsmall_pub.publish(off);
+  };
+
+  const handleMiston = () => {
+    var on = new ROSLIB.Message({
+      data: true,
+    });
+    mist_pub.publish(on);
+  };
+
+  const handleMistoff = () => {
+    var off = new ROSLIB.Message({
+      data: false,
+    });
+    mist_pub.publish(off);
+  };
+
+  const handleFanon = () => {
+    var on = new ROSLIB.Message({
+      data: true,
+    });
+    fan_pub.publish(on);
+  };
+
+  const handleFanoff = () => {
+    var off = new ROSLIB.Message({
+      data: false,
+    });
+    fan_pub.publish(off);
   };
 
   return (
@@ -127,6 +229,16 @@ const Manual = (props) => {
       >
         Stop
       </button>
+      <button onClick={() => handleExtend()}>Extend</button>
+      <button onClick={() => handleRetract()}>Retract</button>
+      <button onClick={() => handleUVbigon()}>UV Big On</button>
+      <button onClick={() => handleUVbigoff()}>UV Big Off</button>
+      <button onClick={() => handleUVsmallon()}>UV Small On</button>
+      <button onClick={() => handleUVsmalloff()}>UV Small Off</button>
+      <button onClick={() => handleMiston()}>Mist On</button>
+      <button onClick={() => handleMistoff()}>Mist Off</button>
+      <button onClick={() => handleFanon()}>Fan On</button>
+      <button onClick={() => handleFanoff()}>Fan Off</button>
     </React.Fragment>
   );
 };

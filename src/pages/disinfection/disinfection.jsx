@@ -61,7 +61,7 @@ class Disinfection extends Component {
     this.state.motor_pub = new ROSLIB.Topic({
       ros: props.ros,
       name: "/MotorActivate",
-      messageType: "std_msgs/Bool",
+      messageType: "std_msgs/String",
     });
     this.state.motor_sub = new ROSLIB.Topic({
       ros: props.ros,
@@ -342,14 +342,14 @@ class Disinfection extends Component {
 
   startExtend() {
     var extend = new ROSLIB.Message({
-      data: true,
+      data: "disinfectiontrue",
     });
     this.state.motor_pub.publish(extend);
   }
 
   startRetract() {
     var retract = new ROSLIB.Message({
-      data: false,
+      data: "disinfectionfalse",
     });
     this.state.motor_pub.publish(retract);
   }
