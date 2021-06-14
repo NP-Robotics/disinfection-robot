@@ -1,6 +1,5 @@
 import React from "react";
 import ReactPlayer from "react-player";
-import { Link } from "react-router-dom";
 import "./camera.css";
 
 export default class Camera extends React.Component {

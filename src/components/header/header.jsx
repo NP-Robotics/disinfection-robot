@@ -5,7 +5,7 @@ import "./header.css";
 import NPLogo from "../../assets/NPLogo.png";
 import Rosconnect from "../ros/rosconnect";
 import { UserOutlined } from "@ant-design/icons";
-import { OmitProps } from "antd/lib/transfer/ListBody";
+//import { OmitProps } from "antd/lib/transfer/ListBody";
 
 class Header extends Component {
   state = { clicked: false };

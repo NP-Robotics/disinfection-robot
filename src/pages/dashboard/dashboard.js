@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./dashboard.css";
 import Waypointfinder from "../waypointfinder/waypointfinder";
-import { propTypes } from "react-bootstrap/esm/Image";
+//import { propTypes } from "react-bootstrap/esm/Image";
 
 const Dashboard = (props) => {
   return (

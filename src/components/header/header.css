@@ -50,6 +50,7 @@
 .nav-links {
   color: white;
   padding: 0.5rem 1rem;
+  white-space: nowrap;
 }
 
 .nav-links:hover {
@@ -130,13 +131,13 @@
   .title {
     display: none;
   }
+
+  .nav-menu {
+    white-space: nowrap;
+  }
 }
 
 @media screen and (max-width: 1000px) {
-  .header-wrapper {
-    overflow: hidden;
-  }
-
   .header-wrapper {
     overflow: hidden;
   }
