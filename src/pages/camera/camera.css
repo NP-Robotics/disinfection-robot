@@ -1,15 +1,117 @@
-.video-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -50px;
-  width: 500px;
-  height: 500px;
+.safety-message-1 {
+  top: 0;
+  font-family: "Ubuntu", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-weight: 750;
+  font-size: 22px;
+  margin-top: 10px;
 }
-.video-wrapper iframe {
+
+.safety-message-2 {
+  top: 0;
+  font-family: "Ubuntu", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-weight: 750;
+  font-size: 22px;
+  padding-bottom: 20px;
+}
+
+.safety-message-chi-1 {
+  top: 0;
+  font-family: "Ubuntu", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-weight: 750;
+  font-size: 22px;
+  margin-top: 10px;
+  letter-spacing: 3px;
+}
+
+.safety-message-chi-2 {
+  top: 0;
+  font-family: "Ubuntu", sans-serif;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-weight: 750;
+  font-size: 22px;
+  padding-bottom: 20px;
+  letter-spacing: 3px;
+}
+
+iframe {
+  width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  background-color: #777;
+  display: block;
+}
+
+@keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-webkit-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-moz-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-ms-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+.stars-camera-page,
+.twinkling-camera-page {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 4px solid black;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  margin: auto;
+  margin-top: 80px;
+  overflow: hidden;
+}
+
+.stars-camera-page {
+  background: #000
+    url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top
+    center;
+  z-index: 0;
+}
+
+.twinkling-camera-page {
+  background: transparent
+    url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat
+    top center;
+  z-index: 1;
+
+  -moz-animation: move-twink-back 200s linear infinite;
+  -ms-animation: move-twink-back 200s linear infinite;
+  -o-animation: move-twink-back 200s linear infinite;
+  -webkit-animation: move-twink-back 200s linear infinite;
+  animation: move-twink-back 200s linear infinite;
 }

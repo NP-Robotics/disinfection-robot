@@ -3,6 +3,7 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
 from imutils.video import VideoStream
+
 import numpy as np
 import imutils
 import time
@@ -54,7 +55,7 @@ def detect():
     mask_net = load_model(mask_model_path)
 
     #vs = VideoStream(src=0).start()
-    vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
+    vs = VideoStream(src="rtspt://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
     time.sleep(2.0)
     print("Steam is OPEN")
 

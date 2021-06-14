@@ -26,17 +26,19 @@
   color: blanchedalmond;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1150px) {
   .text {
     max-width: 70px;
     margin-right: 53px;
     float: right;
+    padding-left: 2em;
   }
 
   .refresh {
     margin-right: 60px;
     float: left;
     margin-right: 250px;
+    padding-left: 2em;
   }
   .refresh:hover {
     transition: all 0.4s ease-in-out;

@@ -124,7 +124,7 @@ const Waypointfinder = (props) => {
         Stop Escort
       </button>
       <br></br>
-      <img src={Map} height={700} width={1900} />
+      <img className="ros-map" src={Map} />
       <button
         onClick={() => handleToilet()}
         className="btn btn-success btn-sm m-2"
