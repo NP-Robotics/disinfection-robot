@@ -111,7 +111,7 @@ const Logs = (props) => {
                 >
                   Delete
                 </button>
-                <ul class="list-group list-group-horizontal">
+                <ul className="list-group list-group-horizontal">
                   {log[1].map((location) => (
                     <li
                       key={log[1].indexOf(location)}

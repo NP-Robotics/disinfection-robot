@@ -123,7 +123,7 @@ const Path = (props) => {
           <br></br>
           <div>
             <h4>Path: </h4>
-            <ul class="list-group list-group-vertical">
+            <ul className="list-group list-group-vertical">
               {paths.map((path, index) => (
                 <div key={index}>
                   <li className="list-group-item list-group-item-success">

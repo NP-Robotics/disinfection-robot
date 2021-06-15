@@ -32,7 +32,7 @@ export default class Camera extends React.Component {
 
           <iframe
             src={"http://localhost:5000/camera"}
-            frameborder="0"
+            frameBorder="0"
             allow=" autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             title="stream"

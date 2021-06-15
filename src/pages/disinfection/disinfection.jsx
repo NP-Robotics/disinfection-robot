@@ -282,12 +282,12 @@ class Disinfection extends Component {
             </button>
           </div>
           <br></br>
-          <ul class="list-group list-group-horizontal">
+          <ul className="list-group list-group-horizontal">
             <li className={this.textColour()}>
               Current Waypoint: {this.state.status_waypoint}
             </li>
           </ul>
-          <ul class="list-group list-group-horizontal">
+          <ul className="list-group list-group-horizontal">
             <li className={this.uvColour(this.state.status_uv0)}>
               UV0: {this.state.status_uv0}
             </li>
