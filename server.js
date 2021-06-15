@@ -1,82 +1,92 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const fs = require('fs');
-const bp = require('body-parser')
+const fs = require("fs");
+const bp = require("body-parser");
 
 app.use(cors());
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: true }))
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 
 app.use("/login", (request, result) => {
   result.send({ token: "admin" });
 });
 
 app.use("/data/read", (request, result) => {
-  fs.readFile('./src/pages/disinfection/log.json', (err, data) => {
+  fs.readFile("./src/pages/disinfection/log.json", (err, data) => {
     if (err) {
-        console.log("File read failed:", err)
-        return
+      console.log("File read failed:", err);
+      return;
     }
-    try { result.send(JSON.parse(data)); } catch (e) {
-      console.log("error log/read")
+    try {
+      result.send(JSON.parse(data));
+    } catch (e) {
+      console.log("error log/read");
     }
-  })
-  console.log("sent")
+  });
+  console.log("sent");
 });
 
 app.use("/data/write", (request, result) => {
-  console.log(request.body)
-  fs.writeFile('./src/pages/disinfection/log.json', JSON.stringify(request.body, null, 2), err => {
-    if (err) {
-      console.log('Error writing file', err)
-    } else {
-      console.log('Successfully wrote file')
+  console.log(request.body);
+  fs.writeFile(
+    "./src/pages/disinfection/log.json",
+    JSON.stringify(request.body, null, 2),
+    (err) => {
+      if (err) {
+        console.log("Error writing file", err);
+      } else {
+        console.log("Successfully wrote file");
+      }
     }
-  })
+  );
   result.send({});
 });
 
 app.use("/path/read", (request, result) => {
-  fs.readFile('./src/pages/disinfection/path.json', (err, data) => {
+  fs.readFile("./src/pages/disinfection/path.json", (err, data) => {
     if (err) {
-        console.log("File read failed:", err)
-        return
+      console.log("File read failed:", err);
+      return;
     }
-    try { result.send(JSON.parse(data)); } catch (e) {
-      console.log("error path/read")
+    try {
+      result.send(JSON.parse(data));
+    } catch (e) {
+      console.log("error path/read");
     }
-  })
-  console.log("sent")
+  });
+  console.log("sent");
 });
 
 app.use("/path/write", (request, result) => {
-  console.log(request.body)
-  fs.writeFile('./src/pages/disinfection/path.json', JSON.stringify(request.body, null, 2), err => {
-    if (err) {
-      console.log('Error writing file', err)
-    } else {
-      console.log('Successfully wrote file')
+  console.log(request.body);
+  fs.writeFile(
+    "./src/pages/disinfection/path.json",
+    JSON.stringify(request.body, null, 2),
+    (err) => {
+      if (err) {
+        console.log("Error writing file", err);
+      } else {
+        console.log("Successfully wrote file");
+      }
     }
-  })
+  );
   result.send({});
 });
 
 app.use("/waypoint/read", (request, result) => {
-<<<<<<< Updated upstream
-  fs.readFile('./src/pages/waypointfinder/waypoints.json', (err, data) => {
-=======
-  fs.readFile('./src/components/waypointfinder/waypoints.json', (err, data) => {
->>>>>>> Stashed changes
+  fs.readFile("./src/components/waypointfinder/waypoints.json", (err, data) => {
     if (err) {
-        console.log("File read failed:", err)
-        return
+      console.log("File read failed:", err);
+      return;
     }
-    try { result.send(JSON.parse(data)); } catch (e) {
-      console.log("error waypoint/read")
+    try {
+      result.send(JSON.parse(data));
+    } catch (e) {
+      console.log("error waypoint/read");
     }
-  })
-  console.log("sent")
+  });
+  console.log("sent");
 });
 
 app.listen(8080, () => {
