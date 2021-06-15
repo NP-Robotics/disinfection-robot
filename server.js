@@ -13,7 +13,7 @@ app.use("/login", (request, result) => {
 });
 
 app.use("/data/read", (request, result) => {
-  fs.readFile("./src/pages/disinfection/log.json", (err, data) => {
+  fs.readFile("/home/npark2/catkin_ws/src/disinfection-robot/src/pages/disinfection/log.json", (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -30,7 +30,7 @@ app.use("/data/read", (request, result) => {
 app.use("/data/write", (request, result) => {
   console.log(request.body);
   fs.writeFile(
-    "./src/pages/disinfection/log.json",
+    "/home/npark2/catkin_ws/src/disinfection-robot/src/pages/disinfection/log.json",
     JSON.stringify(request.body, null, 2),
     (err) => {
       if (err) {
@@ -44,7 +44,7 @@ app.use("/data/write", (request, result) => {
 });
 
 app.use("/path/read", (request, result) => {
-  fs.readFile("./src/pages/disinfection/path.json", (err, data) => {
+  fs.readFile("/home/npark2/catkin_ws/src/disinfection-robot/src/pages/disinfection/path.json", (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -61,7 +61,7 @@ app.use("/path/read", (request, result) => {
 app.use("/path/write", (request, result) => {
   console.log(request.body);
   fs.writeFile(
-    "./src/pages/disinfection/path.json",
+    "/home/npark2/catkin_ws/src/disinfection-robot/src/pages/disinfection/path.json",
     JSON.stringify(request.body, null, 2),
     (err) => {
       if (err) {
@@ -75,7 +75,7 @@ app.use("/path/write", (request, result) => {
 });
 
 app.use("/waypoint/read", (request, result) => {
-  fs.readFile('./src/pages/waypointfinder/waypoints.json', (err, data) => {
+  fs.readFile('/home/npark2/catkin_ws/src/disinfection-robot/src/pages/waypointfinder/waypoints.json', (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
