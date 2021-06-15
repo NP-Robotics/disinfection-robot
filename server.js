@@ -75,7 +75,7 @@ app.use("/path/write", (request, result) => {
 });
 
 app.use("/waypoint/read", (request, result) => {
-  fs.readFile("./src/components/waypointfinder/waypoints.json", (err, data) => {
+  fs.readFile('./src/pages/waypointfinder/waypoints.json', (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
