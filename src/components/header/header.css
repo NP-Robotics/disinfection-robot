@@ -1,5 +1,6 @@
 .header-wrapper {
-  background: linear-gradient(90deg, rgb(51, 50, 53) 10%, rgb(25, 25, 32) 100%);
+  /*background: linear-gradient(90deg, rgb(51, 50, 53) 10%, rgb(25, 25, 32) 100%); */
+  background: rgb(118, 115, 115);
   height: 80px;
   width: 100vw;
   padding: auto;
@@ -13,7 +14,7 @@
 }
 
 .header-logo {
-  width: 200px;
+  width: 350px;
   padding: auto;
   margin: auto;
   align-items: flex-start;

@@ -1,5 +1,8 @@
 import React from "react";
 import "./camera.css";
+import "../../components/GlobalVariables";
+
+const ipAddress = global.ipAddress;
 
 export default class Camera extends React.Component {
   render() {
@@ -31,7 +34,7 @@ export default class Camera extends React.Component {
           </div>
 
           <iframe
-            src={"http://localhost:5000/camera"}
+            src={`http://${ipAddress}:5000/camera`}
             frameBorder="0"
             allow=" autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -42,3 +45,5 @@ export default class Camera extends React.Component {
     );
   }
 }
+
+//src={"http://localhost:5000/camera"}

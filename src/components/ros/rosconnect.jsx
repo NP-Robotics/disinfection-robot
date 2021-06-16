@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./rosconnect.css";
 import { ReloadOutlined } from "@ant-design/icons";
+import "../GlobalVariables";
+
+const baseIpAddress = global.baseIpAddress;
 
 class Rosconnect extends Component {
   statusIndicator() {
@@ -24,7 +27,7 @@ class Rosconnect extends Component {
   }
 
   handleRefresh = () => {
-    this.props.ros.connect("ws://192.168.31.200:9090");
+    this.props.ros.connect(`ws://${baseIpAddress}:9090`);
   };
 
   render() {

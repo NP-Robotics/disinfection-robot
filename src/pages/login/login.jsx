@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 import "./login.css";
 import { Form, Input, Button } from "antd";
 import { EyeFilled } from "@ant-design/icons";
+import "../../components/GlobalVariables";
+
+const ipAddress = global.ipAddress;
 
 async function loginUser(credentials) {
-  return fetch("http://192.168.31.2:8080/login", {
+  return fetch(`http://${ipAddress}:8080/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

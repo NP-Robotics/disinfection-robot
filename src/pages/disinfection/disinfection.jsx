@@ -4,9 +4,12 @@ import ROSLIB from "roslib";
 import { Link } from "react-router-dom";
 import "./disinfection.css";
 import Logs from "./logs";
+import "../../components/GlobalVariables";
+
+const ipAddress = global.ipAddress;
 
 async function readPaths() {
-  return fetch("http://192.168.31.2:8080/path/read", {
+  return fetch(`http://${ipAddress}:8080/path/read`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

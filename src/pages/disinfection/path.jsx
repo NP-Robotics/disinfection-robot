@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
+import "../../components/GlobalVariables";
+
+const ipAddress = global.ipAddress;
 
 async function readPaths() {
-  return fetch("http://192.168.31.2:8080/path/read", {
+  return fetch(`http://${ipAddress}:8080/path/read`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +14,7 @@ async function readPaths() {
 }
 
 async function writePaths(object) {
-  return fetch("http://192.168.31.2:8080/path/write", {
+  return fetch(`http://${ipAddress}:8080/path/write`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,4 +1,3 @@
-//hi
 //react
 import React, { useEffect, useState } from "react";
 import { Route, Switch, Link } from "react-router-dom";
@@ -23,6 +22,10 @@ import Camera from "./pages/camera/camera";
 //custom hooks
 import useToken from "./useToken";
 
+//global variables
+import "./components/GlobalVariables";
+const baseIpAddress = global.baseIpAddress;
+
 function App() {
   const { token, setToken } = useToken();
   const [ros, setRos] = useState(new ROSLIB.Ros());
@@ -30,7 +33,7 @@ function App() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    ros.connect("ws://192.168.31.200:9090");
+    ros.connect(`ws://${baseIpAddress}:9090`);
 
     ros.on("connection", () => {
       setStatus("Connected");
@@ -39,7 +42,7 @@ function App() {
 
     ros.on("close", () => {
       setStatus("Disconnected");
-      ros.connect("ws://192.168.31.200:9090");
+      ros.connect(`ws://${baseIpAddress}:9090`);
     });
 
     ros.on("error", () => {

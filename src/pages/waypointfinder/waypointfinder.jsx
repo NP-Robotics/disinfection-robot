@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
 import Map from "./map.jpg";
 import "./waypointfinder.css";
+import "../../components/GlobalVariables";
+
+const ipAddress = global.ipAddress;
 
 async function readWaypoints() {
-  return fetch("http://192.168.31.2:8080/waypoint/read", {
+  return fetch(`http://${ipAddress}:8080/waypoint/read`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
