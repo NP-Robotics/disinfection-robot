@@ -5,7 +5,7 @@ import { Form, Input, Button } from "antd";
 import { EyeFilled } from "@ant-design/icons";
 
 async function loginUser(credentials) {
-  return fetch("http://127.0.0.1:8080/login", {
+  return fetch("http://192.168.31.2:8080/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
 
 async function readLocation() {
-  return fetch("http://127.0.0.1:8080/data/read", {
+  return fetch("http://192.168.31.2:8080/data/read", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +11,7 @@ async function readLocation() {
 }
 
 async function writeLocation(object) {
-  return fetch("http://127.0.0.1:8080/data/write", {
+  return fetch("http://192.168.31.2:8080/data/write", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

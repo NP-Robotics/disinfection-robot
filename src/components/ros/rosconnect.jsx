@@ -24,7 +24,7 @@ class Rosconnect extends Component {
   }
 
   handleRefresh = () => {
-    this.props.ros.connect("ws://localhost:9090");
+    this.props.ros.connect("ws://192.168.31.200:9090");
   };
 
   render() {

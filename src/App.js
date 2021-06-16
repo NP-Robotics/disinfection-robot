@@ -30,7 +30,7 @@ function App() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    ros.connect("ws://127.0.0.1:9090");
+    ros.connect("ws://192.168.31.200:9090");
 
     ros.on("connection", () => {
       setStatus("Connected");
@@ -39,7 +39,7 @@ function App() {
 
     ros.on("close", () => {
       setStatus("Disconnected");
-      ros.connect("ws://127.0.0.1:9090");
+      ros.connect("ws://192.168.31.200:9090");
     });
 
     ros.on("error", () => {

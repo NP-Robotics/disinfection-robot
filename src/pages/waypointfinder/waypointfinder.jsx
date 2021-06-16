@@ -4,7 +4,7 @@ import Map from "./map.jpg";
 import "./waypointfinder.css";
 
 async function readWaypoints() {
-  return fetch("http://127.0.0.1:8080/waypoint/read", {
+  return fetch("http://192.168.31.2:8080/waypoint/read", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

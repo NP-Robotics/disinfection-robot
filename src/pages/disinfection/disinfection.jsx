@@ -1,4 +1,4 @@
-//heyy
+//hey
 import React, { Component } from "react";
 import ROSLIB from "roslib";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import "./disinfection.css";
 import Logs from "./logs";
 
 async function readPaths() {
-  return fetch("http://127.0.0.1:8080/path/read", {
+  return fetch("http://192.168.31.2:8080/path/read", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

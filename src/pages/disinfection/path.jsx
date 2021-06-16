@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
 
 async function readPaths() {
-  return fetch("http://127.0.0.1:8080/path/read", {
+  return fetch("http://192.168.31.2:8080/path/read", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +11,7 @@ async function readPaths() {
 }
 
 async function writePaths(object) {
-  return fetch("http://127.0.0.1:8080/path/write", {
+  return fetch("http://192.168.31.2:8080/path/write", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
