@@ -34,5 +34,35 @@
       "location": "toilet",
       "task": "10"
     }
+  ],
+  "hs": [
+    {
+      "location": "side bed 1",
+      "task": "5"
+    },
+    {
+      "location": "front bed 1",
+      "task": "5"
+    },
+    {
+      "location": "side bed 2",
+      "task": "5"
+    },
+    {
+      "location": "front bed 2",
+      "task": "5"
+    },
+    {
+      "location": "side bed 3",
+      "task": "5"
+    },
+    {
+      "location": "front bed 3",
+      "task": "5"
+    },
+    {
+      "location": "wall",
+      "task": "5"
+    }
   ]
 }

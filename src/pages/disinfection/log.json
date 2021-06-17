@@ -38,5 +38,37 @@
     {
       "location": "classroom"
     }
+  ],
+  "16/06/2021": [
+    {
+      "location": "classroom"
+    },
+    {
+      "location": "side bed 1"
+    },
+    {
+      "location": "front bed 1"
+    },
+    {
+      "location": "side bed 2"
+    },
+    {
+      "location": "front bed 2"
+    },
+    {
+      "location": "side bed 3"
+    },
+    {
+      "location": "front bed 3"
+    },
+    {
+      "location": "wall"
+    },
+    {
+      "location": "side bed 1"
+    },
+    {
+      "location": "front bed 1"
+    }
   ]
 }
