@@ -1,6 +1,9 @@
 .header-wrapper {
-  /*background: linear-gradient(90deg, rgb(51, 50, 53) 10%, rgb(25, 25, 32) 100%); */
-  background: rgb(118, 115, 115);
+  background: linear-gradient(
+    90deg,
+    rgb(118, 113, 113) 20%,
+    rgb(25, 25, 32) 80%
+  );
   height: 80px;
   width: 100vw;
   padding: auto;
@@ -14,7 +17,7 @@
 }
 
 .header-logo {
-  width: 350px;
+  width: 400px;
   padding: auto;
   margin: auto;
   align-items: flex-start;
@@ -128,7 +131,7 @@
   transition: all 0.15s ease-out;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
   .title {
     display: none;
   }
@@ -138,7 +141,7 @@
   }
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1300px) {
   .header-logo {
     display: relative;
   }
