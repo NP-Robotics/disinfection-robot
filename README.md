@@ -34,7 +34,7 @@ install flask and other required modules
 
 ### Start the project...
 
-Open three separate terminals and `cd` into the project's root folder (don't forget the virtual environment):
+Open three separate terminals and `cd` into the project's root folder (and activate your virtual environment):
 
 To start the local react webpage,
 
