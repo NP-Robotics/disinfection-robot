@@ -24,11 +24,15 @@ update node (if there is an error)
 
 `sudo n latest`
 
-open a new terminal and `cd` into the project folder
+install flask and flask-cors
+
+`pip install Flask`
+
+`pip install -U flask-cors`
 
 ### Start the project...
 
-You will need three separate terminals:
+Open three separate terminals and `cd` into the project's root folder (don't forget the virtual environment):
 
 To start the local react webpage,
 
