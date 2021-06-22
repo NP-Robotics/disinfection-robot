@@ -1,3 +1,5 @@
+This project is developed on an Nvidia Xavier AGX with JetPack 4.5 and Ubuntu 18.04.
+
 ### Set up the project...
 
 First, create a virtual environment and activate it and clone the project into a folder.
@@ -31,6 +33,10 @@ install flask and other required modules
 `pip install -U flask-cors`
 
 `pip install python-dotenv`
+
+install tensorflow
+
+https://forums.developer.nvidia.com/t/official-tensorflow-for-jetson-agx-xavier/65523
 
 ### Start the project...
 
