@@ -1,31 +1,45 @@
-install yarn
+### Set up the project...
+
+First, create a virtual environment and activate it and clone the project into a folder.
+
+`git clone`
+
+git clone https://github.com/NP-Robotics/disinfection-robot.git
+
+`install yarn`
+
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
 sudo apt update
+
 sudo apt install yarn
 
-### `yarn start`
+`update node` (if there is an error)
 
-To start local server
+sudo npm cache clean -f
 
-### `node server.js`
+sudo npm install -g n
 
-To start username and password server
+sudo n latest
 
-### `cd api`and `export FLASK_APP=app.py`
-if running server on Nvidia Xavier
+open a new terminal and cd into the project folder
 
-Camera functionalities:
+### Start the project...
 
-Turn on power and connect thermal camera to your laptop
+You will need three separate terminals.
 
-### `cd api` and access main.py
+To start the local react webpage,
 
-Uncomment line 84 and comment line 85 for local video source
-Uncomment line 85 and comment line 84 for Thermal Camera
+`yarn start`
 
-### `yarn start-flask-api`
+To start username and password server,
 
-To start camera API
+`node server.js`
 
-In the local browser, click the camera icon to open up camera page. The stream should start automatically
+To start flask API for camera functionalities,
+
+`cd api` and `export FLASK_APP=app.py`
+
+`cd..` and `yarn start-flask-api`
