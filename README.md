@@ -1,4 +1,4 @@
-This project is developed on an Nvidia Xavier AGX with JetPack 4.5 and Ubuntu 18.04.
+This project is developed on an Nvidia Xavier AGX with JetPack 4.5, CUDA 10.2, and Ubuntu 18.04.
 
 ### Set up the project...
 
