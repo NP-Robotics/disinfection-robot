@@ -24,11 +24,13 @@ update node (if there is an error)
 
 `sudo n latest`
 
-install flask and flask-cors
+install flask and other required modules
 
 `pip install Flask`
 
 `pip install -U flask-cors`
+
+`pip install python-dotenv`
 
 ### Start the project...
 
