@@ -41,11 +41,12 @@
 }
 
 iframe {
-  width: 400px;
-  height: 200px;
+  width: 420px;
+  height: 240px;
   margin: 0 auto;
   background-color: #777;
   display: block;
+  overflow: hidden;
 }
 
 @keyframes move-twink-back {
