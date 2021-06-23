@@ -12,6 +12,8 @@ git clone
 
 install yarn
 
+`sudo apt-get install curl`
+
 `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
 
 `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
@@ -21,8 +23,6 @@ install yarn
 `sudo apt install yarn`
 
 install latest node (if there is an error)
-
-`sudo apt-get install curl`
 
 `curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
 
