@@ -36,7 +36,7 @@ install flask and other required modules
 
 install tensorflow
 
-check compatibility here: https://www.tensorflow.org/install/source#gpu
+https://www.pyimagesearch.com/2019/01/30/ubuntu-18-04-install-tensorflow-and-keras-for-deep-learning/
 
 ### Start the project...
 
