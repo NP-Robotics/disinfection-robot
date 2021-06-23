@@ -22,11 +22,11 @@ install yarn
 
 update node (if there is an error)
 
-`sudo npm cache clean -f`
+`sudo apt-get install curl`
 
-`sudo npm install -g n`
+`curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
 
-`sudo n latest`
+`sudo apt-get install nodejs`
 
 install flask and other required modules
 
