@@ -36,7 +36,7 @@ install flask and other required modules
 
 install tensorflow
 
-https://forums.developer.nvidia.com/t/official-tensorflow-for-jetson-agx-xavier/65523
+check compatibility here: https://www.tensorflow.org/install/source#gpu
 
 ### Start the project...
 
