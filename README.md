@@ -2,7 +2,7 @@ This project is developed on an Nvidia Xavier AGX with JetPack 4.5, CUDA 10.2, a
 
 ### Set up the project...
 
-First, create a virtual environment and activate it and clone the project into a folder.
+First, create a virtual environment, activate it, and clone the project into a folder.
 
 git clone
 
