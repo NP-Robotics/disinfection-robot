@@ -20,7 +20,7 @@ install yarn
 
 `sudo apt install yarn`
 
-update node (if there is an error)
+install latest node (if there is an error)
 
 `sudo apt-get install curl`
 
