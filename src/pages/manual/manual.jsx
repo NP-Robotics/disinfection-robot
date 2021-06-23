@@ -4,7 +4,19 @@ import ROSLIB from "roslib";
 const Manual = (props) => {
   var interval,
     keydown = false;
-  const [teleop_sub, setTeleop_sub] = useState(
+  const [UVbig, setUVbig] = useState("UV Big Off");
+  const [UVbig_bool, setUVbig_bool] = useState(false);
+
+  const [UVsmall, setUVsmall] = useState("UV Small Off");
+  const [UVsmall_bool, setUVsmall_bool] = useState(false);
+
+  const [mist, setMist] = useState("Mist Off");
+  const [mist_bool, setMist_bool] = useState(false);
+
+  const [fan, setFan] = useState("Fan Off");
+  const [fan_bool, setFan_bool] = useState(false);
+
+  const [teleop_pub] = useState(
     new ROSLIB.Topic({
       ros: props.ros,
       name: "/cmd_vel",
@@ -60,7 +72,7 @@ const Manual = (props) => {
         z: angularZ,
       },
     });
-    teleop_sub.publish(teleop_msg);
+    teleop_pub.publish(teleop_msg);
   };
 
   useEffect(() => {
@@ -81,9 +93,9 @@ const Manual = (props) => {
     if (keydown === false) {
       keydown = true;
       if (event.key === "w") {
-        interval = setInterval(startTeleop.bind(null, 0.5, 0), 400);
+        interval = setInterval(startTeleop.bind(null, 0.1, 0), 400);
       } else if (event.key === "s") {
-        interval = setInterval(startTeleop.bind(null, -0.5, 0), 400);
+        interval = setInterval(startTeleop.bind(null, -0.1, 0), 400);
       } else if (event.key === "a") {
         interval = setInterval(startTeleop.bind(null, 0, 1), 400);
       } else if (event.key === "d") {
@@ -109,63 +121,90 @@ const Manual = (props) => {
     motor_pub.publish(retract);
   };
 
-  const handleUVbigon = () => {
-    var on = new ROSLIB.Message({
-      data: true,
-    });
-    UVbig_pub.publish(on);
-  };
-  const handleUVbigoff = () => {
-    var off = new ROSLIB.Message({
-      data: false,
-    });
-    UVbig_pub.publish(off);
-  };
-  const handleUVsmallon = () => {
-    var on = new ROSLIB.Message({
-      data: true,
-    });
-    UVsmall_pub.publish(on);
-  };
-  const handleUVsmalloff = () => {
-    var off = new ROSLIB.Message({
-      data: false,
-    });
-    UVsmall_pub.publish(off);
+  const handleUVbig = () => {
+    if (UVbig_bool) {
+      var off = new ROSLIB.Message({
+        data: false,
+      });
+      UVbig_pub.publish(off);
+      setUVbig_bool(false);
+      setUVbig("UV Big Off");
+    } else {
+      var on = new ROSLIB.Message({
+        data: true,
+      });
+      UVbig_pub.publish(on);
+      setUVbig_bool(true);
+      setUVbig("UV Big On");
+    }
   };
 
-  const handleMiston = () => {
-    var on = new ROSLIB.Message({
-      data: true,
-    });
-    mist_pub.publish(on);
+  const handleUVsmall = () => {
+    if (UVsmall_bool) {
+      var off = new ROSLIB.Message({
+        data: false,
+      });
+      UVsmall_pub.publish(off);
+      setUVsmall_bool(false);
+      setUVsmall("UV Small Off");
+    } else {
+      var on = new ROSLIB.Message({
+        data: true,
+      });
+      UVsmall_pub.publish(on);
+      setUVsmall_bool(true);
+      setUVsmall("UV Small On");
+    }
   };
 
-  const handleMistoff = () => {
-    var off = new ROSLIB.Message({
-      data: false,
-    });
-    mist_pub.publish(off);
+  const handleMist = () => {
+    if (mist_bool) {
+      var off = new ROSLIB.Message({
+        data: false,
+      });
+      mist_pub.publish(off);
+      setMist_bool(false);
+      setMist("Mist Off");
+    } else {
+      var on = new ROSLIB.Message({
+        data: true,
+      });
+      mist_pub.publish(on);
+      setMist_bool(true);
+      setMist("Mist On");
+    }
   };
 
-  const handleFanon = () => {
-    var on = new ROSLIB.Message({
-      data: true,
-    });
-    fan_pub.publish(on);
+  const handleFan = () => {
+    if (fan_bool) {
+      var off = new ROSLIB.Message({
+        data: false,
+      });
+      fan_pub.publish(off);
+      setFan_bool(false);
+      setFan("Fan Off");
+    } else {
+      var on = new ROSLIB.Message({
+        data: true,
+      });
+      fan_pub.publish(on);
+      setFan_bool(true);
+      setFan("Fan On");
+    }
   };
 
-  const handleFanoff = () => {
-    var off = new ROSLIB.Message({
-      data: false,
-    });
-    fan_pub.publish(off);
+  const buttonColour = (status) => {
+    if (status) {
+      return "btn btn-warning";
+    } else {
+      return "btn btn-secondary";
+    }
   };
 
   return (
     <React.Fragment>
       <button
-        onMouseDown={() => handleTeleopStart(0.5, 0)}
+        onMouseDown={() => handleTeleopStart(0.1, 0)}
         onMouseUp={() => handleTeleopCancel()}
         className="btn btn-primary"
         style={{
@@ -178,7 +217,7 @@ const Manual = (props) => {
         Forward (W)
       </button>
       <button
-        onMouseDown={() => handleTeleopStart(-0.5, 0)}
+        onMouseDown={() => handleTeleopStart(-0.1, 0)}
         onMouseUp={() => handleTeleopCancel()}
         className="btn btn-primary"
         style={{
@@ -191,7 +230,7 @@ const Manual = (props) => {
         Backward (S)
       </button>
       <button
-        onMouseDown={() => handleTeleopStart(0, 1)}
+        onMouseDown={() => handleTeleopStart(0, 0.5)}
         onMouseUp={() => handleTeleopCancel()}
         className="btn btn-primary"
         style={{
@@ -204,7 +243,7 @@ const Manual = (props) => {
         Left (A)
       </button>
       <button
-        onMouseDown={() => handleTeleopStart(0, -1)}
+        onMouseDown={() => handleTeleopStart(0, -0.5)}
         onMouseUp={() => handleTeleopCancel()}
         className="btn btn-primary"
         style={{
@@ -231,14 +270,24 @@ const Manual = (props) => {
       </button>
       <button onClick={() => handleExtend()}>Extend</button>
       <button onClick={() => handleRetract()}>Retract</button>
-      <button onClick={() => handleUVbigon()}>UV Big On</button>
-      <button onClick={() => handleUVbigoff()}>UV Big Off</button>
-      <button onClick={() => handleUVsmallon()}>UV Small On</button>
-      <button onClick={() => handleUVsmalloff()}>UV Small Off</button>
-      <button onClick={() => handleMiston()}>Mist On</button>
-      <button onClick={() => handleMistoff()}>Mist Off</button>
-      <button onClick={() => handleFanon()}>Fan On</button>
-      <button onClick={() => handleFanoff()}>Fan Off</button>
+      <button
+        className={buttonColour(UVbig_bool)}
+        onClick={() => handleUVbig()}
+      >
+        {UVbig}
+      </button>
+      <button
+        className={buttonColour(UVsmall_bool)}
+        onClick={() => handleUVsmall()}
+      >
+        {UVsmall}
+      </button>
+      <button className={buttonColour(mist_bool)} onClick={() => handleMist()}>
+        {mist}
+      </button>
+      <button className={buttonColour(fan_bool)} onClick={() => handleFan()}>
+        {fan}
+      </button>
     </React.Fragment>
   );
 };

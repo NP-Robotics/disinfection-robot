@@ -1,40 +1,4 @@
 {
-  "Path 1": [
-    {
-      "location": "classroom",
-      "task": "5"
-    },
-    {
-      "location": "gym",
-      "task": "10"
-    },
-    {
-      "location": "canteen",
-      "task": "5"
-    },
-    {
-      "location": "toilet",
-      "task": "10"
-    }
-  ],
-  "Path 2": [
-    {
-      "location": "gym",
-      "task": "5"
-    },
-    {
-      "location": "classroom",
-      "task": "10"
-    },
-    {
-      "location": "canteen",
-      "task": "5"
-    },
-    {
-      "location": "toilet",
-      "task": "10"
-    }
-  ],
   "hs": [
     {
       "location": "side bed 1",
@@ -62,6 +26,44 @@
     },
     {
       "location": "wall",
+      "task": "5"
+    }
+  ],
+  "hs1": [
+    {
+      "location": "side bed 1",
+      "task": "5"
+    },
+    {
+      "location": "front bed 1",
+      "task": "60"
+    },
+    {
+      "location": "side bed 2",
+      "task": "180"
+    }
+  ],
+  "hs2": [
+    {
+      "location": "front bed 1",
+      "task": "5"
+    },
+    {
+      "location": "front bed 2",
+      "task": "5"
+    },
+    {
+      "location": "front bed 3",
+      "task": "5"
+    }
+  ],
+  "hs short": [
+    {
+      "location": "side bed 1",
+      "task": "5"
+    },
+    {
+      "location": "front bed 1",
       "task": "5"
     }
   ]
