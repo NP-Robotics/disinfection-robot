@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-flask-api": "cd api && flask run --no-debugger",
+    "start-flask-api": "cd api && flask run -h 192.168.31.2 --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-flask-api": "cd api && flask test",

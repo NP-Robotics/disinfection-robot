@@ -53,7 +53,6 @@ def detect():
     face_net = cv2.dnn.readNet(prototxt_path, weights_path)
     mask_net = load_model(mask_model_path)
 
-    #vs = VideoStream(src=0).start()
     vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64:554/ISAPI/Streaming/Channels/101").start()
     #Liyan's camera: 192.168.1.88
     time.sleep(2.0)
@@ -79,8 +78,7 @@ def detect():
             height = int(frame.shape[0] * scale_percent / 100)
             dim = (width, height)
             resized = cv2.resize(frame, dim, interpolation= cv2.INTER_AREA)
-        
-        #cv2.imshow("Frame", frame)
+
         ret, jpeg = cv2.imencode('.jpg', resized)
         img = jpeg.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n') 

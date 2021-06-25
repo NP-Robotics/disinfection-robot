@@ -8,7 +8,6 @@ sys.path.append("/home/srtc/ENTER/lib/python3.7/site-packages")
 app = Flask(__name__)
 CORS(app)
 
-
 @app.route('/camera')
 def stream():
     return Response(main.detect(),
