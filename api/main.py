@@ -54,7 +54,7 @@ def detect():
     mask_net = load_model(mask_model_path)
 
     #vs = VideoStream(src=0).start()
-    vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
+    vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64:554/ISAPI/Streaming/Channels/101").start()
     #Liyan's camera: 192.168.1.88
     time.sleep(2.0)
     print("Steam is OPEN")
@@ -73,9 +73,15 @@ def detect():
             cv2.putText(frame, label, (startX, startY - 10),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
             cv2.rectangle(frame, (startX, startY), (endX, endY), color, 1)
+
+            scale_percent = 200 
+            width = int(frame.shape[1] * scale_percent / 100)
+            height = int(frame.shape[0] * scale_percent / 100)
+            dim = (width, height)
+            resized = cv2.resize(frame, dim, interpolation= cv2.INTER_AREA)
         
         #cv2.imshow("Frame", frame)
-        ret, jpeg = cv2.imencode('.jpg', frame)
+        ret, jpeg = cv2.imencode('.jpg', resized)
         img = jpeg.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n') 
 

@@ -33,13 +33,15 @@ export default class Camera extends React.Component {
             வெப்பநிலை அளவீடு கருவியை பாருங்கல்.
           </div>
 
-          <iframe
-            src={`http://${ipAddress}:5000/camera`}
-            frameBorder="0"
-            allow=" autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="stream"
-          />
+          <div className="iframe-wrapper">
+            <iframe
+              src={`http://${ipAddress}:5000/camera`}
+              frameBorder="0"
+              allow=" autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="stream"
+            />
+          </div>
         </div>
       </div>
     );

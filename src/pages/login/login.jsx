@@ -79,11 +79,10 @@ const Login = ({ setToken }) => {
                   <Input
                     className={red ? "error" : "password"}
                     placeholder="Password"
-                    type="text"
+                    type={showPassword ? "text" : "password"}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
-                    type={showPassword ? "text" : "password"}
                   />
                 </Form.Item>
                 <EyeFilled

@@ -1,0 +1,11 @@
+.waypoint-finder {
+  overflow: hidden;
+  align-items: center;
+  object-fit: contain;
+  height: 50%;
+  width: 50%;
+  padding: 20px;
+  margin: 20px;
+  padding-top: 0px;
+  margin-top: 0px;
+}

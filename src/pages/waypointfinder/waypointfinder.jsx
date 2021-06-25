@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
-import Map from "./map.jpg";
+import Map from "./map.png";
 import "./waypointfinder.css";
 import "../../components/GlobalVariables";
 
