@@ -1,25 +1,59 @@
-### `yarn start`
+This project is developed on an Nvidia Xavier AGX with JetPack 4.5, CUDA 10.2, and Ubuntu 18.04.
 
-To start local server
+It is also deployed on an Intel NUC running Ubuntu 18.04. In the prototype clinic robot, startup services are already created to automatically run all the necessary commands in the backend and open up the browser to the webpage. 
 
-### `node server.js`
+### Set up the project...
 
-To start username and password server
+First, create a virtual environment, activate it, and clone the project into a folder.
 
-### `cd api`and `export FLASK_APP=app.py`
-if running server on Nvidia Xavier
+git clone
 
-Camera functionalities:
+`git clone https://github.com/NP-Robotics/disinfection-robot.git`
 
-Turn on power and connect thermal camera to your laptop
+install yarn
 
-### `cd api` and access main.py
+`sudo apt-get install curl`
 
-Uncomment line 84 and comment line 85 for local video source
-Uncomment line 85 and comment line 84 for Thermal Camera
+`curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
 
-### `yarn start-flask-api`
+`echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 
-To start camera API
+`sudo apt update`
 
-In the local browser, click the camera icon to open up camera page. The stream should start automatically
+`sudo apt install yarn`
+
+install latest node (if there is an error)
+
+`curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
+
+`sudo apt-get install nodejs`
+
+install flask and other required modules
+
+`pip install Flask`
+
+`pip install -U flask-cors`
+
+`pip install python-dotenv`
+
+install tensorflow
+
+https://www.pyimagesearch.com/2019/01/30/ubuntu-18-04-install-tensorflow-and-keras-for-deep-learning/
+
+### Start the project...
+
+Open three separate terminals and `cd` into the project's root folder (and activate your virtual environment):
+
+To start the local react webpage,
+
+`yarn start`
+
+To start username and password server,
+
+`node server.js`
+
+To start flask API for camera functionalities,
+
+`cd api` and `export FLASK_APP=app.py`
+
+`cd..` and `yarn start-flask-api`

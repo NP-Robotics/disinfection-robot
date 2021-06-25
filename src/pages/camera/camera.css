@@ -40,31 +40,13 @@
   letter-spacing: 3px;
 }
 
-.iframe-wrapper {
-  position: relative;
-  display: block;
-  width: 500px; /* width of iframe wrapper */
-  height: 350px;
-  margin: auto;
-  padding: 0% 0% 56.25%; /* 16:9 ratio */
-  overflow: hidden;
-}
-
-.iframe-wrapper iframe {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  /*
-  width: 400px;
-  height: 200px;
+iframe {
+  width: 420px;
+  height: 240px;
   margin: 0 auto;
   background-color: #777;
   display: block;
-  */
+  overflow: hidden;
 }
 
 @keyframes move-twink-back {
