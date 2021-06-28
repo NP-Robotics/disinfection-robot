@@ -28,6 +28,8 @@ install latest node (if there is an error)
 
 `sudo apt-get install nodejs`
 
+`yarn`
+
 install flask and other required modules
 
 `pip install Flask`
