@@ -3,7 +3,6 @@ import ROSLIB from "roslib";
 import Map from "./map.png";
 import "./waypointfinder.css";
 import "../../components/GlobalVariables";
-//
 
 const ipAddress = global.ipAddress;
 
