@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 cap = cv2.VideoCapture(
-    "rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101")
+    "rtsp://admin:rric070105@192.168.1.64/ISAPI/Streaming/Channels/101")
 
 while True:
     ret, frame = cap.read()
