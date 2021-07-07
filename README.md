@@ -22,7 +22,7 @@ install yarn
 
 `sudo apt install yarn`
 
-install latest node (if there is an error)
+install latest node
 
 `curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -`
 
