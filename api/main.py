@@ -12,12 +12,13 @@ face_detector_path = "./detector/face_detector"
 mask_model_path = "./detector/model/mask_detector.model"
 target_confidence = 0.75
 
-def detect():
-    
+
+def detect(vs):
+
     def detect_and_predict_mask(frame, face_net, mask_net):
         (h, w) = frame.shape[:2]
         blob = cv2.dnn.blobFromImage(frame, 1.0, (300, 300),
-            (104.0, 177.0, 123.0))
+                                     (104.0, 177.0, 123.0))
         face_net.setInput(blob)
         detections = face_net.forward()
 
@@ -39,7 +40,7 @@ def detect():
                 face = img_to_array(face)
                 face = preprocess_input(face)
                 faces.append(face)
-                locs.append((startX, startY, endX, endY))  
+                locs.append((startX, startY, endX, endY))
 
         if len(faces) > 0:
             faces = np.array(faces, dtype="float32")
@@ -49,12 +50,11 @@ def detect():
 
     prototxt_path = os.path.sep.join([face_detector_path, "deploy.prototxt"])
     weights_path = os.path.sep.join([face_detector_path,
-        "res10_300x300_ssd_iter_140000.caffemodel"])
+                                     "res10_300x300_ssd_iter_140000.caffemodel"])
     face_net = cv2.dnn.readNet(prototxt_path, weights_path)
     mask_net = load_model(mask_model_path)
 
-    vs = VideoStream(src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
-    #Liyan's camera: 192.168.1.88
+    # Liyan's camera: 192.168.1.88
     time.sleep(2.0)
     print("Steam is OPEN")
 
@@ -69,19 +69,21 @@ def detect():
             label = "Masked" if mask > withoutMask else "Unmasked"
             color = (0, 255, 0) if label == "Masked" else (0, 0, 255)
             #label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
-            cv2.putText(frame, label, (startX, startY - 10),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
-            cv2.rectangle(frame, (startX, startY), (endX, endY), color, 1)
+            cv2.putText(frame, label, (startX, endY + 10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
+            cv2.rectangle(frame, (startX, startY),
+                          (endX, endY), color, 1)
 
         scale_percent = 600
-        width = int(frame.shape[1] * scale_percent / 100 )
-        height = int(frame.shape[0] * scale_percent / 100 )
+        width = int(frame.shape[1] * scale_percent / 100)
+        height = int(frame.shape[0] * scale_percent / 100)
         dim = (width, height)
 
         resized = cv2.resize(frame, dim, interpolation=cv2.INTER_LINEAR)
         ret, jpeg = cv2.imencode('.jpg', resized)
         img = jpeg.tobytes()
-        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n') 
+        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n')
+
 
 if __name__ == '__main__':
     detect()

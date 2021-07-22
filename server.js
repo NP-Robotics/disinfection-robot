@@ -89,6 +89,37 @@ app.use("/waypoint/read", (request, result) => {
   console.log("sent");
 });
 
+app.use("/timing/read", (request, result) => {
+  fs.readFile("/home/nuc/disinfection-robot/src/pages/disinfection/timing.json", (err, data) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      result.send(JSON.parse(data));
+    } catch (e) {
+      console.log("error timing/read");
+    }
+  });
+  console.log("sent time");
+});
+
+app.use("/timing/write", (request, result) => {
+  console.log(request.body);
+  fs.writeFile(
+    "/home/nuc/disinfection-robot/src/pages/disinfection/timing.json",
+    JSON.stringify(request.body, null, 2),
+    (err) => {
+      if (err) {
+        console.log("Error writing file", err);
+      } else {
+        console.log("Successfully wrote file");
+      }
+    }
+  );
+  result.send({});
+});
+
 app.listen(8080, () => {
   console.log("API is running on port 8080");
 });

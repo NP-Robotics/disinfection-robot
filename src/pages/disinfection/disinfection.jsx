@@ -17,6 +17,15 @@ async function readPaths() {
   }).then((data) => data.json());
 }
 
+async function readTime() {
+  return fetch(`http://${ipAddress}:8080/timing/read`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((data) => data.json());
+}
+
 function statusUV(value) {
   if (value >= 600) {
     return "On";
@@ -51,7 +60,11 @@ class Disinfection extends Component {
     status_uv6: "Off",
     status_uv7: "Off",
     path_list: [],
+    curr_time: "",
   };
+  intervalID = 0;
+  disinfectionReq = false;
+  start_time = ""; //time for disinfection to start
 
   constructor(props) {
     super(props);
@@ -196,6 +209,28 @@ class Disinfection extends Component {
     );
     this.state.path_list = Object.entries(await readPaths());
     this.setState({ state: this.state });
+
+    this.state.start_time = (await readTime()).time;
+    this.setState({ state: this.state });
+
+    this.intervalID = setInterval(() => {
+      this.setState({
+        curr_time: new Date().getHours(),
+      });
+    }, 1000);
+  }
+
+  componentDidUpdate() {
+    if (this.state.curr_time < this.state.start_time) {
+      this.disinfectionReq = false;
+    } else if (
+      this.state.curr_time >= this.state.start_time &&
+      this.disinfectionReq == false
+    ) {
+      this.handleStart();
+      this.disinfectionReq = true;
+    }
+    console.log(this.state.start_time);
   }
 
   componentWillUnmount() {
@@ -209,6 +244,7 @@ class Disinfection extends Component {
     this.state.uv5_sub.unsubscribe();
     this.state.uv6_sub.unsubscribe();
     this.state.uv7_sub.unsubscribe();
+    clearInterval(this.intervalID);
   }
 
   handleStart = () => {
@@ -243,11 +279,6 @@ class Disinfection extends Component {
     return (
       <React.Fragment>
         <div>
-          <Link to="/">
-            <button className="btn btn-primary btn-sm m-2">
-              Back to Dashboard
-            </button>
-          </Link>
           <Link to="/disinfection/admin">
             <button className="btn btn-primary btn-sm m-2">
               Disinfection Admin Mode
@@ -286,6 +317,9 @@ class Disinfection extends Component {
           </div>
           <br></br>
           <ul className="list-group list-group-horizontal">
+            <li className={this.textColour()}>
+              Auto Disinfection Time: {this.state.start_time}:00 Hr
+            </li>
             <li className={this.textColour()}>
               Current Waypoint: {this.state.status_waypoint}
             </li>
