@@ -1,10 +1,38 @@
 import React from "react";
 import "./camera.css";
 import "../../components/GlobalVariables";
+import Beep from "./beep.wav";
 
 const ipAddress = global.ipAddress;
 
+async function readTemperature() {
+  return fetch(`http://${ipAddress}:5000/temperature`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  }).then((data) => data.json());
+}
+
 export default class Camera extends React.Component {
+  state = {
+    temperature: [],
+  };
+  intervalID = 0;
+
+  async componentDidMount() {
+    this.intervalID = setInterval(async () => {
+      this.state.temperature = await readTemperature();
+      this.setState({ state: this.state });
+    }, 800);
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+  handleStop = () => {
+    console.log(this.state.temperature);
+  };
+
   render() {
     return (
       <div className="stars-camera-page">
@@ -42,10 +70,51 @@ export default class Camera extends React.Component {
               title="stream"
             />
           </div>
+          <div
+            style={{
+              position: "absolute",
+              left: "1200px",
+              top: "320px",
+            }}
+          >
+            <table className="table table-bordered table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Temperature °C</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.temperature.map((temperature) => (
+                  <tr
+                    key={this.state.temperature.indexOf(temperature)}
+                    className={this.tempColour(
+                      Math.round(temperature * 100) / 100
+                    )}
+                  >
+                    <th scope="row">
+                      {this.state.temperature.indexOf(temperature)}
+                    </th>
+                    <td> {Math.round(temperature * 100) / 100} </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );
   }
+  tempColour = (temp) => {
+    if (temp >= 37.9) {
+      let audio = new Audio(Beep);
+      audio.load();
+      audio.play();
+      return "bg-danger";
+    } else {
+      return "";
+    }
+  };
 }
 
 //src={"http://localhost:5000/camera"}

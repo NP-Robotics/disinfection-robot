@@ -66,5 +66,11 @@
       "location": "front bed 1",
       "task": "5"
     }
+  ],
+  "path legend": [
+    {
+      "location": "wall",
+      "task": "0"
+    }
   ]
 }

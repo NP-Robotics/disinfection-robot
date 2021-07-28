@@ -1,3 +1,7 @@
+//change this line for different workspaces
+const fileRoute =
+  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/log.json";
+
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -13,7 +17,7 @@ app.use("/login", (request, result) => {
 });
 
 app.use("/data/read", (request, result) => {
-  fs.readFile("/home/srtc/disinfection-robot/src/pages/disinfection/log.json", (err, data) => {
+  fs.readFile(fileRoute, (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -29,22 +33,18 @@ app.use("/data/read", (request, result) => {
 
 app.use("/data/write", (request, result) => {
   console.log(request.body);
-  fs.writeFile(
-    "/home/srtc/disinfection-robot/src/pages/disinfection/log.json",
-    JSON.stringify(request.body, null, 2),
-    (err) => {
-      if (err) {
-        console.log("Error writing file", err);
-      } else {
-        console.log("Successfully wrote file");
-      }
+  fs.writeFile(fileRoute, JSON.stringify(request.body, null, 2), (err) => {
+    if (err) {
+      console.log("Error writing file", err);
+    } else {
+      console.log("Successfully wrote file");
     }
-  );
+  });
   result.send({});
 });
 
 app.use("/path/read", (request, result) => {
-  fs.readFile("/home/srtc/disinfection-robot/src/pages/disinfection/path.json", (err, data) => {
+  fs.readFile(fileRoute, (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -60,22 +60,18 @@ app.use("/path/read", (request, result) => {
 
 app.use("/path/write", (request, result) => {
   console.log(request.body);
-  fs.writeFile(
-    "/home/srtc/disinfection-robot/src/pages/disinfection/path.json",
-    JSON.stringify(request.body, null, 2),
-    (err) => {
-      if (err) {
-        console.log("Error writing file", err);
-      } else {
-        console.log("Successfully wrote file");
-      }
+  fs.writeFile(fileRoute, JSON.stringify(request.body, null, 2), (err) => {
+    if (err) {
+      console.log("Error writing file", err);
+    } else {
+      console.log("Successfully wrote file");
     }
-  );
+  });
   result.send({});
 });
 
 app.use("/waypoint/read", (request, result) => {
-  fs.readFile('/home/srtc/disinfection-robot/src/pages/waypointfinder/waypoints.json', (err, data) => {
+  fs.readFile(fileRoute, (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -87,6 +83,33 @@ app.use("/waypoint/read", (request, result) => {
     }
   });
   console.log("sent");
+});
+
+app.use("/timing/read", (request, result) => {
+  fs.readFile(fileRoute, (err, data) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      result.send(JSON.parse(data));
+    } catch (e) {
+      console.log("error timing/read");
+    }
+  });
+  console.log("sent time");
+});
+
+app.use("/timing/write", (request, result) => {
+  console.log(request.body);
+  fs.writeFile(fileRoute, JSON.stringify(request.body, null, 2), (err) => {
+    if (err) {
+      console.log("Error writing file", err);
+    } else {
+      console.log("Successfully wrote file");
+    }
+  });
+  result.send({});
 });
 
 app.listen(8080, () => {

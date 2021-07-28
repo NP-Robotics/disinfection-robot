@@ -29,7 +29,7 @@ const Path = (props) => {
   const [waypoint_list, setWaypoint_list] = useState([]);
   const [path_list, setPath_list] = useState([]);
 
-  const [waypoints_srv, setWaypoints_srv] = useState(
+  const [waypoints_srv] = useState(
     new ROSLIB.Service({
       ros: props.ros,
       name: "/web_service/retrieve_all_location",

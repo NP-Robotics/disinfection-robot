@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
-import Map from "./map.png";
+import Map from "./map2.png";
 import "./waypointfinder.css";
 import "../../components/GlobalVariables";
+import Geotag from "./geotag";
 
 const ipAddress = global.ipAddress;
 
@@ -17,7 +18,8 @@ async function readWaypoints() {
 
 const Waypointfinder = (props) => {
   const [waypoints, setWaypoints] = useState([["", {}]]);
-  const [current_go, setCurrent_go] = useState("Room 1");
+  const [current_go, setCurrent_go] = useState("side bed 1");
+  const [nameprop, setNameprop] = useState();
   const [goal_pub, setGoal_pub] = useState(
     new ROSLIB.Topic({
       ros: props.ros,
@@ -44,11 +46,11 @@ const Waypointfinder = (props) => {
     setCurrent_go(waypoint);
   };
   const handleGo = () => {
-    const waypoint = JSON.parse(
+    /*const waypoint = JSON.parse(
       document.getElementById("waypointlist").value
-    )[1];
+    )[1];*/
     const name = JSON.parse(document.getElementById("waypointlist").value)[0];
-    var goal = new ROSLIB.Message({
+    /*var goal = new ROSLIB.Message({
       poses: [
         {
           location: name,
@@ -70,15 +72,17 @@ const Waypointfinder = (props) => {
       ],
       loop: false,
     });
-    goal_pub.publish(goal);
+    goal_pub.publish(goal);*/
+    setNameprop(name);
   };
 
   const handleStop = () => {
-    var request = new ROSLIB.ServiceRequest({});
-    cancel_srv.callService(request, function (result) {});
+    /*var request = new ROSLIB.ServiceRequest({});
+    cancel_srv.callService(request, function (result) {});*/
+    setNameprop();
   };
 
-  const handleToilet = () => {
+  /*const handleToilet = () => {
     var goal = new ROSLIB.Message({
       poses: [
         {
@@ -102,7 +106,7 @@ const Waypointfinder = (props) => {
       loop: false,
     });
     goal_pub.publish(goal);
-  };
+  };*/
 
   return (
     <React.Fragment>
@@ -118,17 +122,17 @@ const Waypointfinder = (props) => {
         ))}
       </select>
       <button onClick={() => handleGo()} className="btn btn-success btn-sm m-2">
-        Escort To {current_go}
+        Locate {current_go}
       </button>
       <button
         onClick={() => handleStop()}
         className="btn btn-danger btn-sm m-2"
       >
-        Stop Escort
+        Clear Location 
       </button>
       <br></br>
       <img className="ros-map" src={Map} />
-      <button
+      {/*<button
         onClick={() => handleToilet()}
         className="btn btn-success btn-sm m-2"
         style={{
@@ -139,7 +143,8 @@ const Waypointfinder = (props) => {
         }}
       >
         Toilet
-      </button>
+      </button>*/}
+      <Geotag name={nameprop}/>
     </React.Fragment>
   );
 };
