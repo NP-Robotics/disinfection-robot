@@ -7,6 +7,8 @@ import sys
 import numpy as np
 import json
 import cv2
+from realsense_camera import *
+from mask_rcnn import *
 from imutils.video import VideoStream
 sys.path.append("/home/srtc/ENTER/lib/python3.7/site-packages")
 
@@ -14,6 +16,10 @@ vs = VideoStream(
     src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
 vs2 = VideoStream(
     src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/201").start()
+
+# Load Realsense camera
+rs = RealsenseCamera()
+mrcnn = MaskRCNN()
 
 app = Flask(__name__)
 CORS(app)
@@ -29,8 +35,25 @@ def stream():
 def stream2():
     frame2 = vs2.read()
     json_str = temperature.temperature(frame2)
-    print(json_str)
     return Response(json.dumps(json_str), mimetype='application/json')
+
+@app.route('/depth')
+def stream3():
+    # Get frame in real time from Realsense camera
+    ret, bgr_frame, depth_frame = rs.get_frame_stream()
+
+    # Get object mask
+    boxes, classes, contours, centers = mrcnn.detect_objects_mask(bgr_frame)
+
+    # Draw object mask
+    bgr_frame = mrcnn.draw_object_mask(bgr_frame)
+
+    # Show depth info of the objects
+    bgr_frame, deptharr = mrcnn.draw_object_info(bgr_frame, depth_frame)
+    #deptharr is amount of depth values the camera detected
+    print(deptharr)
+
+    return Response(json.dumps(deptharr), mimetype='application/json')
 
 
 if __name__ == '__main__':

@@ -9,10 +9,6 @@ from random import random
 
 
 def temperature(frame2):
-
-    # Liyan's camera: 192.168.1.88
-    print("Steam is OPEN")
-
     frame2 = imutils.resize(frame2, width=400)
 
     scale_percent = 600

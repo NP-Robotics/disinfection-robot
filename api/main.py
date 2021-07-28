@@ -55,7 +55,6 @@ def detect(vs):
     mask_net = load_model(mask_model_path)
 
     # Liyan's camera: 192.168.1.88
-    time.sleep(2.0)
     print("Steam is OPEN")
 
     while True:
