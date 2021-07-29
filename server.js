@@ -1,6 +1,12 @@
 //change this line for different workspaces
-const fileRoute =
-  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/log.json";
+const fileRouteLOG =
+  "/home/srtc/disinfection-robot/src/pages/disinfection/log.json";
+const fileRoutePATH =
+  "/home/srtc/disinfection-robot/src/pages/disinfection/path.json";
+const fileRouteWAYPOINTS =
+  "/home/srtc/disinfection-robot/src/pages/waypointfinder/waypoints.json";
+const fileRouteTIMING =
+  "/home/srtc/disinfection-robot/src/pages/disinfection/timing.json";
 
 const express = require("express");
 const cors = require("cors");
@@ -17,7 +23,7 @@ app.use("/login", (request, result) => {
 });
 
 app.use("/data/read", (request, result) => {
-  fs.readFile(fileRoute, (err, data) => {
+  fs.readFile(fileRouteLOG, (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -33,7 +39,7 @@ app.use("/data/read", (request, result) => {
 
 app.use("/data/write", (request, result) => {
   console.log(request.body);
-  fs.writeFile(fileRoute, JSON.stringify(request.body, null, 2), (err) => {
+  fs.writeFile(fileRouteLOG, JSON.stringify(request.body, null, 2), (err) => {
     if (err) {
       console.log("Error writing file", err);
     } else {
@@ -44,7 +50,7 @@ app.use("/data/write", (request, result) => {
 });
 
 app.use("/path/read", (request, result) => {
-  fs.readFile(fileRoute, (err, data) => {
+  fs.readFile(fileRoutePATH, (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -60,7 +66,7 @@ app.use("/path/read", (request, result) => {
 
 app.use("/path/write", (request, result) => {
   console.log(request.body);
-  fs.writeFile(fileRoute, JSON.stringify(request.body, null, 2), (err) => {
+  fs.writeFile(fileRoutePATH, JSON.stringify(request.body, null, 2), (err) => {
     if (err) {
       console.log("Error writing file", err);
     } else {
@@ -71,7 +77,7 @@ app.use("/path/write", (request, result) => {
 });
 
 app.use("/waypoint/read", (request, result) => {
-  fs.readFile(fileRoute, (err, data) => {
+  fs.readFile(fileRouteWAYPOINTS, (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -86,7 +92,7 @@ app.use("/waypoint/read", (request, result) => {
 });
 
 app.use("/timing/read", (request, result) => {
-  fs.readFile(fileRoute, (err, data) => {
+  fs.readFile(fileRouteTIMING, (err, data) => {
     if (err) {
       console.log("File read failed:", err);
       return;
@@ -102,7 +108,7 @@ app.use("/timing/read", (request, result) => {
 
 app.use("/timing/write", (request, result) => {
   console.log(request.body);
-  fs.writeFile(fileRoute, JSON.stringify(request.body, null, 2), (err) => {
+  fs.writeFile(fileRouteTIMING, JSON.stringify(request.body, null, 2), (err) => {
     if (err) {
       console.log("Error writing file", err);
     } else {

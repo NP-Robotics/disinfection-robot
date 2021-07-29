@@ -18,7 +18,7 @@ class MaskRCNN:
         self.mask_threshold = 0.3
 
         self.classes = []
-        with open("dnn/classes.txt", "r") as file_object:
+        with open("models/dnn/classes.txt", "r") as file_object:
             for class_name in file_object.readlines():
                 class_name = class_name.strip()
                 self.classes.append(class_name)
