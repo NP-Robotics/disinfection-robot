@@ -66,3 +66,10 @@ To start flask API for camera functionalities,
 `cd api` and `export FLASK_APP=app.py`
 
 `cd..` and `yarn start-flask-api`
+
+Make some changes within the files,
+
+1. In `package.json`, change line 35 to "cd api && flask run -h {ip}", where ip = IP Address of surface computer
+2. In `server.js`, change the first 4 const as appropriate
+3. In `src/components/GlobalVariables.js`, change the IP addresses as appropriate (surface computer, ROS base, thermal camera)
+4. In `api/main.py`, change the variable 'path' as appropriate
