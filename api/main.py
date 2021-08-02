@@ -59,8 +59,7 @@ def detect():
 
     vs = VideoStream(src=0).start()
     sleep(2.0)
-    print("Stream is Open")
-
+    #print("Stream is Open")
     count = 0
 
     while True:
@@ -80,18 +79,12 @@ def detect():
         
             if label == "Unmasked":
                  count = count + 1
-                 print(count)
-
                  if count == 20:
                      
 
-
                      current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
                      filename = os.path.join(path, current_time + '.jpg')
-
                      roi = frame[startY:endY, startX:endX]
-
-
                      if not cv2.imwrite(filename, roi):
                          raise Exception("Error saving to path")
                      count = 0
@@ -99,15 +92,6 @@ def detect():
             else:
                 count = 0
 
-        cv2.imshow("Frame", frame)
-
-        if cv2.waitKey(1) & 0xff == ord('q'):
-            break
-    
-    cv2.destroyAllWindows()
-    vs.stop
-
-"""
         scale_percent = 600
         width = int(frame.shape[1] * scale_percent / 100)
         height = int(frame.shape[0] * scale_percent / 100)
@@ -117,6 +101,15 @@ def detect():
         ret, jpeg = cv2.imencode('.jpg', resized)
         img = jpeg.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n')
+
+"""
+        cv2.imshow("Frame", frame)
+
+        if cv2.waitKey(1) & 0xff == ord('q'):
+            break
+    
+    cv2.destroyAllWindows()
+    vs.stop
 """
 
 if __name__ == '__main__':
