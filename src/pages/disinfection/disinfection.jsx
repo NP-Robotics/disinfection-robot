@@ -1,11 +1,10 @@
-//hey
 import React, { Component } from "react";
 import ROSLIB from "roslib";
 import { Link } from "react-router-dom";
 import "./disinfection.css";
 import Logs from "./logs";
-import "../../components/GlobalVariables";
 
+import "../../components/GlobalVariables";
 const ipAddress = global.ipAddress;
 
 async function readPaths() {
@@ -225,7 +224,7 @@ class Disinfection extends Component {
       this.disinfectionReq = false;
     } else if (
       this.state.curr_time >= this.state.start_time &&
-      this.disinfectionReq == false
+      this.disinfectionReq === false
     ) {
       this.handleStart();
       this.disinfectionReq = true;

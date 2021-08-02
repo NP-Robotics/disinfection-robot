@@ -1,19 +1,22 @@
-import cv2
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.models import load_model
-from imutils.video import VideoStream
-import numpy as np
-import imutils
-import time
+from itertools import count
 import os
+import cv2
+import imutils
+import numpy as np
+from time import *
+from datetime import datetime
+from imutils.video import VideoStream
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 face_detector_path = "./models/face"
 mask_model_path = "./models/mask/mask_detector.model"
-target_confidence = 0.75
+path = 'C:/NP-Robotics/disinfection-robot/api/img/'
+#change the path on other systems
+target_confidence = 0.68
 
-
-def detect(vs):
+def detect():
 
     def detect_and_predict_mask(frame, face_net, mask_net):
         (h, w) = frame.shape[:2]
@@ -54,8 +57,11 @@ def detect(vs):
     face_net = cv2.dnn.readNet(prototxt_path, weights_path)
     mask_net = load_model(mask_model_path)
 
-    # Liyan's camera: 192.168.1.88
-    print("Steam is OPEN")
+    vs = VideoStream(src=0).start()
+    sleep(2.0)
+    print("Stream is Open")
+
+    count = 0
 
     while True:
         frame = vs.read()
@@ -67,12 +73,41 @@ def detect(vs):
             (mask, withoutMask) = pred
             label = "Masked" if mask > withoutMask else "Unmasked"
             color = (0, 255, 0) if label == "Masked" else (0, 0, 255)
-            #label = "{}: {:.2f}%".format(label, max(mask, withoutMask) * 100)
             cv2.putText(frame, label, (startX, endY + 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
             cv2.rectangle(frame, (startX, startY),
                           (endX, endY), color, 1)
+        
+            if label == "Unmasked":
+                 count = count + 1
+                 print(count)
 
+                 if count == 20:
+                     
+
+
+                     current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
+                     filename = os.path.join(path, current_time + '.jpg')
+
+                     roi = frame[startY:endY, startX:endX]
+
+
+                     if not cv2.imwrite(filename, roi):
+                         raise Exception("Error saving to path")
+                     count = 0
+            
+            else:
+                count = 0
+
+        cv2.imshow("Frame", frame)
+
+        if cv2.waitKey(1) & 0xff == ord('q'):
+            break
+    
+    cv2.destroyAllWindows()
+    vs.stop
+
+"""
         scale_percent = 600
         width = int(frame.shape[1] * scale_percent / 100)
         height = int(frame.shape[0] * scale_percent / 100)
@@ -82,7 +117,7 @@ def detect(vs):
         ret, jpeg = cv2.imencode('.jpg', resized)
         img = jpeg.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n')
-
+"""
 
 if __name__ == '__main__':
     detect()

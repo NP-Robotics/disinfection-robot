@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import "../../components/GlobalVariables";
 
+import "../../components/GlobalVariables";
 const ipAddress = global.ipAddress;
 
 async function writeTime(object) {

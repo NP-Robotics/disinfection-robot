@@ -1,12 +1,13 @@
 //change this line for different workspaces
+//C:/NP-Robotics/disinfection-robot/src/pages/disinfection or waypointfinder
 const fileRouteLOG =
-  "/home/srtc/disinfection-robot/src/pages/disinfection/log.json";
+  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/log.json";
 const fileRoutePATH =
-  "/home/srtc/disinfection-robot/src/pages/disinfection/path.json";
-const fileRouteWAYPOINTS =
-  "/home/srtc/disinfection-robot/src/pages/waypointfinder/waypoints.json";
+  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/path.json";
 const fileRouteTIMING =
-  "/home/srtc/disinfection-robot/src/pages/disinfection/timing.json";
+  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/timing.json";
+const fileRouteWAYPOINTS =
+  "C:/NP-Robotics/disinfection-robot/src/pages/waypointfinder/waypoints.json";
 
 const express = require("express");
 const cors = require("cors");
@@ -108,13 +109,17 @@ app.use("/timing/read", (request, result) => {
 
 app.use("/timing/write", (request, result) => {
   console.log(request.body);
-  fs.writeFile(fileRouteTIMING, JSON.stringify(request.body, null, 2), (err) => {
-    if (err) {
-      console.log("Error writing file", err);
-    } else {
-      console.log("Successfully wrote file");
+  fs.writeFile(
+    fileRouteTIMING,
+    JSON.stringify(request.body, null, 2),
+    (err) => {
+      if (err) {
+        console.log("Error writing file", err);
+      } else {
+        console.log("Successfully wrote file");
+      }
     }
-  });
+  );
   result.send({});
 });
 

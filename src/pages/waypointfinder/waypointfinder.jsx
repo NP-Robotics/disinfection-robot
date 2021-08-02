@@ -128,10 +128,10 @@ const Waypointfinder = (props) => {
         onClick={() => handleStop()}
         className="btn btn-danger btn-sm m-2"
       >
-        Clear Location 
+        Clear Location
       </button>
       <br></br>
-      <img className="ros-map" src={Map} />
+      <img className="ros-map" src={Map} alt="map" />
       {/*<button
         onClick={() => handleToilet()}
         className="btn btn-success btn-sm m-2"
@@ -144,7 +144,7 @@ const Waypointfinder = (props) => {
       >
         Toilet
       </button>*/}
-      <Geotag name={nameprop}/>
+      <Geotag name={nameprop} />
     </React.Fragment>
   );
 };

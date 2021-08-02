@@ -1,19 +1,22 @@
 #!/usr/bin/python
+
+import sys
+import json
 import main
 import temperature
 from flask_cors import CORS
 from flask import Flask, Response
-import sys
-import numpy as np
-import json
-import cv2
-from realsense_camera import *
+
 from mask_rcnn import *
+from realsense_camera import *
 from imutils.video import VideoStream
+
 sys.path.append("/home/srtc/ENTER/lib/python3.7/site-packages")
 
+#change the paths below if camera used is different
 vs = VideoStream(
     src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
+
 vs2 = VideoStream(
     src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/201").start()
 
@@ -24,12 +27,14 @@ mrcnn = MaskRCNN()
 app = Flask(__name__)
 CORS(app)
 
-
 @app.route('/camera')
 def stream():
     return Response(main.detect(vs),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+@app.route('unmasked_logging')
+def logging():
+    return Response()
 
 @app.route('/temperature')
 def stream2():
@@ -54,7 +59,6 @@ def stream3():
     print(deptharr)
 
     return Response(json.dumps(deptharr), mimetype='application/json')
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

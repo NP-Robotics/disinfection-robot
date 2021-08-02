@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
-import "../../components/GlobalVariables";
 
+import "../../components/GlobalVariables";
 const ipAddress = global.ipAddress;
 
 async function readPaths() {

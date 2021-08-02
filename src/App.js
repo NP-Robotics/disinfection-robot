@@ -1,5 +1,5 @@
 //react
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch, Link, useHistory } from "react-router-dom";
 
 //ros
@@ -17,7 +17,7 @@ import Dashboard from "./pages/dashboard/dashboard";
 import Disinfection from "./pages/disinfection/disinfection";
 import Manual from "./pages/manual/manual";
 import Path from "./pages/disinfection/path.jsx";
-import Time from "./pages/disinfection/time"
+import Time from "./pages/disinfection/time";
 import Camera from "./pages/camera/camera";
 
 //custom hooks
@@ -74,8 +74,9 @@ function App() {
 
     intervalID = setInterval(() => {
       setCurr_time(new Date().getHours());
+
       if (curr_time > start_time) {
-        history.push("/disinfection");
+        //history.push("/disinfection");
       }
     }, 1000);
 
@@ -109,7 +110,7 @@ function App() {
           </Link>
           <br></br>
           <Path ros={ros} />
-          <Time/>
+          <Time />
         </Route>
         <Route exact path="/manual">
           <Manual ros={ros} />
