@@ -1,4 +1,3 @@
-from itertools import count
 import os
 import cv2
 import imutils
@@ -14,7 +13,12 @@ face_detector_path = "./models/face"
 mask_model_path = "./models/mask/mask_detector.model"
 path = 'C:/NP-Robotics/disinfection-robot/api/img/'
 #change the path on other systems
+
 target_confidence = 0.68
+
+def record(unmasked):
+    print(unmasked)
+    
 
 def detect():
 
@@ -60,7 +64,8 @@ def detect():
     vs = VideoStream(src=0).start()
     sleep(2.0)
     #print("Stream is Open")
-    count = 0
+    frame_count = 0
+    unmasked_count = 0
 
     while True:
         frame = vs.read()
@@ -78,20 +83,31 @@ def detect():
                           (endX, endY), color, 1)
         
             if label == "Unmasked":
-                 count = count + 1
-                 if count == 20:
-                     
+                 frame_count = frame_count + 1
+                 if frame_count == 30:
+                     unmasked_count = unmasked_count + 1
+                     record(unmasked_count)
 
                      current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
                      filename = os.path.join(path, current_time + '.jpg')
                      roi = frame[startY:endY, startX:endX]
+
                      if not cv2.imwrite(filename, roi):
                          raise Exception("Error saving to path")
-                     count = 0
-            
-            else:
-                count = 0
 
+                     frame_count = 0
+            else:
+                frame_count = 0
+
+        cv2.imshow("Frame", frame)
+
+        if cv2.waitKey(1) & 0xff == ord('q'):
+            break
+    
+    cv2.destroyAllWindows()
+    vs.stop
+
+"""
         scale_percent = 600
         width = int(frame.shape[1] * scale_percent / 100)
         height = int(frame.shape[0] * scale_percent / 100)
@@ -102,14 +118,6 @@ def detect():
         img = jpeg.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n')
 
-"""
-        cv2.imshow("Frame", frame)
-
-        if cv2.waitKey(1) & 0xff == ord('q'):
-            break
-    
-    cv2.destroyAllWindows()
-    vs.stop
 """
 
 if __name__ == '__main__':

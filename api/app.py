@@ -32,9 +32,9 @@ def stream():
     return Response(main.detect(vs),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('unmasked_logging')
+@app.route('/camera')
 def logging():
-    return Response()
+    return Response(main.record())
 
 @app.route('/temperature')
 def stream2():
