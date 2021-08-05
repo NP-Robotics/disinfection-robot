@@ -8,19 +8,16 @@ from imutils.video import VideoStream
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+import global_var
 
 face_detector_path = "./models/face"
 mask_model_path = "./models/mask/mask_detector.model"
-path = 'C:/NP-Robotics/disinfection-robot/api/img/'
+#path = 'C:/NP-Robotics/disinfection-robot/api/img/'
 #change the path on other systems
 
-target_confidence = 0.68
+target_confidence = 0.75
 
-def record(unmasked):
-    print(unmasked)
-    
-
-def detect():
+def detect(vs):
 
     def detect_and_predict_mask(frame, face_net, mask_net):
         (h, w) = frame.shape[:2]
@@ -61,11 +58,8 @@ def detect():
     face_net = cv2.dnn.readNet(prototxt_path, weights_path)
     mask_net = load_model(mask_model_path)
 
-    vs = VideoStream(src=0).start()
-    sleep(2.0)
-    #print("Stream is Open")
+    print("Steam is OPEN")
     frame_count = 0
-    unmasked_count = 0
 
     while True:
         frame = vs.read()
@@ -85,29 +79,19 @@ def detect():
             if label == "Unmasked":
                  frame_count = frame_count + 1
                  if frame_count == 30:
-                     unmasked_count = unmasked_count + 1
-                     record(unmasked_count)
+                    global_var.count = global_var.count + 1
 
-                     current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
-                     filename = os.path.join(path, current_time + '.jpg')
-                     roi = frame[startY:endY, startX:endX]
+                    #current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
+                    #filename = os.path.join(path, current_time + '.jpg')
+                    #roi = frame[startY:endY, startX:endX]
 
-                     if not cv2.imwrite(filename, roi):
-                         raise Exception("Error saving to path")
+                    #if not cv2.imwrite(filename, roi):
+                        #raise Exception("Error saving to path")
 
-                     frame_count = 0
+                    frame_count = 0
             else:
                 frame_count = 0
 
-        cv2.imshow("Frame", frame)
-
-        if cv2.waitKey(1) & 0xff == ord('q'):
-            break
-    
-    cv2.destroyAllWindows()
-    vs.stop
-
-"""
         scale_percent = 600
         width = int(frame.shape[1] * scale_percent / 100)
         height = int(frame.shape[0] * scale_percent / 100)
@@ -118,7 +102,7 @@ def detect():
         img = jpeg.tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n')
 
-"""
+
 
 if __name__ == '__main__':
     detect()

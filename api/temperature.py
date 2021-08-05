@@ -8,7 +8,7 @@ from random import seed
 from random import random
 
 
-def temperature(frame2):
+def temperature(frame2, offset):
     frame2 = imutils.resize(frame2, width=400)
 
     scale_percent = 600
@@ -38,7 +38,7 @@ def temperature(frame2):
             for cX in range(x, x+w):
                 for cY in range(y, int(y+(w/2))):
                     colour = frame2[cY, cX]
-                    temp = 15/255*colour[0]+30 - 7.5
+                    temp = 15/255*colour[0]+30 - offset
                     if temp > maxtemp:
                         maxtemp = temp
             temparr.append(maxtemp)

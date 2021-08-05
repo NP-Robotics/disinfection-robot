@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from "react";
 import ROSLIB from "roslib";
 
+const ipAddress = global.ipAddress;
+
+async function writeOffset(object) {
+  return fetch(`http://${ipAddress}:8080/offset/write`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(object),
+  }).then((data) => data.json());
+}
+
+async function readOffset() {
+  return fetch(`http://${ipAddress}:8080/offset/read`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  }).then((data) => data.json());
+}
+
 const Manual = (props) => {
   var interval,
     keydown = false;
+  const [Offset, setOffset] = useState();
+
   const [UVbig, setUVbig] = useState("UV Big Off");
   const [UVbig_bool, setUVbig_bool] = useState(false);
 
@@ -76,6 +99,11 @@ const Manual = (props) => {
   };
 
   useEffect(() => {
+    async function fetchData() {
+      setOffset((await readOffset()).offset)
+    }
+    fetchData()
+
     document.addEventListener("keydown", handleKeydown);
     document.addEventListener("keyup", handleKeyup);
   }, []);
@@ -193,11 +221,23 @@ const Manual = (props) => {
     }
   };
 
+  const handleOffset = async (err) => {
+    const offsetvalue = document.getElementById("offsetvalue").value;
+    if (offsetvalue !== "") {
+      const data = {
+        offset: parseFloat(offsetvalue)
+      };
+      let token = await writeOffset(data);
+      setOffset((await readOffset()).offset)
+      alert("Updated Temperature Offset");
+    }
+  };
+
   const buttonColour = (status) => {
     if (status) {
-      return "btn btn-warning";
+      return "btn btn-warning btn-lg";
     } else {
-      return "btn btn-secondary";
+      return "btn btn-secondary btn-lg";
     }
   };
 
@@ -206,7 +246,7 @@ const Manual = (props) => {
       <button
         onMouseDown={() => handleTeleopStart(0.1, 0)}
         onMouseUp={() => handleTeleopCancel()}
-        className="btn btn-primary"
+        className="btn btn-primary btn-lg"
         style={{
           position: "absolute",
           left: "50%",
@@ -219,7 +259,7 @@ const Manual = (props) => {
       <button
         onMouseDown={() => handleTeleopStart(-0.1, 0)}
         onMouseUp={() => handleTeleopCancel()}
-        className="btn btn-primary"
+        className="btn btn-primary btn-lg"
         style={{
           position: "absolute",
           left: "50%",
@@ -232,7 +272,7 @@ const Manual = (props) => {
       <button
         onMouseDown={() => handleTeleopStart(0, 0.5)}
         onMouseUp={() => handleTeleopCancel()}
-        className="btn btn-primary"
+        className="btn btn-primary btn-lg"
         style={{
           position: "absolute",
           left: "40%",
@@ -245,7 +285,7 @@ const Manual = (props) => {
       <button
         onMouseDown={() => handleTeleopStart(0, -0.5)}
         onMouseUp={() => handleTeleopCancel()}
-        className="btn btn-primary"
+        className="btn btn-primary btn-lg"
         style={{
           position: "absolute",
           left: "60%",
@@ -258,7 +298,7 @@ const Manual = (props) => {
       <button
         onMouseDown={() => handleTeleopStart(0, 0)}
         onMouseUp={() => handleTeleopCancel()}
-        className="btn btn-primary"
+        className="btn btn-primary btn-lg"
         style={{
           position: "absolute",
           left: "50%",
@@ -268,8 +308,8 @@ const Manual = (props) => {
       >
         Stop
       </button>
-      <button onClick={() => handleExtend()}>Extend</button>
-      <button onClick={() => handleRetract()}>Retract</button>
+      <button onClick={() => handleExtend()} className="btn btn-primary btn-lg">Extend</button>
+      <button onClick={() => handleRetract()} className="btn btn-primary btn-lg">Retract</button>
       <button
         className={buttonColour(UVbig_bool)}
         onClick={() => handleUVbig()}
@@ -288,6 +328,15 @@ const Manual = (props) => {
       <button className={buttonColour(fan_bool)} onClick={() => handleFan()}>
         {fan}
       </button>
+      <label>Temperature Offset: </label>
+      <input id="offsetvalue" />
+      <button
+        onClick={() => handleOffset()}
+        className="btn btn-primary btn-sm m-2"
+      >
+        Update Offset
+      </button>
+      <label>Current Offset: {Offset}</label>
     </React.Fragment>
   );
 };

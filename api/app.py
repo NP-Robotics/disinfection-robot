@@ -5,11 +5,15 @@ import json
 import main
 import temperature
 from flask_cors import CORS
-from flask import Flask, Response
+from flask import Flask, Response, jsonify
 
 from mask_rcnn import *
 from realsense_camera import *
 from imutils.video import VideoStream
+
+import global_var
+
+global_var.init()
 
 sys.path.append("/home/srtc/ENTER/lib/python3.7/site-packages")
 
@@ -32,18 +36,25 @@ def stream():
     return Response(main.detect(vs),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/camera')
-def logging():
-    return Response(main.record())
+@app.route('/counter')
+def stream_counter():
+    message = {'count':global_var.count}
+    return jsonify(message)
 
-@app.route('/temperature')
-def stream2():
+@app.route('/temperature/<float:offset>')
+def stream2(offset):
     frame2 = vs2.read()
-    json_str = temperature.temperature(frame2)
+    json_str = temperature.temperature(frame2, offset)
+    return Response(json.dumps(json_str), mimetype='application/json')
+
+@app.route('/temperature/<int:offset>')
+def stream3(offset):
+    frame2 = vs2.read()
+    json_str = temperature.temperature(frame2, offset)
     return Response(json.dumps(json_str), mimetype='application/json')
 
 @app.route('/depth')
-def stream3():
+def stream4():
     # Get frame in real time from Realsense camera
     ret, bgr_frame, depth_frame = rs.get_frame_stream()
 

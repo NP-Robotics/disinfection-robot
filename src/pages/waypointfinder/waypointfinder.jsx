@@ -121,12 +121,12 @@ const Waypointfinder = (props) => {
           </option>
         ))}
       </select>
-      <button onClick={() => handleGo()} className="btn btn-success btn-sm m-2">
+      <button onClick={() => handleGo()} className="btn btn-success m-2 btn-lg">
         Locate {current_go}
       </button>
       <button
         onClick={() => handleStop()}
-        className="btn btn-danger btn-sm m-2"
+        className="btn btn-danger m-2 btn-lg"
       >
         Clear Location
       </button>

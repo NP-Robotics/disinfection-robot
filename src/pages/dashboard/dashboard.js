@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 import "./dashboard.css";
 import Waypointfinder from "../waypointfinder/waypointfinder";
-import Voice from "./voice.wav";
+import Voice from "./voiceNEAR.mp3";
 //import { propTypes } from "react-bootstrap/esm/Image";
 const ipAddress = global.ipAddress;
 

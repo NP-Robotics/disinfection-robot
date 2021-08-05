@@ -104,7 +104,7 @@ function App() {
         </Route>
         <Route exact path="/disinfection/admin">
           <Link to="/disinfection">
-            <button className="btn btn-primary btn-sm m-2">
+            <button className="btn btn-primary btn-lg m-2">
               Back to Disinfection Mode
             </button>
           </Link>

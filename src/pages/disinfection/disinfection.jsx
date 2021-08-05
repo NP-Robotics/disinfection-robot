@@ -279,7 +279,7 @@ class Disinfection extends Component {
       <React.Fragment>
         <div>
           <Link to="/disinfection/admin">
-            <button className="btn btn-primary btn-sm m-2">
+            <button className="btn btn-primary btn-lg m-2">
               Disinfection Admin Mode
             </button>
           </Link>
@@ -300,16 +300,16 @@ class Disinfection extends Component {
               </option>
             ))}
           </select>
-          <div className="btn-group">
+          <div className="btn-group m-2">
             <button
               onClick={() => this.handleStart()}
-              className="btn btn-primary"
+              className="btn btn-primary btn-lg"
             >
               Start Disinfection Mode
             </button>
             <button
               onClick={() => this.handleStop()}
-              className="btn btn-danger"
+              className="btn btn-danger btn-lg"
             >
               Stop Disinfection Mode
             </button>

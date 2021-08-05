@@ -1,13 +1,15 @@
 //change this line for different workspaces
 //C:/NP-Robotics/disinfection-robot/src/pages/disinfection or waypointfinder
 const fileRouteLOG =
-  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/log.json";
+  "/home/srtc/disinfection-robot/src/pages/disinfection/log.json";
 const fileRoutePATH =
-  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/path.json";
-const fileRouteTIMING =
-  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/timing.json";
+  "/home/srtc/disinfection-robot/src/pages/disinfection/path.json";
 const fileRouteWAYPOINTS =
-  "C:/NP-Robotics/disinfection-robot/src/pages/waypointfinder/waypoints.json";
+  "/home/srtc/disinfection-robot/src/pages/waypointfinder/waypoints.json";
+const fileRouteTIMING =
+  "/home/srtc/disinfection-robot/src/pages/disinfection/timing.json";
+const fileRouteOFFSET = 
+  "/home/srtc/disinfection-robot/src/pages/manual/offset.json";
 
 const express = require("express");
 const cors = require("cors");
@@ -120,6 +122,33 @@ app.use("/timing/write", (request, result) => {
       }
     }
   );
+  result.send({});
+});
+
+app.use("/offset/read", (request, result) => {
+  fs.readFile(fileRouteOFFSET, (err, data) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      result.send(JSON.parse(data));
+    } catch (e) {
+      console.log("error timing/read");
+    }
+  });
+  console.log("sent time");
+});
+
+app.use("/offset/write", (request, result) => {
+  console.log(request.body);
+  fs.writeFile(fileRouteOFFSET, JSON.stringify(request.body, null, 2), (err) => {
+    if (err) {
+      console.log("Error writing file", err);
+    } else {
+      console.log("Successfully wrote file");
+    }
+  });
   result.send({});
 });
 
