@@ -2,6 +2,7 @@ import React from "react";
 import "./camera.css";
 import "../../components/GlobalVariables";
 import Beep from "./voiceTEMP.mp3";
+import maskReminder from "./voice_mask.mp3";
 
 const ipAddress = global.ipAddress;
 
@@ -36,27 +37,57 @@ export default class Camera extends React.Component {
   state = {
     temperature: [],
     offset: 7.5,
-    count: 0
+    count: 0,
   };
   intervalID = 0;
+
   audio = new Audio(Beep);
 
+  maskAudio = new Audio(maskReminder);
+  counterTracker = 0;
+
   async componentDidMount() {
-    this.state.offset = (await readOffset()).offset
+    this.state.offset = (await readOffset()).offset;
     this.setState({ state: this.state });
+
+    this.state.count = (await readCounter()).count;
+    this.setState({ state: this.state });
+    this.counterTracker = this.state.count;
 
     this.intervalID = setInterval(async () => {
       this.state.temperature = await readTemperature(this.state.offset);
       this.setState({ state: this.state });
+
       this.state.count = (await readCounter()).count;
       this.setState({ state: this.state });
+      if (this.counterTracker != this.state.count) {
+        if (this.maskAudio.paused && this.audio.paused) {
+          this.maskAudio.load();
+          this.maskAudio.play();
+        }
+      }
+      this.counterTracker = this.state.count;
     }, 800);
   }
+
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
+
   handleStop = () => {
     console.log(this.state.temperature);
+  };
+
+  tempColour = (temp) => {
+    if (temp >= 37.9) {
+      if (this.audio.paused) {
+        this.audio.load();
+        this.audio.play();
+      }
+      return "bg-danger";
+    } else {
+      return "";
+    }
   };
 
   render() {
@@ -103,10 +134,11 @@ export default class Camera extends React.Component {
               top: "320px",
             }}
           >
-
             <div>
-              <h2>Number of improperly masked people today: </h2>
-              <h1 style={{color:"Red"}}>{this.state.count}</h1>
+              <h2 style={{ color: "white" }}>
+                Number of improperly masked people today:{" "}
+              </h2>
+              <h1 style={{ color: "Red" }}>{this.state.count}</h1>
             </div>
             <table className="table table-bordered table-dark">
               <thead>
@@ -136,17 +168,6 @@ export default class Camera extends React.Component {
       </div>
     );
   }
-  tempColour = (temp) => {
-    if (temp >= 35) {
-      if(this.audio.paused){
-        this.audio.load();
-        this.audio.play();
-      }
-      return "bg-danger";
-    } else {
-      return "";
-    }
-  };
 }
 
 //src={"http://localhost:5000/camera"}
