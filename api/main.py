@@ -12,7 +12,7 @@ import global_var
 
 face_detector_path = "./models/face"
 mask_model_path = "./models/mask/mask_detector.model"
-path = 'C:/NP-Robotics/disinfection-robot/api/img/'
+path = '/home/srtc/disinfection-robot/api/img/'
 #change the path on other systems
 
 target_confidence = 0.75
@@ -57,14 +57,16 @@ def detect(vs):
                                      "res10_300x300_ssd_iter_140000.caffemodel"])
     face_net = cv2.dnn.readNet(prototxt_path, weights_path)
     mask_net = load_model(mask_model_path)
-
-    frame_count = 0
+    frame_count = 0 #frame count tracker
+    unmask_in_frames= 0 #amount of unmask in a certain amount of frames
+    frame_delay = 120 #use to delay unmask count after a count had happen
 
     while True:
         frame = vs.read()
         frame = imutils.resize(frame, width=400)
         (locs, preds) = detect_and_predict_mask(frame, face_net, mask_net)
 
+        mask_arr = []
         for (box, pred) in zip(locs, preds):
             (startX, startY, endX, endY) = box
             (mask, withoutMask) = pred
@@ -74,24 +76,34 @@ def detect(vs):
                         cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 1)
             cv2.rectangle(frame, (startX, startY),
                           (endX, endY), color, 1)
-        
-            if label == "Unmasked":
-                 frame_count = frame_count + 1
+            mask_arr.append(label)
+            
+        if frame_count != 30:
+            frame_count +=1
 
-                 if frame_count == 30:
-                    print("hi")
-                    global_var.count = global_var.count + 1
+        for i in mask_arr:
+            if i == "Unmasked" and frame_count != 30:
+                unmask_in_frames +=1
+                break
 
-                    current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
-                    filename = os.path.join(path, current_time + '.jpg')
-                    roi = frame[startY:endY, startX:endX]
+        if frame_delay < 120:
+            frame_delay += 1
 
-                    if not cv2.imwrite(filename, roi):
-                        raise Exception("Error saving to path")
+        if frame_count == 30:
+            print("hi")
+            if unmask_in_frames >= 20 and frame_delay == 120 :
+                global_var.count = global_var.count + 1
 
-                    frame_count = 0
-            else:
-                frame_count = 0
+                current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
+                filename = os.path.join(path, current_time + '.jpg')
+                roi = frame[startY:endY, startX:endX]
+
+                if not cv2.imwrite(filename, roi):
+                    raise Exception("Error saving to path")
+                frame_delay = 0
+
+            frame_count = 0
+            unmask_in_frames = 0 
 
         scale_percent = 600 
         width = int(frame.shape[1] * scale_percent / 100)

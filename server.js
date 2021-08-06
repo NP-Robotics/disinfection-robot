@@ -1,15 +1,15 @@
 //change this line for different workspaces
 //C:/NP-Robotics/disinfection-robot/src/pages/disinfection or waypointfinder
 const fileRouteLOG =
-  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/log.json";
+  "/home/srtc/disinfection-robot/src/pages/disinfection/log.json";
 const fileRoutePATH =
-  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/path.json";
+  "/home/srtc/disinfection-robot/src/pages/disinfection/path.json";
 const fileRouteWAYPOINTS =
-  "C:/NP-Robotics/disinfection-robot/src/pages/waypointfinder/waypoints.json";
+  "/home/srtc/disinfection-robot/src/pages/waypointfinder/waypoints.json";
 const fileRouteTIMING =
-  "C:/NP-Robotics/disinfection-robot/src/pages/disinfection/timing.json";
+  "/home/srtc/disinfection-robot/src/pages/disinfection/timing.json";
 const fileRouteOFFSET =
-  "C:/NP-Robotics/disinfection-robot/src/pages/manual/offset.json";
+  "/home/srtc/disinfection-robot/src/pages/manual/offset.json";
 
 const express = require("express");
 const cors = require("cors");
