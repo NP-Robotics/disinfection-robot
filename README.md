@@ -2,7 +2,7 @@ This project is developed on an Nvidia Xavier AGX with JetPack 4.5, CUDA 10.2, U
 
 It is also deployed on an Intel NUC running Ubuntu 18.04. In the prototype clinic robot, startup services are already created to automatically run all the necessary commands in the backend and open up the browser to the webpage. 
 
-*The project can be set up easily on a new machine with Docker. Image can be found at alsonjiang/disinfection-robot 
+*The project can be set up easily on a new machine with Docker. Image can be found at alsonjiang/disinfection-robot:latest*
 
 ### Set up the project...
 
