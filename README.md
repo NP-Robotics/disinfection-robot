@@ -53,7 +53,7 @@ https://forums.developer.nvidia.com/t/installing-opencv4-on-xavier-solved/65436
 
 ### Start the project...
 
-Concurrently is used to start all three commands at once
+Concurrently is used to start all the necessary commands at once
 
 Simply cd into the project root folder and `yarn start` 
 
