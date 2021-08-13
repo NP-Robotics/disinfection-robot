@@ -53,21 +53,11 @@ https://forums.developer.nvidia.com/t/installing-opencv4-on-xavier-solved/65436
 
 ### Start the project...
 
-Open three separate terminals and `cd` into the project's root folder (and activate your virtual environment):
+Concurrently is used to start all three commands at once
 
-To start the local react webpage,
+Simply cd into the project root folder and `yarn start` 
 
-`yarn start`
-
-To start username and password server,
-
-`node server.js`
-
-To start flask API for camera functionalities,
-
-`cd api` and `export FLASK_APP=app.py`
-
-`cd..` and `yarn start-flask-api`
+The react webpage, flask API, and backend server will all start
 
 Make some changes within the files,
 
