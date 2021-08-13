@@ -12,19 +12,22 @@ RUN yarn
 
 #copy all source code
 COPY . .
-
+    
 #expose port 3000
 EXPOSE 3000
 
-#start app
+#start app 
 CMD ["yarn","start"]  
 
+#useful commands:
 #docker build -t {image name} .
 #docker image ls
 #docker image rm {image ID}
 #docker ps
 
-#docker run -d -p 3000:3000 --name disinfection-robot disinfection-robot
+#docker run -e CHOKIDAR_USEPOLLING=true -v %cd%:/app/src -d -p 3000:3000 --name disinfection-robot disinfection-robot 
+#(use ${pwd} instead of %cd% AND remove -e CHOKIDAR_USEPOLLING=true on Linux)
+
 #docker rm disinfection-robot -f
 
 #docker pull
