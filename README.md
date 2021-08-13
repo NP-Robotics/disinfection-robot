@@ -55,7 +55,7 @@ https://forums.developer.nvidia.com/t/installing-opencv4-on-xavier-solved/65436
 
 Concurrently is used to start all the necessary commands at once
 
-Simply cd into the project root folder and `yarn start` 
+Simply cd into the project's root folder and `yarn start` 
 
 The react webpage, flask API, and backend server will all start
 
