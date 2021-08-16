@@ -76,7 +76,7 @@ function App() {
       setCurr_time(new Date().getHours());
 
       if (curr_time > start_time) {
-        history.push("/disinfection");
+        //history.push("/disinfection");
       }
     }, 1000);
 

@@ -1,15 +1,18 @@
 //change this line for different workspaces
 //C:/NP-Robotics/disinfection-robot/src/pages/disinfection or waypointfinder
 const fileRouteLOG =
-  "/home/srtc/disinfection-robot/src/pages/disinfection/log.json";
+  "./src/pages/disinfection/log.json";
 const fileRoutePATH =
-  "/home/srtc/disinfection-robot/src/pages/disinfection/path.json";
+  "./src/pages/disinfection/path.json";
 const fileRouteWAYPOINTS =
-  "/home/srtc/disinfection-robot/src/pages/waypointfinder/waypoints.json";
+  "./src/pages/waypointfinder/waypoints.json";
 const fileRouteTIMING =
-  "/home/srtc/disinfection-robot/src/pages/disinfection/timing.json";
+  "./src/pages/disinfection/timing.json";
 const fileRouteOFFSET =
-  "/home/srtc/disinfection-robot/src/pages/manual/offset.json";
+  "./src/pages/manual/offset.json";
+const fileRouteROBOTLOCATION = 
+  "./src/pages/dashboard/robotlocation.json";
+
 
 const express = require("express");
 const cors = require("cors");
@@ -155,6 +158,22 @@ app.use("/offset/write", (request, result) => {
   );
   result.send({});
 });
+
+app.use("/robotlocation/read", (request, result) => {
+  fs.readFile(fileRouteROBOTLOCATION, (err, data) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      result.send(JSON.parse(data));
+    } catch (e) {
+      console.log("error log/read");
+    }
+  });
+  console.log("sent");
+});
+
 
 app.listen(8080, () => {
   console.log("API is running on port 8080");

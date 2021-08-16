@@ -12,7 +12,7 @@ import global_var
 
 face_detector_path = "./models/face"
 mask_model_path = "./models/mask/mask_detector.model"
-path = '/home/srtc/disinfection-robot/api/img/'
+path = './img/'
 #change the path on other systems
 
 target_confidence = 0.75

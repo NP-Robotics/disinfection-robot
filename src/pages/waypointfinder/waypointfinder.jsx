@@ -20,14 +20,14 @@ const Waypointfinder = (props) => {
   const [waypoints, setWaypoints] = useState([["", {}]]);
   const [current_go, setCurrent_go] = useState("side bed 1");
   const [nameprop, setNameprop] = useState();
-  const [goal_pub, setGoal_pub] = useState(
+  const [goal_pub] = useState(
     new ROSLIB.Topic({
       ros: props.ros,
       name: "/waypoints",
       serviceType: "waypoint_msgs/PathTaskArray",
     })
   );
-  const [cancel_srv, setCancel_srv] = useState(
+  const [cancel_srv] = useState(
     new ROSLIB.Service({
       ros: props.ros,
       name: "/web_service/stop_path",
