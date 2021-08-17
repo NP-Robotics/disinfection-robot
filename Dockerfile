@@ -12,12 +12,12 @@ RUN yarn
 
 #copy all source code
 COPY . .
-    
+
 #expose port 3000
 EXPOSE 3000
 
 #start app 
-CMD ["yarn","start"]  
+CMD ["yarn","start"]
 
 #useful commands:
 #docker build -t {image name} .

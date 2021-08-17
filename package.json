@@ -32,8 +32,10 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"cd api && flask run -h localhost --no-debugger\" \"node server.js\"",
+    "start": "concurrently \"yarn start-app\" \"yarn start-flask-api\" \"yarn start-server\"",
+    "start-app": "react-scripts start",
     "start-flask-api": "cd api && flask run -h localhost --no-debugger",
+    "start-server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-flask-api": "cd api && flask test",

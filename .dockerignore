@@ -2,7 +2,7 @@ node_modules
 npm-debug.logs
 build
 Dockerfile
-.dockerignore
 **/.git
+**/.cache
 **/.DS_Store
 **/node_modules
