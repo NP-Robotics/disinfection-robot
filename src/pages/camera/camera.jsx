@@ -1,7 +1,7 @@
 import React from "react";
 import "./camera.css";
 import "../../components/GlobalVariables";
-import Beep from "./voiceTEMP.mp3";
+import Beep from "./voice_temp.mp3";
 import maskReminder from "./voice_mask.mp3";
 
 const ipAddress = global.ipAddress;
@@ -60,7 +60,7 @@ export default class Camera extends React.Component {
 
       this.state.count = (await readCounter()).count;
       this.setState({ state: this.state });
-      if (this.counterTracker != this.state.count) {
+      if (this.counterTracker !== this.state.count) {
         if (this.maskAudio.paused && this.audio.paused) {
           this.maskAudio.load();
           this.maskAudio.play();

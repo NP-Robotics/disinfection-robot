@@ -1,10 +1,10 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import Waypointfinder from "../waypointfinder/waypointfinder";
-import Voice from "./voiceNEAR.mp3";
+import Voice from "./voice_near.mp3";
 import ROSLIB from "roslib";
 import { BsPeopleCircle } from "react-icons/bs";
-const fs = require("fs");
+//const fs = require("fs");
 //import { propTypes } from "react-bootstrap/esm/Image";
 const ipAddress = global.ipAddress;
 
@@ -28,16 +28,16 @@ async function readLocation() {
 
 const Dashboard = (props) => {
   const [depth, setDepth] = useState([300]);
-  const [depth_trigger1, setDepth_trigger1] = useState(false)
-  const [depth_trigger2, setDepth_trigger2] = useState(false)
-  const [enabled, setEnabled] = useState(false)
-  const [status_waypoint, setStatus_waypoint] = useState("")
-  const [path_start, setPath_start] = useState(false)
-  const [path, setPath] = useState([])
-  const [left, setLeft] = useState("")
-  const [top, setTop] = useState("")
+  const [depth_trigger1, setDepth_trigger1] = useState(false);
+  const [depth_trigger2, setDepth_trigger2] = useState(false);
+  const [enabled, setEnabled] = useState(false);
+  const [status_waypoint, setStatus_waypoint] = useState("");
+  const [path_start, setPath_start] = useState(false);
+  const [path, setPath] = useState([]);
+  const [left, setLeft] = useState("");
+  const [top, setTop] = useState("");
   const [waypoint_sub] = useState(
-      new ROSLIB.Topic({
+    new ROSLIB.Topic({
       ros: props.ros,
       name: "/web_service/current_waypoint",
       messageType: "std_msgs/String",
@@ -64,21 +64,19 @@ const Dashboard = (props) => {
       serviceType: "std_srvs/Empty",
     })
   );
-  var intervalID = 0
+  var intervalID = 0;
 
   useEffect(() => {
-    waypoint_sub.subscribe(
-      async function (message) {
-        setStatus_waypoint(message.data);
-        var locations = await readLocation()
-        try {
-          setLeft(locations[message.data].left)
-          setTop(locations[message.data].top)
-        } catch (e) {
-          console.log("No such current location")
-        }
+    waypoint_sub.subscribe(async function (message) {
+      setStatus_waypoint(message.data);
+      var locations = await readLocation();
+      try {
+        setLeft(locations[message.data].left);
+        setTop(locations[message.data].top);
+      } catch (e) {
+        console.log("No such current location");
       }
-    );
+    });
     async function fetchData() {
       setDepth(await readDepth());
     }
@@ -94,106 +92,107 @@ const Dashboard = (props) => {
   }, []);
 
   useEffect(() => {
-    var smallest_depth= depth[0];
-    for (var i=0; i<=depth.length;i++){
-      if (depth[i]<smallest_depth) {
-        var smallest_depth=depth[i];
+    var smallest_depth = depth[0];
+    for (var i = 0; i <= depth.length; i++) {
+      if (depth[i] < smallest_depth) {
+        var smallest_depth = depth[i];
       }
     }
-    if (smallest_depth <= 70){
-      if (!depth_trigger1){
-        setDepth_trigger1(true)
+    if (smallest_depth <= 70) {
+      if (!depth_trigger1) {
+        setDepth_trigger1(true);
+      } else if (!depth_trigger2) {
+        setDepth_trigger2(true);
       }
-      else if(!depth_trigger2){
-        setDepth_trigger2(true)
-      }
-    }
-    else if(smallest_depth>70){
-      setDepth_trigger1(false)
-      setDepth_trigger2(false)
-      if(path_start && enabled){
+    } else if (smallest_depth > 70) {
+      setDepth_trigger1(false);
+      setDepth_trigger2(false);
+      if (path_start && enabled) {
         var request = new ROSLIB.ServiceRequest({
           sequence: path,
           loop: true,
-          disinfection: false
+          disinfection: false,
         });
         path_srv.callService(request, function (result) {});
       }
-      setEnabled(false)
+      setEnabled(false);
     }
-    console.log(depth_trigger2)
-    if(depth_trigger2 && !enabled){
+    console.log(depth_trigger2);
+    if (depth_trigger2 && !enabled) {
       let audio = new Audio(Voice);
       audio.load();
       audio.play();
-      setEnabled(true)
-      if(path_start){
+      setEnabled(true);
+      if (path_start) {
         var request = new ROSLIB.ServiceRequest({});
         cancel_srv.callService(request, function (result) {});
-        var temp = [], located = false, j = 1;
-        for(var i=0; i<path.length; i++){
-          if(located){
+        var temp = [],
+          located = false,
+          j = 1;
+        for (var i = 0; i < path.length; i++) {
+          if (located) {
             temp.splice(j, 0, path[i]);
-            j++
+            j++;
           }
-          if(path[i].location != status_waypoint && !located){
-            temp.push(path[i])
-          }
-          else if(path[i].location === status_waypoint && !located){
-            located = true
-            temp.unshift(path[i])
+          if (path[i].location != status_waypoint && !located) {
+            temp.push(path[i]);
+          } else if (path[i].location === status_waypoint && !located) {
+            located = true;
+            temp.unshift(path[i]);
           }
         }
-        setPath(temp)
+        setPath(temp);
       }
     }
-  }, [depth])
+  }, [depth]);
 
   const handleStart = () => {
     var request = new ROSLIB.ServiceRequest({
       data: true,
     });
     list_srv.callService(request, function (result) {
-      var temp = []
-      for(var i=0; i<result.ID.length; i++){
+      var temp = [];
+      for (var i = 0; i < result.ID.length; i++) {
         var data = {
           location: result.ID[i].name,
-          task: "0"
-        }
-        temp.push(data)
+          task: "0",
+        };
+        temp.push(data);
       }
-      setPath(temp)
+      setPath(temp);
       var request = new ROSLIB.ServiceRequest({
         sequence: temp,
         loop: true,
-        disinfection: false
+        disinfection: false,
       });
       path_srv.callService(request, function (result) {});
-      setPath_start(true)
+      setPath_start(true);
     });
   };
 
   const handleStop = async () => {
     var request = new ROSLIB.ServiceRequest({});
-    cancel_srv.callService(request, function (result) {setPath_start(false)});
+    cancel_srv.callService(request, function (result) {
+      setPath_start(false);
+    });
   };
 
   return (
     <div className="dashboard">
       <React.Fragment>
         <div>
-        <button
-        onClick={() => handleStart()}
-        className="btn btn-success btn-lg m-2"
-      >
-        Start Patrol
-      </button>
-      <button
-        onClick={() => handleStop()}
-        className="btn btn-danger btn-lg m-2"
-      >
-        Stop Patrol
-      </button>
+          <button
+            onClick={() => handleStart()}
+            className="btn btn-success btn-lg m-2"
+          >
+            Start Patrol
+          </button>
+          <button
+            onClick={() => handleStop()}
+            className="btn btn-danger btn-lg m-2"
+          >
+            Stop Patrol
+          </button>
           <div className="waypoint-finder">
             <Waypointfinder ros={props.ros} />
             <div
@@ -201,7 +200,8 @@ const Dashboard = (props) => {
                 position: "relative",
                 left: left,
                 top: top,
-              }}>   
+              }}
+            >
               <BsPeopleCircle size="100px" color="blue" />
               <span className="d-inline p-2 bg-info text-white rounded">
                 You are here
