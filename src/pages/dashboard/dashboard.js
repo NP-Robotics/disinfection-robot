@@ -85,7 +85,7 @@ const Dashboard = (props) => {
 
     intervalID = setInterval(async () => {
       fetchData();
-    }, 2000);
+    }, 1500);
 
     return () => {
       clearInterval(intervalID);
@@ -100,51 +100,57 @@ const Dashboard = (props) => {
         var smallest_depth=depth[i];
       }
     }
-    if (smallest_depth <= 70){
+    if (smallest_depth <= 90){
+      setDepth_trigger1(false)
+      setDepth_trigger2(false)
+      if(!enabled){
+        let audio = new Audio(Voice);
+        audio.load();
+        audio.play();
+        setEnabled(true)
+        if(path_start){
+          console.log("stop")
+          var request = new ROSLIB.ServiceRequest({});
+          cancel_srv.callService(request, function (result) {});
+          var temp = [], located = false, j = 1;
+          for(var i=0; i<path.length; i++){
+            if(located){
+              temp.splice(j, 0, path[i]);
+              j++
+            }
+            if(path[i].location != status_waypoint && !located){
+              temp.push(path[i])
+            }
+            else if(path[i].location === status_waypoint && !located){
+              located = true
+              temp.unshift(path[i])
+            }
+          }
+          setPath(temp)
+        }
+      }
+    }
+    else if(smallest_depth>90){
+      var temp = false
       if (!depth_trigger1){
         setDepth_trigger1(true)
       }
       else if(!depth_trigger2){
         setDepth_trigger2(true)
+        temp = true
       }
-    }
-    else if(smallest_depth>70){
-      setDepth_trigger1(false)
-      setDepth_trigger2(false)
-      if(path_start && enabled){
-        var request = new ROSLIB.ServiceRequest({
-          sequence: path,
-          loop: true,
-          disinfection: false
-        });
-        path_srv.callService(request, function (result) {});
-      }
-      setEnabled(false)
-    }
-    console.log(depth_trigger2)
-    if(depth_trigger2 && !enabled){
-      let audio = new Audio(Voice);
-      audio.load();
-      audio.play();
-      setEnabled(true)
-      if(path_start){
-        var request = new ROSLIB.ServiceRequest({});
-        cancel_srv.callService(request, function (result) {});
-        var temp = [], located = false, j = 1;
-        for(var i=0; i<path.length; i++){
-          if(located){
-            temp.splice(j, 0, path[i]);
-            j++
-          }
-          if(path[i].location != status_waypoint && !located){
-            temp.push(path[i])
-          }
-          else if(path[i].location === status_waypoint && !located){
-            located = true
-            temp.unshift(path[i])
-          }
+
+      if(depth_trigger2 || temp){
+        if(path_start && enabled){
+          console.log("start")
+          var request = new ROSLIB.ServiceRequest({
+            sequence: path,
+            loop: true,
+            disinfection: false
+          });
+          path_srv.callService(request, function (result) {});
         }
-        setPath(temp)
+        setEnabled(false)
       }
     }
   }, [depth])
