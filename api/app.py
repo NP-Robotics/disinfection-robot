@@ -6,6 +6,7 @@ import main
 import temperature
 from flask_cors import CORS
 from flask import Flask, Response, jsonify
+from time import *
 
 from mask_rcnn import *
 from realsense_camera import *
@@ -15,9 +16,10 @@ import global_var
 
 global_var.init()
 
-sys.path.append("/home/srtc/ENTER/lib/python3.7/site-packages")
+#sys.path.append("/home/srtc/ENTER/lib/python3.7/site-packages")
 
 #change the paths below if camera used is different
+sleep(60)
 vs = VideoStream(
     src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
 

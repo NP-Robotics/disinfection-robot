@@ -90,7 +90,6 @@ def detect(vs):
             frame_delay += 1
 
         if frame_count == 30:
-            print("hi")
             if unmask_in_frames >= 20 and frame_delay == 120 :
                 global_var.count = global_var.count + 1
 
