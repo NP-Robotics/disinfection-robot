@@ -25,7 +25,8 @@ CMD ["yarn","start"]
 #docker image rm {image ID}
 #docker ps
 
-#docker run -e CHOKIDAR_USEPOLLING=true -v %cd% -d -p 3000:3000 --name disinfection-robot disinfection-robot 
+#docker run -e CHOKIDAR_USEPOLLING=true -d -p 3000:3000 --name disinfection-robot disinfection-robot
+#docker run -e CHOKIDAR_USEPOLLING=true -v %cd%:/app -d -p 3000:3000 --name disinfection-robot disinfection-robot 
 #(use ${pwd} instead of %cd% AND remove -e CHOKIDAR_USEPOLLING=true on Linux)
 
 #docker rm disinfection-robot -f
