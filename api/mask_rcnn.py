@@ -123,9 +123,8 @@ class MaskRCNN:
             cv2.putText(bgr_frame, "{} cm".format(depth_mm / 10), (x + 5, y + 60), 0, 1.0, (255, 255, 255), 2)
             cv2.rectangle(bgr_frame, (x, y), (x2, y2), color, 1)
             deptharr.append(depth_mm/10)
-
-
-
+        if not deptharr:
+            deptharr.append(300)
 
         return bgr_frame, deptharr
 

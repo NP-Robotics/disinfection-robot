@@ -42,13 +42,14 @@
 
 iframe {
   width: 1000px;
-  height: 562px;
+  height: 600px;
   margin: 0 auto;
   background-color: #777;
   display: block;
   overflow: hidden;
   position: relative;
-  left: -300px;
+  top: 70px;
+  left: -250px;
 }
 
 @keyframes move-twink-back {

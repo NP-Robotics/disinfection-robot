@@ -1,5 +1,6 @@
 import os
 import cv2
+from realsense_camera import *
 import imutils
 import numpy as np
 from time import *
@@ -62,7 +63,8 @@ def detect(vs):
     frame_delay = 120 #use to delay unmask count after a count had happen
 
     while True:
-        frame = vs.read()
+        ret, bgr_frame, depth_frame = vs.get_frame_stream()
+        frame = bgr_frame
         frame = imutils.resize(frame, width=400)
         (locs, preds) = detect_and_predict_mask(frame, face_net, mask_net)
 
@@ -104,9 +106,10 @@ def detect(vs):
             frame_count = 0
             unmask_in_frames = 0 
 
-        scale_percent = 600 
-        width = int(frame.shape[1] * scale_percent / 100)
-        height = int(frame.shape[0] * scale_percent / 100)
+        scale_percent_w = 250
+        scale_percent_h = 200
+        width = int(frame.shape[1] * scale_percent_w / 100)
+        height = int(frame.shape[0] * scale_percent_h / 100)
         dim = (width, height)
 
         resized = cv2.resize(frame, dim, interpolation=cv2.INTER_LINEAR)
