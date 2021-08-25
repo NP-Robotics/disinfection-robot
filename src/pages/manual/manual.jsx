@@ -227,7 +227,7 @@ const Manual = (props) => {
       const data = {
         offset: parseFloat(offsetvalue)
       };
-      let token = await writeOffset(data);
+      await writeOffset(data);
       setOffset((await readOffset()).offset)
       alert("Updated Temperature Offset");
     }

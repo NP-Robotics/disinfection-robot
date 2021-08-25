@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ROSLIB from "roslib";
+//import ROSLIB from "roslib";
 import Map from "./map2.png";
 import "./waypointfinder.css";
 import "../../components/GlobalVariables";
@@ -20,7 +20,7 @@ const Waypointfinder = (props) => {
   const [waypoints, setWaypoints] = useState([["", {}]]);
   const [current_go, setCurrent_go] = useState("side bed 1");
   const [nameprop, setNameprop] = useState();
-  const [goal_pub] = useState(
+  /*const [goal_pub] = useState(
     new ROSLIB.Topic({
       ros: props.ros,
       name: "/waypoints",
@@ -34,6 +34,7 @@ const Waypointfinder = (props) => {
       serviceType: "std_srvs/Empty",
     })
   );
+  */
 
   useEffect(() => {
     async function fetchData() {

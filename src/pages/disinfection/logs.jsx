@@ -38,7 +38,7 @@ const Logs = (props) => {
     return dd + "/" + mm + "/" + yyyy;
   };
 
-  const [uv_off_sub, setUv_off_sub] = useState(
+  const [uv_off_sub] = useState(
     new ROSLIB.Topic({
       ros: props.ros,
       name: "/web_service/current_uv_off_waypoint",
@@ -58,7 +58,7 @@ const Logs = (props) => {
       }
       data[date].push({ location: message.data });
       console.log(data[date]);
-      let token = await writeLocation(data);
+      await writeLocation(data);
       setLocation_log(await initialize_location_log());
       //console.log(await readLocation());
     });
@@ -78,7 +78,7 @@ const Logs = (props) => {
   const handleDelete = async (e) => {
     let data = await readLocation();
     delete data[e];
-    let token = await writeLocation(data);
+    await writeLocation(data);
     setLocation_log(await initialize_location_log());
     //console.log(await readLocation());
   };

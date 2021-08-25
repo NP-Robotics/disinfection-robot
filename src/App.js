@@ -1,5 +1,5 @@
 //react
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Route, Switch, Link, useHistory } from "react-router-dom";
 
 //ros
@@ -44,8 +44,9 @@ function App() {
   const [error, setError] = useState(false);
   const [curr_time, setCurr_time] = useState();
   const [start_time, setStart_time] = useState("");
+  const intervalID = useRef();
   const history = useHistory();
-  var intervalID = 0;
+  
 
   useEffect(() => {
     ros.connect(`ws://${baseIpAddress}:9090`);
@@ -72,16 +73,16 @@ function App() {
     }
     fetchData();
 
-    intervalID = setInterval(() => {
+    intervalID.current = setInterval(() => {
       setCurr_time(new Date().getHours());
 
       if (curr_time > start_time) {
-        //history.push("/disinfection");
+        history.push("/disinfection");
       }
     }, 1000);
 
     return () => {
-      clearInterval(intervalID);
+      clearInterval(intervalID.current);
     };
   }, [curr_time]);
 

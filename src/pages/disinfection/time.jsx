@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 import "../../components/GlobalVariables";
@@ -23,7 +23,7 @@ const Time = () => {
       const data = {
         time: timevalue,
       };
-      let token = await writeTime(data);
+      await writeTime(data);
       alert("Updated Time for Disinfection");
       history.push("/disinfection");
     }

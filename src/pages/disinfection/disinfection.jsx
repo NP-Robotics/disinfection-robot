@@ -229,7 +229,7 @@ class Disinfection extends Component {
       this.handleStart();
       this.disinfectionReq = true;
     }
-    console.log(this.state.start_time);
+    //console.log(this.state.start_time);
   }
 
   componentWillUnmount() {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./dashboard.css";
 import Waypointfinder from "../waypointfinder/waypointfinder";
 import Voice from "./voice_near.mp3";
@@ -46,7 +46,9 @@ const Dashboard = (props) => {
   const [path, setPath] = useState([]);
   const [left, setLeft] = useState("");
   const [top, setTop] = useState("");
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState()
+  const [start_count1, setStart_count1] = useState(false)
+  const [start_count2, setStart_count2] = useState(false)
   const [waypoint_sub] = useState(
     new ROSLIB.Topic({
       ros: props.ros,
@@ -75,12 +77,9 @@ const Dashboard = (props) => {
       serviceType: "std_srvs/Empty",
     })
   );
-  var intervalID = 0;
-
-  let patrolAudio = new Audio(Voice);
-
-  let maskAudio = new Audio(maskReminder);
-  var counterTracker = 0;
+  const intervalID = useRef();
+  const patrolAudio = useRef(new Audio(Voice));
+  const maskAudio = useRef(new Audio(maskReminder));
 
   useEffect(() => {
     waypoint_sub.subscribe(async function (message) {
@@ -93,24 +92,18 @@ const Dashboard = (props) => {
         console.log("No such current location");
       }
     });
-    async function fetchCounter() {
-      counterTracker = (await readCounter()).count
-      setCount(counterTracker)
-    }
-    fetchCounter()
 
     async function fetchData() {
       setDepth(await readDepth());
       setCount((await readCounter()).count)
     }
 
-    intervalID = setInterval(async () => {
-      console.log("why are u still here")
+    intervalID.current = setInterval(async () => {
       fetchData();
     }, 1900);
 
     return () => {
-      clearInterval(intervalID);
+      clearInterval(intervalID.current);
       waypoint_sub.unsubscribe();
     };
   }, []);
@@ -119,15 +112,15 @@ const Dashboard = (props) => {
     var smallest_depth = depth[0];
     for (var i = 0; i <= depth.length; i++) {
       if (depth[i] < smallest_depth) {
-        var smallest_depth = depth[i];
+        smallest_depth = depth[i];
       }
     }
     if (smallest_depth <= 90) {
       setDepth_trigger1(false);
       setDepth_trigger2(false);
       if (!enabled) {
-        patrolAudio.load();
-        patrolAudio.play();
+        patrolAudio.current.load();
+        patrolAudio.current.play();
         setEnabled(true);
         if (path_start) {
           console.log("stop");
@@ -141,7 +134,7 @@ const Dashboard = (props) => {
               temp.splice(j, 0, path[i]);
               j++;
             }
-            if (path[i].location != status_waypoint && !located) {
+            if (path[i].location !== status_waypoint && !located) {
               temp.push(path[i]);
             } else if (path[i].location === status_waypoint && !located) {
               located = true;
@@ -176,11 +169,15 @@ const Dashboard = (props) => {
   }, [depth]);
 
   useEffect(() => {
-    if (counterTracker !== count) {
-        maskAudio.load();
-        maskAudio.play();
+    console.log(start_count2)
+    if (start_count2) {
+        maskAudio.current.load();
+        maskAudio.current.play();
     }
-    counterTracker = count;
+    if(start_count1){
+      setStart_count2(true)
+    }
+    setStart_count1(true);
   }, [count]);
 
   const handleStart = () => {
@@ -220,10 +217,6 @@ const Dashboard = (props) => {
           <div>
             <iframe
               src={`http://${ipAddress}:5000/camera`}
-              frameBorder="0"
-              allow=" autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title="stream"
               style={{width: "0px", height: "0px"}}
             />
           </div>

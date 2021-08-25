@@ -115,6 +115,7 @@ def detect(vs):
         resized = cv2.resize(frame, dim, interpolation=cv2.INTER_LINEAR)
         ret, jpeg = cv2.imencode('.jpg', resized)
         img = jpeg.tobytes()
+        print("video ON")
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img + b'\r\n\r\n')
 
 if __name__ == '__main__':

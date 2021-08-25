@@ -76,7 +76,7 @@ const Path = (props) => {
     if (pathname !== "") {
       let data = await readPaths();
       data[pathname] = paths;
-      let token = await writePaths(data);
+      await writePaths(data);
       alert("Added New Path Successfully");
       setPath_list(Object.entries(await readPaths()));
     }
@@ -85,7 +85,7 @@ const Path = (props) => {
     const pathname = document.getElementById("pathnamelist").value;
     let data = await readPaths();
     delete data[pathname];
-    let token = await writePaths(data);
+    await writePaths(data);
     setPath_list(Object.entries(await readPaths()));
   };
 
