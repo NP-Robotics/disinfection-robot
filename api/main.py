@@ -60,7 +60,7 @@ def detect(vs):
     mask_net = load_model(mask_model_path)
     frame_count = 0 #frame count tracker
     unmask_in_frames= 0 #amount of unmask in a certain amount of frames
-    frame_delay = 120 #use to delay unmask count after a count had happen
+    frame_delay = 90 #use to delay unmask count after a count had happen
 
     while True:
         ret, bgr_frame, depth_frame = vs.get_frame_stream()
@@ -88,11 +88,11 @@ def detect(vs):
                 unmask_in_frames +=1
                 break
 
-        if frame_delay < 120:
+        if frame_delay < 90:
             frame_delay += 1
 
         if frame_count == 30:
-            if unmask_in_frames >= 20 and frame_delay == 120 :
+            if unmask_in_frames >= 20 and frame_delay == 90 :
                 global_var.count = global_var.count + 1
 
                 current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))

@@ -20,6 +20,8 @@ global_var.init()
 
 #change the paths below if camera used is different
 
+sleep(60)
+
 vs = VideoStream(
     src="rtsp://admin:rric070105@192.168.1.64/Streaming/Channels/101").start()
 

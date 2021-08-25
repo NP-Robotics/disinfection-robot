@@ -4,6 +4,7 @@ import Waypointfinder from "../waypointfinder/waypointfinder";
 import Voice from "./voice_near.mp3";
 import ROSLIB from "roslib";
 import { BsPeopleCircle } from "react-icons/bs";
+import maskReminder from "./voice_mask.mp3";
 //const fs = require("fs");
 //import { propTypes } from "react-bootstrap/esm/Image";
 const ipAddress = global.ipAddress;
@@ -26,6 +27,15 @@ async function readLocation() {
   }).then((data) => data.json());
 }
 
+async function readCounter() {
+  return fetch(`http://${ipAddress}:5000/counter`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  }).then((data) => data.json());
+}
+
 const Dashboard = (props) => {
   const [depth, setDepth] = useState([300]);
   const [depth_trigger1, setDepth_trigger1] = useState(false);
@@ -36,6 +46,7 @@ const Dashboard = (props) => {
   const [path, setPath] = useState([]);
   const [left, setLeft] = useState("");
   const [top, setTop] = useState("");
+  const [count, setCount] = useState(0)
   const [waypoint_sub] = useState(
     new ROSLIB.Topic({
       ros: props.ros,
@@ -66,6 +77,11 @@ const Dashboard = (props) => {
   );
   var intervalID = 0;
 
+  let patrolAudio = new Audio(Voice);
+
+  let maskAudio = new Audio(maskReminder);
+  var counterTracker = 0;
+
   useEffect(() => {
     waypoint_sub.subscribe(async function (message) {
       setStatus_waypoint(message.data);
@@ -77,13 +93,21 @@ const Dashboard = (props) => {
         console.log("No such current location");
       }
     });
+    async function fetchCounter() {
+      counterTracker = (await readCounter()).count
+      setCount(counterTracker)
+    }
+    fetchCounter()
+
     async function fetchData() {
       setDepth(await readDepth());
+      setCount((await readCounter()).count)
     }
 
     intervalID = setInterval(async () => {
+      console.log("why are u still here")
       fetchData();
-    }, 1500);
+    }, 1900);
 
     return () => {
       clearInterval(intervalID);
@@ -102,9 +126,8 @@ const Dashboard = (props) => {
       setDepth_trigger1(false);
       setDepth_trigger2(false);
       if (!enabled) {
-        let audio = new Audio(Voice);
-        audio.load();
-        audio.play();
+        patrolAudio.load();
+        patrolAudio.play();
         setEnabled(true);
         if (path_start) {
           console.log("stop");
@@ -152,6 +175,14 @@ const Dashboard = (props) => {
     }
   }, [depth]);
 
+  useEffect(() => {
+    if (counterTracker !== count) {
+        maskAudio.load();
+        maskAudio.play();
+    }
+    counterTracker = count;
+  }, [count]);
+
   const handleStart = () => {
     var request = new ROSLIB.ServiceRequest({
       data: true,
@@ -186,7 +217,17 @@ const Dashboard = (props) => {
   return (
     <div className="dashboard">
       <React.Fragment>
-        <div>
+          <div>
+            <iframe
+              src={`http://${ipAddress}:5000/camera`}
+              frameBorder="0"
+              allow=" autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="stream"
+              style={{width: "0px", height: "0px"}}
+            />
+          </div>
+          <div>
           <button
             onClick={() => handleStart()}
             className="btn btn-success btn-lg m-2"
@@ -199,6 +240,9 @@ const Dashboard = (props) => {
           >
             Stop Patrol
           </button>
+          <span className="d-inline p-2 bg-warning text-black rounded">
+            Number of improperly masked people today: {count}
+          </span>
           <div className="waypoint-finder">
             <Waypointfinder ros={props.ros} />
             <div
