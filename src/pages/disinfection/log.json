@@ -8,5 +8,22 @@
     {
       "location": "gym"
     }
+  ],
+  "26/08/2021": [
+    {
+      "location": "Lift B"
+    },
+    {
+      "location": "Lift B"
+    },
+    {
+      "location": "Kiosk"
+    },
+    {
+      "location": "Lift A"
+    },
+    {
+      "location": "Lift B"
+    }
   ]
 }

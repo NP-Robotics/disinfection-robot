@@ -34,7 +34,7 @@
   "scripts": {
     "start": "concurrently \"yarn start-app\" \"yarn start-flask-api\" \"yarn start-server\"",
     "start-app": "react-scripts start",
-    "start-flask-api": "cd api && export FLASK_APP=app.py && flask run -h localhost --no-debugger",
+    "start-flask-api": "cd api && export FLASK_APP=app.py && flask run -h 192.168.31.4 --no-debugger",
     "start-server": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

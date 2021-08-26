@@ -181,6 +181,7 @@ const Dashboard = (props) => {
   }, [count]);
 
   const handleStart = () => {
+    console.log("Start Manual")
     var request = new ROSLIB.ServiceRequest({
       data: true,
     });
@@ -205,6 +206,7 @@ const Dashboard = (props) => {
   };
 
   const handleStop = async () => {
+    console.log("Stop Manual")
     var request = new ROSLIB.ServiceRequest({});
     cancel_srv.callService(request, function (result) {
       setPath_start(false);

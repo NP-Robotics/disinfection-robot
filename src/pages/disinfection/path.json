@@ -1,76 +1,16 @@
 {
-  "hs": [
+  "poly test 1": [
     {
-      "location": "side bed 1",
-      "task": "5"
+      "location": "Lift B",
+      "task": "10"
     },
     {
-      "location": "front bed 1",
-      "task": "5"
+      "location": "Kiosk",
+      "task": "10"
     },
     {
-      "location": "side bed 2",
-      "task": "5"
-    },
-    {
-      "location": "front bed 2",
-      "task": "5"
-    },
-    {
-      "location": "side bed 3",
-      "task": "5"
-    },
-    {
-      "location": "front bed 3",
-      "task": "5"
-    },
-    {
-      "location": "wall",
-      "task": "5"
-    }
-  ],
-  "hs1": [
-    {
-      "location": "side bed 1",
-      "task": "5"
-    },
-    {
-      "location": "front bed 1",
-      "task": "60"
-    },
-    {
-      "location": "side bed 2",
-      "task": "180"
-    }
-  ],
-  "hs2": [
-    {
-      "location": "front bed 1",
-      "task": "5"
-    },
-    {
-      "location": "front bed 2",
-      "task": "5"
-    },
-    {
-      "location": "front bed 3",
-      "task": "5"
-    }
-  ],
-  "hs short": [
-    {
-      "location": "side bed 1",
-      "task": "5"
-    },
-    {
-      "location": "front bed 1",
-      "task": "5"
-    }
-  ],
-  "path legend": [
-    {
-      "location": "wall",
-      "task": "0"
+      "location": "Lift A",
+      "task": "10"
     }
   ]
 }

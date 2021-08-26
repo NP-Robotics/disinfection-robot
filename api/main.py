@@ -80,19 +80,19 @@ def detect(vs):
                           (endX, endY), color, 1)
             mask_arr.append(label)
             
-        if frame_count != 30:
+        if frame_count != 15:
             frame_count +=1
 
         for i in mask_arr:
-            if i == "Unmasked" and frame_count != 30:
+            if i == "Unmasked" and frame_count != 15:
                 unmask_in_frames +=1
                 break
 
         if frame_delay < 90:
             frame_delay += 1
 
-        if frame_count == 30:
-            if unmask_in_frames >= 20 and frame_delay == 90 :
+        if frame_count == 15:
+            if unmask_in_frames >= 9 and frame_delay == 90 :
                 global_var.count = global_var.count + 1
 
                 current_time = str(datetime.now().strftime('%Y-%m-%d-%H%M%S'))
