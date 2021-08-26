@@ -4,13 +4,13 @@ import { BsGeo } from "react-icons/bs";
 const Geotag = (props) => {
   const geoTag = (name) => {
     console.log(name);
-    if (name === "side bed 1") {
+    if (name === "Room 204 to 206") {
       return (
         <div
           style={{
             position: "relative",
-            left: "71%",
-            top: "-90%",
+            left: "49%",
+            top: "-20%",
           }}
         >
           <BsGeo size="100px" color="red" />
@@ -19,13 +19,13 @@ const Geotag = (props) => {
           </span>
         </div>
       );
-    } else if (name === "front bed 1") {
+    } else if (name === "Room 201 to 203") {
       return (
         <div
           style={{
             position: "relative",
-            left: "66%",
-            top: "-82%",
+            left: "31%",
+            top: "-20%",
           }}
         >
           <BsGeo size="100px" color="red" />
@@ -34,13 +34,13 @@ const Geotag = (props) => {
           </span>
         </div>
       );
-    } else if (name === "side bed 2") {
+    } else if (name === "Room 207 to 209") {
       return (
         <div
           style={{
             position: "relative",
-            left: "33%",
-            top: "-90%",
+            left: "60%",
+            top: "-37%",
           }}
         >
           <BsGeo size="100px" color="red" />
@@ -49,13 +49,13 @@ const Geotag = (props) => {
           </span>
         </div>
       );
-    } else if (name === "front bed 2") {
+    } else if (name === "Room 210") {
       return (
         <div
           style={{
             position: "relative",
-            left: "28%",
-            top: "-82%",
+            left: "69%",
+            top: "-33%",
           }}
         >
           <BsGeo size="100px" color="red" />
@@ -64,13 +64,13 @@ const Geotag = (props) => {
           </span>
         </div>
       );
-    } else if (name === "side bed 3") {
+    } else if (name === "Room 211 to 212") {
       return (
         <div
           style={{
             position: "relative",
-            left: "17%",
-            top: "-90%",
+            left: "67%",
+            top: "-48%",
           }}
         >
           <BsGeo size="100px" color="red" />
@@ -79,13 +79,13 @@ const Geotag = (props) => {
           </span>
         </div>
       );
-    } else if (name === "front bed 3") {
+    } else if (name === "Room 215 to 223") {
       return (
         <div
           style={{
             position: "relative",
-            left: "12%",
-            top: "-82%",
+            left: "45%",
+            top: "-47%",
           }}
         >
           <BsGeo size="100px" color="red" />
@@ -94,13 +94,43 @@ const Geotag = (props) => {
           </span>
         </div>
       );
-    } else if (name === "wall") {
+    } else if (name === "Room 233 to 238") {
       return (
         <div
           style={{
             position: "relative",
-            left: "7%",
-            top: "-75%",
+            left: "20%",
+            top: "-32%",
+          }}
+        >
+          <BsGeo size="100px" color="red" />
+          <span className="d-inline p-2 bg-danger text-white rounded">
+            {name}
+          </span>
+        </div>
+      );
+    } else if (name === "Room 239") {
+      return (
+        <div
+          style={{
+            position: "relative",
+            left: "5%",
+            top: "-32%",
+          }}
+        >
+          <BsGeo size="100px" color="red" />
+          <span className="d-inline p-2 bg-danger text-white rounded">
+            {name}
+          </span>
+        </div>
+      );
+    } else if (name === "Room 241 to 246") {
+      return (
+        <div
+          style={{
+            position: "relative",
+            left: "16%",
+            top: "-65%",
           }}
         >
           <BsGeo size="100px" color="red" />

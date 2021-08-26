@@ -1,74 +1,74 @@
 {
     "Patrol 1":{
-        "left": "71%" ,
-        "top": "-90%"
+        "left": "300px" ,
+        "top": "500px"
     },
     "Patrol 2":{
-        "left": "66%" ,
-        "top": "-82%"
+        "left": "350px" ,
+        "top": "500px"
     },
     "Patrol 3":{
-        "left": "33%" ,
-        "top": "-90%"
+        "left": "400px" ,
+        "top": "500px"
     },
     "Patrol 4":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "500px" ,
+        "top": "500px"
     },
     "Patrol 5":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "600px" ,
+        "top": "500px"
     },
     "Patrol 6":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "680px" ,
+        "top": "500px"
     },
     "Patrol 7":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "750px" ,
+        "top": "500px"
     },
     "Patrol 8":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "850px" ,
+        "top": "500px"
     },
     "Patrol 9":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "920px" ,
+        "top": "500px"
     },
     "Patrol 10":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "920px" ,
+        "top": "500px"
     },
     "Patrol 11":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "850px" ,
+        "top": "500px"
     },
     "Patrol 12":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "750px" ,
+        "top": "500px"
     },
     "Patrol 13":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "680px" ,
+        "top": "500px"
     },
     "Patrol 14":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "600px" ,
+        "top": "500px"
     },
     "Patrol 15":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "500px" ,
+        "top": "500px"
     },
     "Patrol 16":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "400px" ,
+        "top": "500px"
     },
     "Patrol 17":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "350px" ,
+        "top": "500px"
     },
     "Patrol 18":{
-        "left": "28%" ,
-        "top": "-82%"
+        "left": "300px" ,
+        "top": "500px"
     }
 }

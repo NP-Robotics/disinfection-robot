@@ -44,8 +44,8 @@ const Dashboard = (props) => {
   const [status_waypoint, setStatus_waypoint] = useState("");
   const [path_start, setPath_start] = useState(false);
   const [path, setPath] = useState([]);
-  const [left, setLeft] = useState("");
-  const [top, setTop] = useState("");
+  const [left, setLeft] = useState("200000px");
+  const [top, setTop] = useState("200000px");
   const [count, setCount] = useState()
   const [start_count1, setStart_count1] = useState(false)
   const [start_count2, setStart_count2] = useState(false)
@@ -86,6 +86,7 @@ const Dashboard = (props) => {
       setStatus_waypoint(message.data);
       var locations = await readLocation();
       try {
+        console.log("hi")
         setLeft(locations[message.data].left);
         setTop(locations[message.data].top);
       } catch (e) {
@@ -211,6 +212,8 @@ const Dashboard = (props) => {
     cancel_srv.callService(request, function (result) {
       setPath_start(false);
     });
+    setTop("200000px")
+    setLeft("200000px")
   };
 
   return (
@@ -242,7 +245,7 @@ const Dashboard = (props) => {
             <Waypointfinder ros={props.ros} />
             <div
               style={{
-                position: "relative",
+                position: "absolute",
                 left: left,
                 top: top,
               }}
@@ -254,7 +257,6 @@ const Dashboard = (props) => {
             </div>
           </div>
         </div>
-        <h1>{depth}</h1>
       </React.Fragment>
     </div>
   );
