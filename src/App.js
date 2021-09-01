@@ -42,8 +42,9 @@ function App() {
   const [ros] = useState(new ROSLIB.Ros());
   const [status, setStatus] = useState("Disconnected");
   const [error, setError] = useState(false);
-  const [curr_time, setCurr_time] = useState();
-  const [start_time, setStart_time] = useState("");
+  const start_time = useRef();
+  const curr_time = useRef();
+  const curr_min = useRef();
   const intervalID = useRef();
   const history = useHistory();
   
@@ -69,14 +70,18 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      setStart_time((await readTime()).time);
+      start_time.current = parseInt((await readTime()).time);
     }
     fetchData();
 
     intervalID.current = setInterval(() => {
-      setCurr_time(new Date().getHours());
-
-      if (curr_time > start_time) {
+      curr_time.current = new Date().getHours();
+      curr_min.current = new Date().getMinutes();
+      console.log(start_time.current)
+      console.log(curr_time.current)
+      console.log(curr_min.current)
+      if (curr_time.current === start_time.current && curr_min.current === 0) {
+        console.log("hi")
         history.push("/disinfection");
       }
     }, 1000);

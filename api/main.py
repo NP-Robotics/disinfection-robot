@@ -79,7 +79,7 @@ def detect(vs):
             cv2.rectangle(frame, (startX, startY),
                           (endX, endY), color, 1)
             mask_arr.append(label)
-            
+        #change all the same number to the number u choose
         if frame_count != 15:
             frame_count +=1
 

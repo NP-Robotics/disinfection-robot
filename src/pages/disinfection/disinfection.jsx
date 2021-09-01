@@ -60,6 +60,7 @@ class Disinfection extends Component {
     status_uv7: "Off",
     path_list: [],
     curr_time: "",
+    curr_min:""
   };
   intervalID = 0;
   disinfectionReq = false;
@@ -209,23 +210,24 @@ class Disinfection extends Component {
     this.state.path_list = Object.entries(await readPaths());
     this.setState({ state: this.state });
 
-    this.state.start_time = (await readTime()).time;
+    this.state.start_time = parseInt((await readTime()).time);
     this.setState({ state: this.state });
 
     this.intervalID = setInterval(() => {
       this.setState({
         curr_time: new Date().getHours(),
+        curr_min: new Date().getMinutes(),
       });
+      console.log(this.state.start_time)
+      console.log(this.state.curr_time)
+      console.log(this.state.curr_min)
+      console.log(this.disinfectionReq)
     }, 1000);
   }
 
   componentDidUpdate() {
-    if (this.state.curr_time < this.state.start_time) {
-      this.disinfectionReq = false;
-    } else if (
-      this.state.curr_time >= this.state.start_time &&
-      this.disinfectionReq === false
-    ) {
+    if (this.state.curr_time === this.state.start_time && this.state.curr_min === 0 && this.disinfectionReq === false) {
+      console.log("dsinfection")
       this.handleStart();
       this.disinfectionReq = true;
     }
@@ -253,6 +255,7 @@ class Disinfection extends Component {
             {cool: "hey", hi: ["hi"]}
         ]
         console.log(JSON.stringify(data))*/
+    console.log("started")
     this.startExtend();
     //this.startPath();
     var dynamixel_position = new ROSLIB.Message({

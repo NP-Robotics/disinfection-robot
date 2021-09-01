@@ -12,5 +12,27 @@
       "location": "Lift A",
       "task": "10"
     }
+  ],
+  "testing 2": [
+    {
+      "location": "Lift B",
+      "task": "5"
+    },
+    {
+      "location": "Kiosk",
+      "task": "5"
+    },
+    {
+      "location": "Lift A",
+      "task": "5"
+    },
+    {
+      "location": "Room 204",
+      "task": "5"
+    },
+    {
+      "location": "Room 219",
+      "task": "5"
+    }
   ]
 }
