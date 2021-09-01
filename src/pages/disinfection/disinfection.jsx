@@ -365,7 +365,7 @@ class Disinfection extends Component {
     console.log(e);
     var request = new ROSLIB.ServiceRequest({
       sequence: e,
-      loop: true,
+      loop: false,
       disinfection: true
     });
     this.state.path_srv.callService(request, function (result) {
