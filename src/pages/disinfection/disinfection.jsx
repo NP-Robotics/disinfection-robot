@@ -38,6 +38,7 @@ class Disinfection extends Component {
     motor_pub: "",
     motor_sub: "",
     waypoint_sub: "",
+    end_disinfection_sub: "",
     uv0_sub: "",
     uv1_sub: "",
     uv2_sub: "",
@@ -59,12 +60,13 @@ class Disinfection extends Component {
     status_uv6: "Off",
     status_uv7: "Off",
     path_list: [],
+    start_time: "", //time for disinfection to start
+    start_min: "", //minute for disinfection to start
     curr_time: "",
     curr_min:""
   };
   intervalID = 0;
   disinfectionReq = false;
-  start_time = ""; //time for disinfection to start
 
   constructor(props) {
     super(props);
@@ -88,6 +90,11 @@ class Disinfection extends Component {
       ros: props.ros,
       name: "/web_service/current_waypoint",
       messageType: "std_msgs/String",
+    });
+    this.state.end_disinfection_sub = new ROSLIB.Topic({
+      ros: props.ros,
+      name: "/web_service/end_disinfection",
+      messageType: "std_msgs/Empty",
     });
     this.state.uv0_sub = new ROSLIB.Topic({
       ros: props.ros,
@@ -159,6 +166,13 @@ class Disinfection extends Component {
       }.bind(this)
     );
 
+    this.state.end_disinfection_sub.subscribe(
+      function (message) {
+        console.log("disinfection ended")
+        this.handleStop();
+      }.bind(this)
+    );
+
     this.state.uv0_sub.subscribe(
       function (message) {
         this.state.status_uv0 = statusUV(message.data);
@@ -210,7 +224,10 @@ class Disinfection extends Component {
     this.state.path_list = Object.entries(await readPaths());
     this.setState({ state: this.state });
 
-    this.state.start_time = parseInt((await readTime()).time);
+    var temp = await readTime()
+    this.state.start_time = parseInt(temp.time);
+    this.setState({ state: this.state });
+    this.state.start_min = parseInt(temp.minute);
     this.setState({ state: this.state });
 
     this.intervalID = setInterval(() => {
@@ -220,23 +237,25 @@ class Disinfection extends Component {
       });
       console.log(this.state.start_time)
       console.log(this.state.curr_time)
+      console.log(this.state.start_min)
       console.log(this.state.curr_min)
       console.log(this.disinfectionReq)
+      if (this.state.curr_time === this.state.start_time && this.state.curr_min === this.state.start_min && this.disinfectionReq === false) {
+        console.log("dsinfection")
+        this.handleStart();
+        this.disinfectionReq = true;
+      }
     }, 1000);
   }
 
   componentDidUpdate() {
-    if (this.state.curr_time === this.state.start_time && this.state.curr_min === 0 && this.disinfectionReq === false) {
-      console.log("dsinfection")
-      this.handleStart();
-      this.disinfectionReq = true;
-    }
     //console.log(this.state.start_time);
   }
 
   componentWillUnmount() {
     this.state.waypoint_sub.unsubscribe();
     this.state.motor_sub.unsubscribe();
+    this.state.end_disinfection_sub.unsubscribe();
     this.state.uv0_sub.unsubscribe();
     this.state.uv1_sub.unsubscribe();
     this.state.uv2_sub.unsubscribe();
@@ -320,7 +339,7 @@ class Disinfection extends Component {
           <br></br>
           <ul className="list-group list-group-horizontal">
             <li className={this.textColour()}>
-              Auto Disinfection Time: {this.state.start_time}:00 Hr
+              Auto Disinfection Time: {this.state.start_time} : {this.state.start_min} Hr
             </li>
             <li className={this.textColour()}>
               Current Waypoint: {this.state.status_waypoint}

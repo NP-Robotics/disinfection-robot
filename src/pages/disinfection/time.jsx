@@ -19,9 +19,11 @@ const Time = () => {
 
   const handleCreate = async (err) => {
     const timevalue = document.getElementById("timevalue").value;
-    if (timevalue !== "") {
+    const minutevalue = document.getElementById("minutevalue").value;
+    if (timevalue !== "" && minutevalue != "") {
       const data = {
         time: timevalue,
+        minute: minutevalue
       };
       await writeTime(data);
       alert("Updated Time for Disinfection");
@@ -33,6 +35,8 @@ const Time = () => {
     <React.Fragment>
       <label>Auto Disinfection Time: </label>
       <input id="timevalue" />
+      <label>::</label>
+      <input id="minutevalue" />
       <button
         onClick={() => handleCreate()}
         className="btn btn-primary btn-sm m-2"

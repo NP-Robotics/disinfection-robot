@@ -70,18 +70,19 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      start_time.current = parseInt((await readTime()).time);
+      var temp = await readTime();
+      start_time.current = {
+        hour: parseInt(temp.time),
+        minute: parseInt(temp.minute)
+      }
     }
     fetchData();
 
     intervalID.current = setInterval(() => {
+      fetchData();
       curr_time.current = new Date().getHours();
       curr_min.current = new Date().getMinutes();
-      console.log(start_time.current)
-      console.log(curr_time.current)
-      console.log(curr_min.current)
-      if (curr_time.current === start_time.current && curr_min.current === 0) {
-        console.log("hi")
+      if (curr_time.current === start_time.current.hour && curr_min.current === start_time.current.minute) {
         history.push("/disinfection");
       }
     }, 1000);
