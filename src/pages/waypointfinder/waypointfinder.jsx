@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 //import ROSLIB from "roslib";
-import Map from "./polyclinicTP.png";
+import Map from "./polyclinic.jpg";
 import "./waypointfinder.css";
 import "../../components/GlobalVariables";
 import Geotag from "./geotag";
