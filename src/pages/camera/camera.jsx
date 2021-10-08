@@ -107,8 +107,8 @@ export default class Camera extends React.Component {
           <div
             style={{
               position: "absolute",
-              left: "1200px",
-              top: "320px",
+              left: "1100px",
+              top: "90px",
             }}
           >
             <div>
@@ -117,7 +117,7 @@ export default class Camera extends React.Component {
               </h2>
               <h1 style={{ color: "Red" }}>{this.state.count}</h1>
             </div>
-            <table className="table table-bordered table-dark">
+            <table className="table table-bordered table-dark" style={{fontSize:"30px"}}>
               <thead>
                 <tr>
                   <th scope="col">ID</th>

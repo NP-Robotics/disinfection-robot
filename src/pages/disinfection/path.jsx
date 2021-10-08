@@ -102,7 +102,7 @@ const Path = (props) => {
       >
         <h6>
           List of Waypoints:{" "}
-          <select id="waypointlist">
+          <select id="waypointlist"style={{fontSize:"22px"}}>
             {waypoint_list.map((waypoint) => (
               <option key={waypoint.name} value={waypoint.name}>
                 {waypoint.name}
@@ -149,7 +149,7 @@ const Path = (props) => {
           </div>
           <div>
             List of Paths:{" "}
-            <select id="pathnamelist">
+            <select id="pathnamelist" style={{fontSize:"22px"}}>
               {path_list.map((pathname, index) => (
                 <option key={index} value={pathname[0]}>
                   {pathname[0]}

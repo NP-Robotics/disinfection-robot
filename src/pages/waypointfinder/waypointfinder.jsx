@@ -111,7 +111,7 @@ const Waypointfinder = (props) => {
 
   return (
     <React.Fragment>
-      <select id="waypointlist">
+      <select id="waypointlist" style={{fontSize:"25px"}}>
         {waypoints.map((waypoint, index) => (
           <option
             key={index}

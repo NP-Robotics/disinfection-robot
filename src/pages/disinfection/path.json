@@ -1,38 +1,13 @@
 {
-  "poly test 1": [
-    {
-      "location": "Lift B",
-      "task": "10"
-    },
+  "aa": [
     {
       "location": "Kiosk",
-      "task": "10"
+      "task": "03"
     },
     {
-      "location": "Lift A",
-      "task": "10"
+      "location": "home",
+      "task": "02"
     }
   ],
-  "testing 2": [
-    {
-      "location": "Lift B",
-      "task": "5"
-    },
-    {
-      "location": "Kiosk",
-      "task": "5"
-    },
-    {
-      "location": "Lift A",
-      "task": "5"
-    },
-    {
-      "location": "Room 204",
-      "task": "5"
-    },
-    {
-      "location": "Room 219",
-      "task": "5"
-    }
-  ]
+  "SingHealth": []
 }

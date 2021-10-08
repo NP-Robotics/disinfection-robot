@@ -63,8 +63,11 @@ class Disinfection extends Component {
     start_time: "", //time for disinfection to start
     start_min: "", //minute for disinfection to start
     curr_time: "",
-    curr_min:""
+    curr_min:"",
+    auto_path_name: ""
   };
+  path_sequence = []
+  path_index= 0
   intervalID = 0;
   disinfectionReq = false;
 
@@ -229,20 +232,19 @@ class Disinfection extends Component {
     this.setState({ state: this.state });
     this.state.start_min = parseInt(temp.minute);
     this.setState({ state: this.state });
+    this.path_index = parseInt(temp.pathindex)
+    this.state.auto_path_name = this.state.path_list[this.path_index][0]; 
+    this.setState({ state: this.state });
+    
 
     this.intervalID = setInterval(() => {
       this.setState({
         curr_time: new Date().getHours(),
         curr_min: new Date().getMinutes(),
       });
-      console.log(this.state.start_time)
-      console.log(this.state.curr_time)
-      console.log(this.state.start_min)
-      console.log(this.state.curr_min)
-      console.log(this.disinfectionReq)
       if (this.state.curr_time === this.state.start_time && this.state.curr_min === this.state.start_min && this.disinfectionReq === false) {
         console.log("dsinfection")
-        this.handleStart();
+        this.handleAutoStart();
         this.disinfectionReq = true;
       }
     }, 1000);
@@ -267,6 +269,24 @@ class Disinfection extends Component {
     clearInterval(this.intervalID);
   }
 
+  handleAutoStart = () => {
+    /*
+        const data = [
+            {data: "data"},
+            {cool: "hey", hi: ["hi"]}
+        ]
+        console.log(JSON.stringify(data))*/
+    console.log("started")
+    this.startExtend();
+    this.path_sequence = this.state.path_list[this.path_index][1];
+    //this.startPath();
+    var dynamixel_position = new ROSLIB.Message({
+      id: 1,
+      position: 16368,
+    });
+    this.state.dynamixel_pub.publish(dynamixel_position);
+  };
+
   handleStart = () => {
     /*
         const data = [
@@ -276,6 +296,8 @@ class Disinfection extends Component {
         console.log(JSON.stringify(data))*/
     console.log("started")
     this.startExtend();
+    const pathindex = document.getElementById("pathnamelist").value;
+    this.path_sequence = this.state.path_list[pathindex][1];
     //this.startPath();
     var dynamixel_position = new ROSLIB.Message({
       id: 1,
@@ -315,7 +337,7 @@ class Disinfection extends Component {
           }}
         >
           Choose Paths:{" "}
-          <select id="pathnamelist">
+          <select id="pathnamelist" style={{fontSize:"19px"}}>
             {this.state.path_list.map((pathname, index) => (
               <option key={index} value={index}>
                 {pathname[0]}
@@ -339,7 +361,8 @@ class Disinfection extends Component {
           <br></br>
           <ul className="list-group list-group-horizontal">
             <li className={this.textColour()}>
-              Auto Disinfection Time: {this.state.start_time} : {this.state.start_min} Hr
+              Auto Disinfection Time: {this.state.start_time} : {this.state.start_min} Hr 
+              Disinfection Path: {this.state.auto_path_name}
             </li>
             <li className={this.textColour()}>
               Current Waypoint: {this.state.status_waypoint}
@@ -379,11 +402,8 @@ class Disinfection extends Component {
   }
 
   startPath() {
-    const pathindex = document.getElementById("pathnamelist").value;
-    let e = this.state.path_list[pathindex][1];
-    console.log(e);
     var request = new ROSLIB.ServiceRequest({
-      sequence: e,
+      sequence: this.path_sequence,
       loop: false,
       disinfection: true
     });
